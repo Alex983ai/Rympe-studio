@@ -1,0 +1,8 @@
+{
+  "name": "rympe-studio",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "open": "npx serve . -p 3000 --open"
+  }
+}
