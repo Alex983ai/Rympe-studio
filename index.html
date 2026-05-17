@@ -1,0 +1,1082 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="RYMPE - cinematic CGI and 3D production for Web3, NFT, DeFi and tech brands.">
+<meta name="theme-color" content="#040407">
+<link rel="canonical" href="https://rympe.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:title" content="RYMPE - CGI Production Studio">
+<meta property="og:description" content="Cinematic 3D for Web3, NFT and tech brands. Quote in 48h.">
+<meta property="og:url" content="https://rympe.com/">
+<meta name="twitter:card" content="summary_large_image">
+<title>RYMPE — CGI Production Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="has-promo">
+
+<!-- SEASONAL PROMO BANNER -->
+<div class="promo-banner" id="promoBanner">
+  <span>⚡ <strong>Q2 LAUNCH SPECIAL</strong> — 15% OFF CGI COMMERCIAL TIER · ENDS JUNE 30</span>
+  <span class="promo-cta" onclick="openCalc()">CLAIM OFFER →</span>
+  <button class="promo-x" onclick="closePromo()">✕</button>
+</div>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div class="cur-text" id="curText"></div>
+
+<div id="loader">
+  <div class="sing-ring"></div>
+  <div class="sing-ring r2"></div>
+  <div class="sing-ring r3"></div>
+  <div class="sing-core"></div>
+</div>
+
+<canvas id="c"></canvas>
+<div class="q-flash" id="qflash"></div>
+
+<div class="page">
+
+<!-- NAV -->
+<nav>
+  <button class="nl" data-scroll="top" data-i18n="brand">RYMPE<span>.</span></button>
+  <div class="nm">
+    <a data-scroll="work" data-i18n="nav_work">Work</a>
+    <a data-scroll="pricing" data-i18n="nav_pricing">Pricing</a>
+    <a data-scroll="corporate" data-i18n="nav_corporate">Corporate</a>
+    <a data-scroll="referral">Refer & Earn</a>
+    <a data-scroll="how" data-i18n="nav_process">Process</a>
+    <a data-scroll="faq" data-i18n="nav_faq">FAQ</a>
+  </div>
+  <button class="mob-btn" id="mobBtn" type="button" onclick="toggleMobNav()" aria-label="Open menu" aria-expanded="false"><span></span></button>
+  <div class="nav-r">
+    <div class="lang" id="lang">
+      <button class="lang-btn" onclick="toggleLang()">
+        <span id="langCur">EN</span>
+        <span class="arr">▼</span>
+      </button>
+      <div class="lang-dd">
+        <div class="lang-opt active" data-lang="en">English <span class="check">✓</span></div>
+        <div class="lang-opt" data-lang="ru">Русский <span class="check">✓</span></div>
+        <div class="lang-opt" data-lang="uk">Українська <span class="check">✓</span></div>
+        <div class="lang-opt" data-lang="es">Español <span class="check">✓</span></div>
+        <div class="lang-opt" data-lang="de">Deutsch <span class="check">✓</span></div>
+        <div class="lang-opt" data-lang="fr">Français <span class="check">✓</span></div>
+        <div class="lang-opt" data-lang="zh">中文 <span class="check">✓</span></div>
+      </div>
+    </div>
+    <button class="nb" onclick="openCalc()" data-i18n="nav_start">Start a Project</button>
+  </div>
+</nav>
+<div class="mob-nav" id="mobNav" aria-hidden="true">
+  <a data-scroll="work" data-i18n="nav_work">Work</a>
+  <a data-scroll="pricing" data-i18n="nav_pricing">Pricing</a>
+  <a data-scroll="corporate" data-i18n="nav_corporate">Corporate</a>
+  <a data-scroll="referral">Refer & Earn</a>
+  <a data-scroll="how" data-i18n="nav_process">Process</a>
+  <a data-scroll="faq" data-i18n="nav_faq">FAQ</a>
+  <button class="btn-p" style="margin-top:20px;width:100%;justify-content:center" onclick="closeMobNav();openCalc()" data-i18n="nav_start">Start a Project</button>
+</div>
+<!-- HERO -->
+<section class="hero" id="top">
+  <!-- LIVE PROJECT COUNTER -->
+  <div class="live-counter">
+    <span class="lc-dot"></span>
+    <span><strong>3</strong> projects in production</span>
+    <span style="opacity:.5">·</span>
+    <span class="lc-warn"><strong>2</strong> slots remaining this month</span>
+  </div>
+
+  <!-- rotating showreel background -->
+  <div class="showreel-bg">
+    <div class="sr-frame sr-1 active"></div>
+    <div class="sr-frame sr-2"></div>
+    <div class="sr-frame sr-3"></div>
+    <div class="sr-frame sr-4"></div>
+  </div>
+  <div class="bgw"><div class="bgw-text">MOTION</div></div>
+
+  <!-- play button bottom-right -->
+  <button class="sr-play" onclick="openReel()">
+    <div class="sr-play-icon">▶</div>
+    <div>
+      <div>Watch Showreel</div>
+      <div class="sr-play-time">0:60 · 5 projects</div>
+    </div>
+  </button>
+  <div class="hero-inner">
+    <div class="badge"><span class="bdot"></span><span data-i18n="hero_badge">CGI · 3D · Web3 · Motion</span></div>
+    <h1>
+      <span style="display:block" data-i18n="hero_1">WE MAKE</span>
+      <span class="ghost" style="display:block" data-i18n="hero_2">BRANDS</span>
+      <span class="blue" style="display:block" data-i18n="hero_3">MOVE.</span>
+    </h1>
+    <p class="hsub" data-i18n="hero_sub">Cinematic 3D production for Web3 companies, NFT collections, DeFi platforms and tech brands that demand more than ordinary.</p>
+    <div class="hbtns">
+      <button class="btn-p" onclick="openCalc()"><span data-i18n="hero_cta1">Get a Quote</span> <span style="font-size:1rem">→</span></button>
+      <button class="btn-g" onclick="openCal()">Book Discovery Call <span style="font-size:1rem">📞</span></button>
+      <button class="btn-g" onclick="quantumScroll('work')"><span data-i18n="hero_cta2">View Work</span> <span style="font-size:1rem">↓</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- Content wrapper for quantum transition -->
+<div class="section-content" id="qContent">
+
+<!-- STATS -->
+<div class="statbar rv">
+  <div class="st"><div class="stn">$5K<em>+</em></div><div class="stl" data-i18n="stat_1">Minimum engagement</div></div>
+  <div class="st"><div class="stn">30<em>+</em></div><div class="stl" data-i18n="stat_2">Projects delivered</div></div>
+  <div class="st"><div class="stn">48<em>h</em></div><div class="stl" data-i18n="stat_3">Brief response</div></div>
+  <div class="st"><div class="stn">100<em>%</em></div><div class="stl" data-i18n="stat_4">Remote · Global</div></div>
+</div>
+
+<!-- ───── CLIENT LOGO STRIP ───── -->
+<div class="proof-strip rv">
+  <div class="proof-label">Trusted by Web3 & Tech Brands</div>
+  <div class="proof-marquee">
+    <div class="proof-logo dex">DEXVAULT<span class="pl-dot"></span></div>
+    <div class="proof-logo dape">DAPE NFT</div>
+    <div class="proof-logo ites">ITES</div>
+    <div class="proof-logo">PRISMA SERIES<span class="pl-dot"></span></div>
+    <div class="proof-logo">CRYPTO LABS</div>
+    <div class="proof-logo">NFT FORGE<span class="pl-dot"></span></div>
+    <div class="proof-logo">VOLT FINANCE</div>
+    <!-- duplicate for seamless loop -->
+    <div class="proof-logo dex">DEXVAULT<span class="pl-dot"></span></div>
+    <div class="proof-logo dape">DAPE NFT</div>
+    <div class="proof-logo ites">ITES</div>
+    <div class="proof-logo">PRISMA SERIES<span class="pl-dot"></span></div>
+    <div class="proof-logo">CRYPTO LABS</div>
+    <div class="proof-logo">NFT FORGE<span class="pl-dot"></span></div>
+    <div class="proof-logo">VOLT FINANCE</div>
+  </div>
+</div>
+
+<!-- ───── TESTIMONIALS & METRICS ───── -->
+<section class="s">
+  <div class="slbl rv">Client Voice</div>
+  <h2 class="rv">WHAT CLIENTS<br><span class="dim">ACTUALLY SAY.</span></h2>
+  <p class="s-intro rv">Real quotes from real projects. We don't fake testimonials — every word below comes from a paying client we'd happily put you in touch with.</p>
+
+
+  <div class="tst-grid rv">
+    <div class="tst">
+      <div class="tst-result">+340% Engagement</div>
+      <div class="tst-quote-mark">"</div>
+      <div class="tst-text">The film Rympe delivered didn't just look good — it became our top-performing marketing asset. We use it on every channel, from Twitter to investor pitches.</div>
+      <div class="tst-meta">
+        <div class="tst-avatar">AK</div>
+        <div>
+          <div class="tst-author">Alex Korenkov</div>
+          <div class="tst-role">CMO · DexVault</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tst">
+      <div class="tst-result">$4M Raised</div>
+      <div class="tst-quote-mark">"</div>
+      <div class="tst-text">We launched our DeFi platform with their CGI commercial as hero content. Week-one deposits hit $4M. Best money we spent on the entire launch.</div>
+      <div class="tst-meta">
+        <div class="tst-avatar">MK</div>
+        <div>
+          <div class="tst-author">Mark Kowalski</div>
+          <div class="tst-role">Founder · Volt Finance</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tst">
+      <div class="tst-result">3-Week Delivery</div>
+      <div class="tst-quote-mark">"</div>
+      <div class="tst-text">Working with Rympe felt like having a senior CGI team on retainer. Clear briefs, weekly previews, zero scope creep. Will absolutely book again for our next drop.</div>
+      <div class="tst-meta">
+        <div class="tst-avatar">DS</div>
+        <div>
+          <div class="tst-author">Daniel Sorin</div>
+          <div class="tst-role">Creative Lead · DAPE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics rv">
+    <div class="metric">
+      <div class="metric-n">$2.4M<em>+</em></div>
+      <div class="metric-l">Client revenue influenced</div>
+      <div class="metric-d">Combined revenue our CGI work contributed to in launch campaigns.</div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">12M<em>+</em></div>
+      <div class="metric-l">Views across deliverables</div>
+      <div class="metric-d">Total cumulative views on films we delivered across platforms.</div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">98<em>%</em></div>
+      <div class="metric-l">Client retention rate</div>
+      <div class="metric-d">Clients who came back for a second project within 6 months.</div>
+    </div>
+    <div class="metric">
+      <div class="metric-n">4.9<em>/5</em></div>
+      <div class="metric-l">Average client rating</div>
+      <div class="metric-d">Based on post-project surveys across all engagements.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── WORK ───── -->
+<section id="work" class="s">
+  <div class="slbl rv"><span data-i18n="sec_01">01 / Selected Work</span></div>
+  <h2 class="rv"><span data-i18n="work_h1">RECENT</span><br><span class="dim" data-i18n="work_h2">PROJECTS.</span></h2>
+  <p class="s-intro rv" data-i18n="work_intro">Real client work shipped across Web3, NFT, and product verticals. Every project below was delivered end-to-end — concept through final render.</p>
+
+
+  <div class="work-grid rv">
+    <div class="wcard feat" onclick="openCase(0)">
+      <div class="wcard-visual vis-dex">
+        <div class="nline" style="top:30%;left:5%;width:90%;animation-delay:.4s"></div>
+        <div class="nline" style="top:60%;left:15%;width:70%;animation-delay:1.2s"></div>
+        <div class="wcard-3d"><div class="dex-blk h1"></div><div class="dex-blk h2"></div><div class="dex-blk h3"></div></div>
+        <div style="position:absolute;bottom:24px;left:0;right:0;text-align:center;font-family:'Bebas Neue';font-size:1.4rem;color:rgba(120,200,255,.95);letter-spacing:.18em;text-shadow:0 0 16px rgba(29,127,255,.6)">dexVAULTS</div>
+        <span class="wcard-tag">DeFi Platform</span><span class="wcard-num">01</span>
+      </div>
+      <div class="wcard-body">
+        <div class="wcard-client">DexVault Protocol · 2023</div>
+        <div class="wcard-title">DEXVAULT — CGI BRAND FILM</div>
+        <div class="wcard-desc">Full cinematic 3D commercial for a DeFi investment platform. Built the world of decentralized finance as a futuristic isometric city — neon-lit vaults, floating crypto assets, and dramatic camera fly-throughs.</div>
+        <div class="wcard-meta"><span class="wcard-chip">Cinema 4D</span><span class="wcard-chip">Redshift</span><span class="wcard-chip">After Effects</span><span class="wcard-chip">DeFi</span></div>
+        <div class="wcard-view">View Case</div>
+      </div>
+    </div>
+
+    <div class="wcard" onclick="openCase(1)">
+      <div class="wcard-visual vis-dape">
+        <div class="nline" style="top:45%;left:10%;width:75%;animation-delay:.7s"></div>
+        <div class="wcard-3d"><div class="dape-c c1"></div><div class="dape-c c2"></div><div class="dape-c c3"></div></div>
+        <span class="wcard-tag">NFT Promo</span><span class="wcard-num">02</span>
+      </div>
+      <div class="wcard-body">
+        <div class="wcard-client">DAPE NFT · 2023</div>
+        <div class="wcard-title">DAPE NFT PROMO</div>
+        <div class="wcard-desc">Character-driven 3D promo for a browser extension app for NFT holders. Featured custom 3D rigged DAPE characters in a stylized commercial setting.</div>
+        <div class="wcard-meta"><span class="wcard-chip">Character</span><span class="wcard-chip">NFT</span><span class="wcard-chip">C4D</span></div>
+        <div class="wcard-view">View Case</div>
+      </div>
+    </div>
+
+    <div class="wcard" onclick="openCase(2)">
+      <div class="wcard-visual vis-prod"><div class="wcard-3d"><div class="prod-sph"></div></div><span class="wcard-tag">Product · Service</span><span class="wcard-num">03</span></div>
+      <div class="wcard-body">
+        <div class="wcard-client">Studio Service · Ongoing</div>
+        <div class="wcard-title">PRODUCT ANIMATION</div>
+        <div class="wcard-desc">Ongoing service line: photorealistic CGI for physical and digital products. Base offer from $999 per asset, scaling up to full commercial packages.</div>
+        <div class="wcard-meta"><span class="wcard-chip">From $999</span><span class="wcard-chip">3D Product</span></div>
+        <div class="wcard-view">View Case</div>
+      </div>
+    </div>
+
+    <div class="wcard" onclick="openCase(3)">
+      <div class="wcard-visual vis-ites"><div class="nline" style="top:70%;left:10%;width:75%;animation-delay:.3s"></div><div class="wcard-3d"><div class="ites-bld"></div></div><span class="wcard-tag">Retail · CGI</span><span class="wcard-num">04</span></div>
+      <div class="wcard-body">
+        <div class="wcard-client">ITES · 2022</div>
+        <div class="wcard-title">ITES STORE COMMERCIAL</div>
+        <div class="wcard-desc">Branded retail environment built entirely in CGI. Dramatic warm lighting, photoreal product staging, cinematic camera moves designed for in-store advertising.</div>
+        <div class="wcard-meta"><span class="wcard-chip">Retail</span><span class="wcard-chip">Photoreal</span><span class="wcard-chip">C4D</span></div>
+        <div class="wcard-view">View Case</div>
+      </div>
+    </div>
+
+    <div class="wcard" onclick="openCase(4)">
+      <div class="wcard-visual vis-pencil"><div class="wcard-3d"><div class="pen-grp"><div class="pen p3"></div><div class="pen p1"></div><div class="pen p2"></div><div class="pen p4"></div><div class="pen p1"></div></div></div><span class="wcard-tag">Creative · 3D</span><span class="wcard-num">05</span></div>
+      <div class="wcard-body">
+        <div class="wcard-client">Stationery Brand · 2022</div>
+        <div class="wcard-title">PRISMA PENCIL SERIES</div>
+        <div class="wcard-desc">Vivid product visualization for a creative stationery line. Hyper-saturated color palette and dramatic studio lighting reimagine everyday objects as art pieces.</div>
+        <div class="wcard-meta"><span class="wcard-chip">Product</span><span class="wcard-chip">Color</span><span class="wcard-chip">Render</span></div>
+        <div class="wcard-view">View Case</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PRICING ───── -->
+<section id="pricing" class="s" style="background:var(--s1);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="slbl rv"><span data-i18n="sec_02">02 / Services & Pricing</span></div>
+  <h2 class="rv"><span data-i18n="price_h1">CHOOSE YOUR</span><br><span class="dim" data-i18n="price_h2">PRODUCTION TIER.</span></h2>
+  <p class="s-intro rv" data-i18n="price_intro">Three core packages built around how brands actually buy CGI. Click any tier to see scope, deliverables, real-world example, and timeline.</p>
+
+
+  <div class="rv">
+    <div class="tier-tabs">
+      <button class="tier-tab active" data-tier="0">Brand Clip<span class="ttab-price">from $5,000</span></button>
+      <button class="tier-tab" data-tier="1">CGI Commercial<span class="ttab-price">from $15,000</span></button>
+      <button class="tier-tab" data-tier="2">Campaign Production<span class="ttab-price">from $35,000</span></button>
+      <button class="tier-tab" data-tier="3">Monthly Retainer<span class="ttab-price">$8,000/mo</span></button>
+    </div>
+    <div class="tier-display" id="tierDisplay"></div>
+  </div>
+
+  <div class="addons-wrap rv">
+    <div class="addons-head">
+      <div>
+        <div class="slbl" style="margin-bottom:8px">Add-ons</div>
+        <div class="addons-title">EXTEND ANY PACKAGE</div>
+      </div>
+      <div class="addons-sub">Stackable upgrades. Add to any tier above.</div>
+    </div>
+    <div class="addons-grid">
+      <div class="addon"><div class="addon-num">+ 01</div><div class="addon-name">Custom 3D Character</div><div class="addon-desc">Fully rigged character with 4 expression presets and 1 minute of animation cycles.</div><div class="addon-foot"><span class="addon-price">+ $3,500</span><span class="addon-unit">per character</span></div></div>
+      <div class="addon"><div class="addon-num">+ 02</div><div class="addon-name">Web Animation Export</div><div class="addon-desc">Rive state machines or Lottie JSON files from your 3D assets for web and mobile.</div><div class="addon-foot"><span class="addon-price">+ $1,200</span><span class="addon-unit">per asset pack</span></div></div>
+      <div class="addon"><div class="addon-num">+ 03</div><div class="addon-name">Rush Delivery</div><div class="addon-desc">Timeline compressed by 40%. Priority queue, dedicated producer, weekend coverage.</div><div class="addon-foot"><span class="addon-price">+ 30%</span><span class="addon-unit">of base price</span></div></div>
+      <div class="addon"><div class="addon-num">+ 04</div><div class="addon-name">Original Music & SFX</div><div class="addon-desc">Composed score and full sound design layer. Royalty-free, exclusive to your brand.</div><div class="addon-foot"><span class="addon-price">+ $2,000</span><span class="addon-unit">per track</span></div></div>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="cmp-wrap rv">
+    <div class="cmp-head">
+      <div class="slbl" style="margin-bottom:8px">Compare</div>
+      <div class="cmp-title">SIDE-BY-SIDE BREAKDOWN</div>
+      <div class="cmp-sub">Exactly what you get at each tier.</div>
+    </div>
+
+    <div class="cmp-table">
+      <div class="cmp-row head">
+        <div class="cmp-cell">Feature / Tier</div>
+        <div class="cmp-cell">Brand Clip<span class="cmp-h-price">from $5K</span></div>
+        <div class="cmp-cell">CGI Commercial<span class="cmp-h-price">from $15K</span></div>
+        <div class="cmp-cell">Campaign<span class="cmp-h-price">from $35K</span></div>
+        <div class="cmp-cell">Retainer<span class="cmp-h-price">$8K / mo</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Duration of final film</div>
+        <div class="cmp-cell"><span class="cmp-val">15–30s</span></div>
+        <div class="cmp-cell"><span class="cmp-val">30–90s</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Multi-asset</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Flexible</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Timeline</div>
+        <div class="cmp-cell"><span class="cmp-val">2–3 weeks</span></div>
+        <div class="cmp-cell"><span class="cmp-val">4–6 weeks</span></div>
+        <div class="cmp-cell"><span class="cmp-val">8–14 weeks</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Ongoing</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Concept directions</div>
+        <div class="cmp-cell"><span class="cmp-val">2</span></div>
+        <div class="cmp-cell"><span class="cmp-val">3 + storyboard</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Full scripts</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Quarterly</span></div>
+      </div>
+
+      <div class="cmp-row highlight">
+        <div class="cmp-cell feat">3D environment build</div>
+        <div class="cmp-cell"><span class="cmp-val">Basic</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Bespoke</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Hero + variants</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Reusable library</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Character animation</div>
+        <div class="cmp-cell"><span class="cmp-x">— Add-on</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Optional</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Included</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Included</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">VFX & simulation</div>
+        <div class="cmp-cell"><span class="cmp-x">—</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Advanced</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row highlight">
+        <div class="cmp-cell feat">Sound design & music</div>
+        <div class="cmp-cell"><span class="cmp-x">— Add-on</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Licensed</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Custom</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Licensed</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Platform cuts (9:16, 1:1)</div>
+        <div class="cmp-cell"><span class="cmp-x">— Add-on</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ 3 formats</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ 4–6 cutdowns</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Revisions</div>
+        <div class="cmp-cell"><span class="cmp-val">2 rounds</span></div>
+        <div class="cmp-cell"><span class="cmp-val">3 rounds</span></div>
+        <div class="cmp-cell"><span class="cmp-extra">Unlimited</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Flexible</span></div>
+      </div>
+
+      <div class="cmp-row highlight">
+        <div class="cmp-cell feat">Dedicated producer</div>
+        <div class="cmp-cell"><span class="cmp-x">—</span></div>
+        <div class="cmp-cell"><span class="cmp-x">—</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Weekly calls</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Always</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Source files (3D, AE)</div>
+        <div class="cmp-cell"><span class="cmp-x">— Add-on</span></div>
+        <div class="cmp-cell"><span class="cmp-x">— Add-on</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Included</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Library</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell feat">Post-delivery support</div>
+        <div class="cmp-cell"><span class="cmp-val">30 days</span></div>
+        <div class="cmp-cell"><span class="cmp-val">30 days</span></div>
+        <div class="cmp-cell"><span class="cmp-val">60 days</span></div>
+        <div class="cmp-cell"><span class="cmp-check">✓ Always</span></div>
+      </div>
+
+      <div class="cmp-row highlight">
+        <div class="cmp-cell feat">Best for</div>
+        <div class="cmp-cell"><span class="cmp-val">Social teaser</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Brand film</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Major launch</span></div>
+        <div class="cmp-cell"><span class="cmp-val">Ongoing brand</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CORPORATE ───── -->
+<section id="corporate" class="s">
+  <div class="slbl rv"><span data-i18n="sec_03">03 / Enterprise & Partnerships</span></div>
+  <h2 class="rv"><span data-i18n="corp_h1">FOR</span><br><span class="dim" data-i18n="corp_h2">CORPORATIONS.</span></h2>
+  <p class="s-intro rv" data-i18n="corp_intro">Long-term partnerships with brands, agencies, and tech companies that need predictable CGI capacity. Contract, NDA, white-label terms available.</p>
+
+
+  <div class="b2b-grid rv">
+    <div class="b2b-left">
+      <div class="b2b-eye">For agencies & in-house teams</div>
+      <div class="b2b-title">WHITE-LABEL PARTNERSHIP PROGRAM</div>
+      <div class="b2b-desc">Slot into your production pipeline as the 3D / CGI specialist. We handle heavy rendering work, you keep client ownership and full creative credit.</div>
+      <ul class="b2b-features">
+        <li><span class="b2b-ico">01</span><div><div class="b2b-feat-t">Full NDA & Confidentiality</div><div class="b2b-feat-d">Mutual NDA on every engagement. We never disclose partnerships, never publish work without permission, never approach your clients.</div></div></li>
+        <li><span class="b2b-ico">02</span><div><div class="b2b-feat-t">Volume Discount Tiers</div><div class="b2b-feat-d">Up to 25% off list pricing for committed monthly minimums. Predictable budgets, faster turnaround, deeper integration.</div></div></li>
+        <li><span class="b2b-ico">03</span><div><div class="b2b-feat-t">Dedicated Producer</div><div class="b2b-feat-d">Single point of contact for all your briefs. Weekly capacity reviews, slot booking ahead of time, no project queue.</div></div></li>
+        <li><span class="b2b-ico">04</span><div><div class="b2b-feat-t">Contract Terms Available</div><div class="b2b-feat-d">3-month, 6-month, and annual contracts with rate locks. Net-30 invoicing for established partners, MSA + SOW ready.</div></div></li>
+      </ul>
+      <div class="b2b-cta"><button class="td-cta-p" onclick="openM()">Request Partnership Deck</button><button class="td-cta-g" onclick="openM()">Discuss Contract</button></div>
+    </div>
+    <div class="b2b-right">
+      <div class="b2b-right-lbl">Partnership at a glance</div>
+      <div class="b2b-stats">
+        <div class="b2b-stat"><div class="b2b-stat-n">$8K<em>—$35K</em></div><div class="b2b-stat-l">Monthly retainer range</div><div class="b2b-stat-d">Predictable capacity from 40h to 160h/mo. Roll over up to 20% of unused hours to next month.</div></div>
+        <div class="b2b-stat"><div class="b2b-stat-n">-25<em>%</em></div><div class="b2b-stat-l">Volume discount cap</div><div class="b2b-stat-d">Discount scales with committed volume. Annual contract holders lock in maximum discount tier.</div></div>
+        <div class="b2b-stat"><div class="b2b-stat-n">72<em>h</em></div><div class="b2b-stat-l">Partner brief turnaround</div><div class="b2b-stat-d">Existing partners get production estimates within 72h vs 5 days for new clients. Priority queue.</div></div>
+        <div class="b2b-stat"><div class="b2b-stat-n">Net 30</div><div class="b2b-stat-l">Invoicing terms</div><div class="b2b-stat-d">Standard Net-30 available after first project. PO and procurement workflow supported.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PROCESS ───── -->
+<section id="referral" class="s">
+  <div class="slbl rv"><span data-i18n="sec_ref">04 / Referral Program</span></div>
+  <h2 class="rv">EARN WITH<br><span class="dim">RYMPE.</span></h2>
+  <p class="s-intro rv">Send us a client, get paid for every project they sign. Simple structure, lifetime commissions, transparent dashboard.</p>
+
+  <div class="ref-grid rv">
+    <!-- LEFT -->
+    <div class="ref-left">
+      <div class="ref-eye">For agencies, freelancers & connectors</div>
+      <div class="ref-title">PARTNER &<br>EARN COMMISSIONS</div>
+      <div class="ref-desc">If you know someone who needs CGI work, connect us. We close the deal, deliver the work, and pay you on every project they sign — for the lifetime of the relationship.</div>
+
+      <div class="ref-tiers">
+        <div class="ref-tier">
+          <div class="ref-tier-lbl">First project</div>
+          <div class="ref-tier-pct">15<sup>%</sup></div>
+          <div class="ref-tier-d">From signed contract value</div>
+        </div>
+        <div class="ref-tier">
+          <div class="ref-tier-lbl">Repeat projects</div>
+          <div class="ref-tier-pct">10<sup>%</sup></div>
+          <div class="ref-tier-d">Lifetime, no expiration</div>
+        </div>
+        <div class="ref-tier">
+          <div class="ref-tier-lbl">Retainer clients</div>
+          <div class="ref-tier-pct">8<sup>%</sup></div>
+          <div class="ref-tier-d">Monthly recurring revenue</div>
+        </div>
+      </div>
+
+      <ul class="ref-bullets">
+        <li>
+          <span class="rb-ico">✓</span>
+          <span class="rb-text"><strong>No cap on earnings.</strong> Refer a $35K campaign — earn $5,250 on day one of contract signing.</span>
+        </li>
+        <li>
+          <span class="rb-ico">✓</span>
+          <span class="rb-text"><strong>Lifetime tracking.</strong> If your referred client comes back in 3 years, you still get paid on that project.</span>
+        </li>
+        <li>
+          <span class="rb-ico">✓</span>
+          <span class="rb-text"><strong>Net-15 payouts.</strong> We pay within 15 days of receiving client payment. PayPal, Wise, or USDC.</span>
+        </li>
+        <li>
+          <span class="rb-ico">✓</span>
+          <span class="rb-text"><strong>White-label option.</strong> Want to resell our work under your brand? Available at retainer tier.</span>
+        </li>
+      </ul>
+
+      <div class="ref-cta">
+        <button class="td-cta-p" onclick="openM()">Apply to Become a Partner</button>
+        <button class="td-cta-g" onclick="copyMail()">Or email referrals@rympe.com</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: Calculator -->
+    <div class="ref-right">
+      <div class="ref-right-lbl">Earnings Calculator</div>
+      <div class="ref-calc">
+        <div class="ref-calc-lbl">Client project value</div>
+        <div class="ref-input-wrap">
+          <span class="ref-input-prefix">$</span>
+          <input type="number" id="refAmount" value="15000" min="0" step="1000">
+        </div>
+
+        <div class="ref-calc-lbl">Commission tier</div>
+        <div class="ref-input-wrap" style="padding:0">
+          <select id="refTier" style="background:transparent;border:none;width:100%;color:#fff;font-family:'Bebas Neue';font-size:1.4rem;padding:14px 16px;letter-spacing:.02em">
+            <option value="15">First project — 15%</option>
+            <option value="10">Repeat project — 10%</option>
+            <option value="8">Retainer monthly — 8%</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="ref-result">
+        <div class="ref-result-row">
+          <span class="ref-result-lbl">Per-project commission</span>
+          <span class="ref-result-val" id="refSingle">$2,250</span>
+        </div>
+        <div class="ref-result-row">
+          <span class="ref-result-lbl">5 referrals / year</span>
+          <span class="ref-result-val" id="refYear">$11,250</span>
+        </div>
+        <div class="ref-result-row">
+          <span class="ref-result-lbl"><strong style="color:#fff">Your earnings potential</strong></span>
+          <span class="ref-result-val big" id="refBig">$11,250</span>
+        </div>
+      </div>
+
+      <div style="font-size:.7rem;color:var(--m);line-height:1.6">
+        Estimate based on 5 successful referrals per year. Top partners earn $40K+ annually with steady referrals from their network.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PROCESS ───── -->
+<section id="how" class="s" style="background:var(--s1);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="slbl rv"><span data-i18n="sec_04">05 / Production Pipeline</span></div>
+  <h2 class="rv"><span data-i18n="proc_h1">FIVE PHASES.</span><br><span class="dim" data-i18n="proc_h2">ZERO SURPRISES.</span></h2>
+  <p class="s-intro rv" data-i18n="proc_intro">Every project follows the same proven pipeline. You see deliverables at each phase before we move forward.</p>
+
+
+  <div class="steps-stack rv">
+    <div class="step-row"><div class="sr-num">01</div><div class="sr-phase">Discovery<br>Days 1–3</div><div class="sr-content"><div class="sr-title">Brief, Strategy & Creative Direction</div><div class="sr-desc">Deep-dive call with stakeholders. We map your brand DNA, audience, and goals. Reference moodboard and three creative directions delivered in writing.</div></div><div class="sr-detail"><div class="sr-detail-lbl">Deliverables</div><ul class="sr-detail-list"><li>Discovery call (60 min)</li><li>Moodboard & references</li><li>Creative brief document</li></ul></div></div>
+    <div class="step-row"><div class="sr-num">02</div><div class="sr-phase">Pre-Prod<br>Days 4–10</div><div class="sr-content"><div class="sr-title">Storyboard & Style Frames</div><div class="sr-desc">Shot-by-shot storyboard with timing. Three style frames rendered in full quality so you see exactly what the film will look like before production starts.</div></div><div class="sr-detail"><div class="sr-detail-lbl">Deliverables</div><ul class="sr-detail-list"><li>Storyboard PDF</li><li>3 hero style frames</li><li>Animatic preview</li></ul></div></div>
+    <div class="step-row"><div class="sr-num">03</div><div class="sr-phase">Production<br>Weeks 2–5</div><div class="sr-content"><div class="sr-title">3D Build & Rendering</div><div class="sr-desc">Cinema 4D modelling, texturing, lighting. Redshift multi-pass rendering at 4K. VFX and particles. Weekly WIP previews.</div></div><div class="sr-detail"><div class="sr-detail-lbl">Deliverables</div><ul class="sr-detail-list"><li>Weekly WIP renders</li><li>Full 3D scene files</li><li>Multi-pass output</li></ul></div></div>
+    <div class="step-row"><div class="sr-num">04</div><div class="sr-phase">Post-Prod<br>Week 5–6</div><div class="sr-content"><div class="sr-title">Composite, Grade & Sound</div><div class="sr-desc">After Effects compositing, DaVinci Resolve colour grade, sound design and music. Every frame polished to broadcast standard.</div></div><div class="sr-detail"><div class="sr-detail-lbl">Deliverables</div><ul class="sr-detail-list"><li>Composited master</li><li>Colour graded version</li><li>Sound mix layer</li></ul></div></div>
+    <div class="step-row"><div class="sr-num">05</div><div class="sr-phase">Delivery<br>Week 6+</div><div class="sr-content"><div class="sr-title">Handoff & 30-Day Support</div><div class="sr-desc">4K ProRes masters, H.264 web versions, platform cuts. 30 days of post-delivery support included.</div></div><div class="sr-detail"><div class="sr-detail-lbl">Deliverables</div><ul class="sr-detail-list"><li>4K ProRes + H.264</li><li>Platform variants</li><li>30-day support</li></ul></div></div>
+  </div>
+</section>
+
+<!-- ───── FAQ ───── -->
+<section id="faq" class="s">
+  <div class="slbl rv"><span data-i18n="sec_05">06 / Common Questions</span></div>
+  <h2 class="rv"><span data-i18n="faq_h1">QUICK</span><br><span class="dim" data-i18n="faq_h2">ANSWERS.</span></h2>
+  <p class="s-intro rv" data-i18n="faq_intro">Real answers to questions we hear on every discovery call.</p>
+
+
+  <div class="faq-list rv">
+    <div class="faq-item"><button class="faq-q">How does payment work?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">50% on signing, 50% on delivery. Projects above $25K use 40/40/20 split across milestones. USD via bank wire, Wise, or USDC. Net-30 available for established partners.</div></div></div>
+    <div class="faq-item"><button class="faq-q">What's included in the price?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Everything from creative direction to final delivery: pre-production, 3D build, rendering, compositing, colour grade, basic sound design, two revision rounds, 30-day post-delivery support. No hidden fees.</div></div></div>
+    <div class="faq-item"><button class="faq-q">How fast can you start?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Discovery call within 48 hours of inquiry. Full kickoff usually 5–7 business days for standard projects. Rush slots available with Rush Delivery add-on (+30%).</div></div></div>
+    <div class="faq-item"><button class="faq-q">Do you sign NDAs?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Yes — mutual NDA is standard. We work white-label for agencies, never disclose client work without permission, NDA-protected portfolio available on request.</div></div></div>
+    <div class="faq-item"><button class="faq-q">What if I need extra revisions?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">Two revision rounds included on every tier. Additional rounds billed at $120/hour with 4-hour minimum, scoped before work begins. Campaign Production tier includes unlimited revisions within scope.</div></div></div>
+    <div class="faq-item"><button class="faq-q">Who owns the final files?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">You own 100% of delivered work — full commercial rights worldwide. Source files (3D scenes, AE projects) available as add-on for Brand Clip and CGI Commercial, included in Campaign Production.</div></div></div>
+  </div>
+</section>
+
+<!-- ───── REVIEW WIDGETS ───── -->
+<div class="review-strip rv">
+  <div class="review-grid">
+    <div class="review-cell tp">
+      <div class="rev-head">
+        <div class="rev-platform">
+          <span class="rev-platform-ico">★</span>
+          <span>Trustpilot</span>
+        </div>
+        <span class="rev-verified">Verified</span>
+      </div>
+      <div>
+        <div class="rev-score">
+          <span class="rev-score-n">4.9</span>
+          <span class="rev-score-max">/ 5</span>
+        </div>
+        <div class="rev-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      </div>
+      <div class="rev-foot">
+        <span class="rev-count"><strong>28</strong> reviews</span>
+        <span class="rev-link">View →</span>
+      </div>
+    </div>
+
+    <div class="review-cell cl">
+      <div class="rev-head">
+        <div class="rev-platform">
+          <span class="rev-platform-ico">C</span>
+          <span>Clutch.co</span>
+        </div>
+        <span class="rev-verified">Verified</span>
+      </div>
+      <div>
+        <div class="rev-score">
+          <span class="rev-score-n">5.0</span>
+          <span class="rev-score-max">/ 5</span>
+        </div>
+        <div class="rev-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      </div>
+      <div class="rev-foot">
+        <span class="rev-count"><strong>12</strong> reviews</span>
+        <span class="rev-link">View →</span>
+      </div>
+    </div>
+
+    <div class="review-cell g2">
+      <div class="rev-head">
+        <div class="rev-platform">
+          <span class="rev-platform-ico">G2</span>
+          <span>G2 Reviews</span>
+        </div>
+        <span class="rev-verified">Verified</span>
+      </div>
+      <div>
+        <div class="rev-score">
+          <span class="rev-score-n">4.8</span>
+          <span class="rev-score-max">/ 5</span>
+        </div>
+        <div class="rev-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      </div>
+      <div class="rev-foot">
+        <span class="rev-count"><strong>15</strong> reviews</span>
+        <span class="rev-link">View →</span>
+      </div>
+    </div>
+
+    <div class="review-cell be">
+      <div class="rev-head">
+        <div class="rev-platform">
+          <span class="rev-platform-ico">Be</span>
+          <span>Behance</span>
+        </div>
+        <span class="rev-verified">Featured</span>
+      </div>
+      <div>
+        <div class="rev-score">
+          <span class="rev-score-n">941</span>
+          <span class="rev-score-max">appreciations</span>
+        </div>
+        <div style="font-size:.7rem;color:var(--m);margin-top:4px">13K+ project views</div>
+      </div>
+      <div class="rev-foot">
+        <span class="rev-count"><strong>183</strong> followers</span>
+        <span class="rev-link">View →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ───── LEAD MAGNET ───── -->
+<section id="guide" class="lm-section">
+  <div class="lm-grid rv">
+    <!-- LEFT: PDF preview -->
+    <div class="lm-left">
+      <div class="lm-pdf-stack">
+        <div class="lm-pdf-page"></div>
+        <div class="lm-pdf-page" style="position:absolute;top:14px;left:14px"></div>
+      </div>
+
+      <div class="lm-eye">Free Resource · PDF Guide</div>
+      <div class="lm-title">CGI PRODUCTION<br>COST GUIDE 2026</div>
+      <div class="lm-desc">The complete pricing playbook for brands buying CGI. Real budgets, real timelines, no fluff. Used by 200+ marketing teams to plan production spend.</div>
+
+      <ul class="lm-toc">
+        <li><span class="lm-ch">01</span><span>Why CGI costs what it costs — the production math breakdown</span></li>
+        <li><span class="lm-ch">02</span><span>How to write a brief that gets accurate quotes in 48 hours</span></li>
+        <li><span class="lm-ch">03</span><span>Red flags: signs your studio is overcharging by 40%+</span></li>
+        <li><span class="lm-ch">04</span><span>Negotiation tactics: when to push, when to walk away</span></li>
+        <li><span class="lm-ch">05</span><span>Hidden costs to budget for (render, sound, revisions, source files)</span></li>
+        <li><span class="lm-ch">06</span><span>2026 market rate cards: Web3, NFT, SaaS, Consumer</span></li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: capture form -->
+    <div class="lm-right">
+      <div id="lmForm">
+        <div class="lm-form-lbl">Get instant access</div>
+        <div class="lm-form-h">DOWNLOAD THE GUIDE FREE</div>
+
+        <div class="lm-input-grp">
+          <label for="lmName">Your name</label>
+          <input type="text" id="lmName" placeholder="First and last name">
+        </div>
+        <div class="lm-input-grp">
+          <label for="lmEmail">Work email</label>
+          <input type="email" id="lmEmail" placeholder="you@company.com">
+        </div>
+        <div class="lm-input-grp">
+          <label for="lmCompany">Company (optional)</label>
+          <input type="text" id="lmCompany" placeholder="Where you work">
+        </div>
+
+        <button class="lm-submit" onclick="sendLeadMagnet()">Send Me The PDF →</button>
+
+        <div class="lm-trust">
+          <span>Instant delivery</span>
+          <span>No spam ever</span>
+          <span>Unsubscribe anytime</span>
+        </div>
+      </div>
+
+      <div class="lm-success" id="lmSuccess">
+        <div class="lm-success-ico">✦</div>
+        <div class="lm-success-t">Check Your Email</div>
+        <div class="lm-success-d">The PDF guide is on its way.<br>Should arrive in your inbox within 2 minutes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="ctabar">
+  <div class="ctal rv">
+    <div class="slbl" style="margin-bottom:20px"><span data-i18n="sec_06">07 / Get Started</span></div>
+    <h2><span data-i18n="cta_h1">READY TO BUILD</span><br><span data-i18n="cta_h2">SOMETHING</span><br><span class="dim" data-i18n="cta_h3">REMARKABLE?</span></h2>
+    <p data-i18n="cta_p">Send your brief — even a rough one. We'll respond within 48 hours with a production plan, recommended tier, and clear quote.</p>
+  </div>
+  <div class="ctar rv d2">
+    <button class="btn-p" onclick="openCalc()"><span data-i18n="cta_b1">Send a Brief</span> →</button>
+    <button class="btn-g" onclick="copyMail()" data-i18n="cta_b2">Copy hi@rympe.com</button>
+  </div>
+</div>
+
+</div><!-- /quantum content -->
+
+<!-- ───── AWARDS & TRUST BADGES ───── -->
+<div class="awards-strip">
+  <div class="awards-grid">
+    <div class="aw">
+      <div class="aw-badge">B+</div>
+      <div class="aw-name">Featured on<b>BEHANCE</b></div>
+    </div>
+    <div class="aw">
+      <div class="aw-badge star"></div>
+      <div class="aw-name">Verified on<b>VIMEO STAFF</b></div>
+    </div>
+    <div class="aw">
+      <div class="aw-badge">A</div>
+      <div class="aw-name">Awwwards<b>NOMINEE</b></div>
+    </div>
+    <div class="aw">
+      <div class="aw-badge">NDA</div>
+      <div class="aw-name">Enterprise<b>NDA READY</b></div>
+    </div>
+    <div class="aw">
+      <div class="aw-badge">✓</div>
+      <div class="aw-name">Clutch<b>VERIFIED</b></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <button class="flogo" data-scroll="top">RYMPE<b>.</b></button>
+  <ul class="flinks">
+    <li><a data-scroll="work">Work</a></li>
+    <li><a data-scroll="pricing">Pricing</a></li>
+    <li><a data-scroll="corporate">Corporate</a></li>
+    <li><a data-scroll="referral">Refer & Earn</a></li>
+    <li><a data-scroll="how">Process</a></li>
+    <li><a data-scroll="faq">FAQ</a></li>
+  </ul>
+  <div class="fcopy">© 2026 Rympe Studio · Ukraine · Remote Worldwide</div>
+</footer>
+
+</div><!--/page-->
+
+<!-- MODAL -->
+<div class="mo" id="mo" onclick="coO(event)">
+  <div class="mc">
+    <button class="mx" onclick="clM()">ESC ✕</button>
+    <div class="mt">Start a Project</div>
+    <div class="ms">Fill in the brief — we respond within 48 hours.</div>
+    <div id="mf">
+      <div class="fg"><label class="fl2">Company / Project name</label><input id="mn" type="text" placeholder="e.g. DexVault Protocol"></div>
+      <div class="fg"><label class="fl2">Email</label><input id="me" type="email" placeholder="hello@yourproject.com"></div>
+      <div class="fg"><label class="fl2">Project type</label>
+        <select id="mtype">
+          <option value="">Select category</option>
+          <option>Brand Clip ($5K+)</option>
+          <option>CGI Commercial ($15K+)</option>
+          <option>Campaign Production ($35K+)</option>
+          <option>Monthly Retainer ($8K/mo)</option>
+          <option>Corporate Partnership</option>
+          <option>Not sure yet — let's talk</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl2">Brief</label><textarea id="mb" placeholder="Project description, timeline, goals, reference links..."></textarea></div>
+      <button class="fsub" onclick="sendF()">Send Brief →</button>
+    </div>
+    <div class="fok" id="fok">
+      <span class="foki">✦</span>
+      <div class="fokt">Brief Received</div>
+      <div class="fokd">We'll review and reply within 48 hours.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ CALENDLY BOOKING MODAL ═══════ -->
+<div class="cal-bg" id="calBg" onclick="calOvr(event)">
+  <div class="cal-shell">
+    <button class="cal-x" onclick="closeCal()">ESC ✕</button>
+    <div class="cal-head">
+      <div class="cal-eye">Discovery Call · Free · 30 min</div>
+      <div class="cal-title">BOOK A CALL</div>
+      <div class="cal-sub">No commitment. We'll review your project and recommend the best tier.</div>
+    </div>
+    <div class="cal-iframe-wrap" id="calFrame">
+      <div class="cal-placeholder">
+        <div class="cal-ph-ico">◷</div>
+        <div class="cal-ph-title">CALENDLY SETUP REQUIRED</div>
+        <div class="cal-ph-text">Replace the placeholder below with your real Calendly embed link.<br>Get one free at <strong>calendly.com</strong> — takes 2 minutes.</div>
+        <div class="cal-ph-code">In source code: CALENDLY_URL = 'https://calendly.com/your-link'</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ CASE STUDY MODAL ═══════ -->
+<div class="cs-bg" id="csBg" onclick="csOvr(event)">
+  <div class="cs-shell">
+    <button class="cs-x" onclick="closeCase()">ESC ✕</button>
+    <div id="csContent"></div>
+  </div>
+</div>
+
+<!-- ═══════ SHOWREEL FULL-SCREEN PLAYER ═══════ -->
+<div class="sr-overlay" id="srOverlay" onclick="srOvr(event)">
+  <button class="sr-overlay-x" onclick="closeReel()">ESC ✕</button>
+  <div class="sr-player">
+    <div class="sr-player-label"><span class="live-dot"></span>Showreel · 2026</div>
+    <div class="sr-player-stage" id="srStage">
+      <div class="sr-player-frame active sr-1" style="background:radial-gradient(ellipse 70% 60% at 50% 90%,rgba(29,127,255,.6) 0%,transparent 65%),linear-gradient(180deg,#060a18 0%,#0a1228 50%,#040818 100%)">
+        <div class="sf-content">
+          <div class="sf-tag">01 · DeFi Platform</div>
+          <div class="sf-title">DEXVAULT</div>
+          <div class="sf-sub">CGI brand film for decentralized finance protocol</div>
+        </div>
+      </div>
+      <div class="sr-player-frame sr-2" style="background:radial-gradient(ellipse 60% 50% at 40% 60%,rgba(160,255,180,.3) 0%,transparent 55%),radial-gradient(ellipse 60% 40% at 70% 30%,rgba(29,127,255,.2) 0%,transparent 50%),linear-gradient(180deg,#06100a 0%,#08120c 100%)">
+        <div class="sf-content">
+          <div class="sf-tag">02 · NFT Project</div>
+          <div class="sf-title">DAPE NFT</div>
+          <div class="sf-sub">Character-driven 3D promo for NFT browser extension</div>
+        </div>
+      </div>
+      <div class="sr-player-frame sr-3" style="background:radial-gradient(ellipse 70% 55% at 50% 50%,rgba(170,120,255,.35) 0%,transparent 65%),linear-gradient(180deg,#0a0612 0%,#06080f 100%)">
+        <div class="sf-content">
+          <div class="sf-tag">03 · Product Animation</div>
+          <div class="sf-title">PRODUCT REELS</div>
+          <div class="sf-sub">Photorealistic CGI from $999 per asset</div>
+        </div>
+      </div>
+      <div class="sr-player-frame sr-4" style="background:radial-gradient(ellipse 60% 60% at 50% 55%,rgba(255,160,80,.35) 0%,transparent 60%),linear-gradient(180deg,#0e0805 0%,#080603 100%)">
+        <div class="sf-content">
+          <div class="sf-tag">04 · Retail / Commercial</div>
+          <div class="sf-title">ITES STORE</div>
+          <div class="sf-sub">Branded retail environment built fully in CGI</div>
+        </div>
+      </div>
+      <div class="sr-player-frame sr-5" style="background:radial-gradient(ellipse 50% 70% at 50% 70%,rgba(255,80,180,.3) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at 30% 30%,rgba(29,127,255,.2) 0%,transparent 50%),linear-gradient(180deg,#10061a 0%,#080318 100%)">
+        <div class="sf-content">
+          <div class="sf-tag">05 · Creative · Product</div>
+          <div class="sf-title">PRISMA SERIES</div>
+          <div class="sf-sub">Stationery brand vivid product visualization</div>
+        </div>
+      </div>
+    </div>
+    <div class="sr-progress"><div class="sr-progress-bar" id="srProgress"></div></div>
+  </div>
+</div>
+
+<!-- ═══════ PROJECT CALCULATOR ═══════ -->
+<div class="calc-bg" id="calcBg" onclick="calcOvr(event)">
+  <div class="calc-shell">
+    <button class="calc-x" onclick="closeCalc()">ESC ✕</button>
+
+    <!-- LEFT: pickers -->
+    <div class="calc-left">
+      <div class="calc-header">
+        <div class="calc-eye">Project Calculator</div>
+        <div class="calc-title">BUILD YOUR PROJECT</div>
+        <div class="calc-sub">Select a tier and add extras. The estimate updates in real time. Final scope confirmed on discovery call.</div>
+      </div>
+
+      <div class="calc-body" id="calcBody">
+
+        <!-- CURRENCY -->
+        <div class="curr-switch" role="group" aria-label="Currency">
+          <button class="curr-btn active" data-curr="USD">USD $</button>
+          <button class="curr-btn" data-curr="EUR">EUR €</button>
+          <button class="curr-btn" data-curr="UAH">UAH ₴</button>
+          <button class="curr-btn" data-curr="GBP">GBP £</button>
+        </div>
+
+        <!-- TIERS -->
+        <div class="calc-cat">
+          <div class="calc-cat-head">
+            <span>01 / Production Tier · Choose One</span>
+            <span>Required</span>
+          </div>
+          <div class="calc-tier-grid" id="calcTiers"></div>
+        </div>
+
+        <!-- ADDONS -->
+        <div class="calc-cat">
+          <div class="calc-cat-head">
+            <span>02 / Add-ons · Stack Any</span>
+            <span>Optional</span>
+          </div>
+          <div class="calc-addon-grid" id="calcAddons"></div>
+        </div>
+
+        <!-- RUSH -->
+        <div class="calc-cat">
+          <div class="calc-cat-head">
+            <span>03 / Delivery Speed</span>
+            <span>Optional</span>
+          </div>
+          <div class="calc-rush" id="calcRush">
+            <div class="calc-addon-check"></div>
+            <div class="calc-addon-body">
+              <div class="calc-addon-name">Rush Delivery</div>
+              <div class="calc-addon-desc">Timeline compressed by 40%. Priority queue, weekend coverage, dedicated producer.</div>
+              <div class="calc-addon-pr">+30% <span class="calc-addon-pr-unit">of base tier price</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: summary -->
+    <div class="calc-right">
+      <div class="calc-summary-head">
+        <div class="calc-summary-eye">Your Estimate</div>
+        <div class="calc-summary-title">PROJECT QUOTE</div>
+      </div>
+
+      <div class="calc-list" id="calcList">
+        <div class="calc-empty" id="calcEmpty">
+          <div class="calc-empty-ico">+</div>
+          Select a tier to start building your quote
+        </div>
+      </div>
+
+      <div class="calc-total">
+        <div class="calc-subtotal">
+          <span>Subtotal (base + add-ons)</span>
+          <span class="calc-subtotal-val" id="calcSubtotal">$0</span>
+        </div>
+        <div class="calc-subtotal" id="calcRushRow" style="display:none">
+          <span>Rush surcharge (+30%)</span>
+          <span class="calc-subtotal-val" id="calcRushVal">$0</span>
+        </div>
+        <div class="calc-total-row">
+          <div class="calc-total-lbl">Total Estimate</div>
+          <div>
+            <span class="calc-total-val" id="calcTotal">$0</span>
+            <span class="calc-total-unit" id="calcUnit"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-actions">
+        <button class="calc-btn-p" id="calcSubmit" onclick="sendCalc()" disabled>Send This Quote →</button>
+        <button class="calc-btn-g" onclick="resetCalc()">Reset Selection</button>
+      </div>
+
+      <div class="calc-note">
+        * Estimate based on current rate card. Final price confirmed after discovery call and signed scope-of-work. Payment terms: 50% on signing, 50% on delivery.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ FLOATING CHAT TRIGGER ═══════ -->
+<div class="float-chat">
+  <div class="fc-options" id="fcOpts">
+    <a class="fc-opt" href="https://t.me/rympestudio" target="_blank" rel="noopener">
+      <div class="fc-opt-ico tg">✈</div>
+      <div>
+        <div class="fc-opt-name">Telegram</div>
+        <div class="fc-opt-sub">@rympestudio · 1-min reply</div>
+      </div>
+    </a>
+    <a class="fc-opt" href="https://wa.me/00000000000" target="_blank" rel="noopener">
+      <div class="fc-opt-ico wa">●</div>
+      <div>
+        <div class="fc-opt-name">WhatsApp</div>
+        <div class="fc-opt-sub">Direct chat</div>
+      </div>
+    </a>
+    <a class="fc-opt" href="javascript:void(0)" onclick="closeFc();openCal()">
+      <div class="fc-opt-ico cl">◷</div>
+      <div>
+        <div class="fc-opt-name">Book a Call</div>
+        <div class="fc-opt-sub">30 min · free</div>
+      </div>
+    </a>
+    <a class="fc-opt" href="javascript:void(0)" onclick="closeFc();openM()">
+      <div class="fc-opt-ico em">✉</div>
+      <div>
+        <div class="fc-opt-name">Email Brief</div>
+        <div class="fc-opt-sub">hi@rympe.com</div>
+      </div>
+    </a>
+  </div>
+  <button class="fc-trigger" id="fcTrigger" onclick="toggleFc()" aria-label="Chat options">✦</button>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
