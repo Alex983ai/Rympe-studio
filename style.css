@@ -2098,6 +2098,19 @@ h2 .dim{-webkit-text-stroke:1px rgba(5,6,20,.16);color:transparent}
 .yt-wrap iframe{width:100%;height:100%}
 
 /* ═══════════════════════════════════════
+   MASTER WEBGL CANVAS — full-page bg
+   ═══════════════════════════════════════ */
+.master-webgl{
+  position:fixed;inset:0;width:100vw;height:100vh;
+  z-index:0;pointer-events:none;
+  display:block;
+}
+
+/* master WebGL active: transparent sections show the canvas */
+.has-master-webgl .void-land{background:transparent !important}
+.has-master-webgl .soul-rise{background:var(--bg)}
+
+/* ═══════════════════════════════════════
    WARP CANVAS
    ═══════════════════════════════════════ */
 .warp-canvas{
