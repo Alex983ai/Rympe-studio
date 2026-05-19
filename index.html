@@ -25,7 +25,7 @@
 
 <!-- SCROLL PROGRESS -->
 <div class="scroll-prog" id="scrollProg"></div>
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+<button class="back-top" id="backTop" onclick="lenisInstance?lenisInstance.scrollTo(0):window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <!-- SEASONAL PROMO BANNER -->
 <div class="promo-banner" id="promoBanner">
@@ -1236,6 +1236,11 @@ if(typeof Lenis !== 'undefined' && !window.matchMedia('(prefers-reduced-motion:r
   });
   function raf(time){lenisInstance.raf(time);requestAnimationFrame(raf)}
   requestAnimationFrame(raf);
+  lenisInstance.on('scroll',({scroll,limit})=>{
+    const pct=(scroll/limit)*100;
+    prog.style.width=Math.min(pct,100)+'%';
+    backTop.classList.toggle('show',scroll>500);
+  });
 }
 
 /* ───── CUSTOM CURSOR + MAGNETIC BUTTONS ───── */
@@ -1548,7 +1553,9 @@ addEventListener('resize',()=>{rsz();ip()});
 /* SCROLL PROGRESS */
 const prog=document.getElementById('scrollProg');
 const backTop=document.getElementById('backTop');
+/* fallback for no-lenis (reduced motion / load fail) */
 window.addEventListener('scroll',()=>{
+  if(lenisInstance)return;
   const h=document.documentElement;
   const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
   prog.style.width=Math.min(pct,100)+'%';
