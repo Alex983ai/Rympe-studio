@@ -4,21 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="RYMPE - cinematic CGI and 3D production for Web3, NFT, DeFi and tech brands.">
-<meta name="theme-color" content="#040407">
-<link rel="canonical" href="https://rympe.com/">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://rympe-studio.vercel.app/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ffffff'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='18' fill='%231d7fff'>R</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <meta property="og:type" content="website">
-<meta property="og:title" content="RYMPE - CGI Production Studio">
+<meta property="og:title" content="RYMPE — CGI Production Studio">
 <meta property="og:description" content="Cinematic 3D for Web3, NFT and tech brands. Quote in 48h.">
-<meta property="og:url" content="https://rympe.com/">
+<meta property="og:url" content="https://rympe-studio.vercel.app/">
+<meta property="og:image" content="https://rympe-studio.vercel.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rympe-studio.vercel.app/og.png">
 <title>RYMPE — CGI Production Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="has-promo">
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-prog" id="scrollProg"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <!-- SEASONAL PROMO BANNER -->
 <div class="promo-banner" id="promoBanner">
@@ -94,6 +101,14 @@
     <span class="lc-warn"><strong>2</strong> slots remaining this month</span>
   </div>
 
+  <!-- animated blue wave blobs -->
+  <div class="hero-wave" aria-hidden="true">
+    <div class="hw-blob b1"></div>
+    <div class="hw-blob b2"></div>
+    <div class="hw-blob b3"></div>
+    <div class="hw-blob b4"></div>
+  </div>
+
   <!-- rotating showreel background -->
   <div class="showreel-bg">
     <div class="sr-frame sr-1 active"></div>
@@ -138,6 +153,9 @@
   <div class="st"><div class="stn">100<em>%</em></div><div class="stl" data-i18n="stat_4">Remote · Global</div></div>
 </div>
 
+<!-- WAVE DIVIDER -->
+<div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path class="w-a" d="M0,32 C240,64 480,0 720,32 C960,64 1200,0 1440,32 L1440,64 L0,64 Z"/><path class="w-b" d="M0,44 C360,16 720,56 1080,44 C1260,38 1380,50 1440,44 L1440,64 L0,64 Z"/><path class="w-c" d="M0,20 C180,60 360,8 540,38 C720,68 900,12 1080,42 C1260,72 1380,28 1440,40 L1440,64 L0,64 Z"/></svg></div>
+
 <!-- ───── CLIENT LOGO STRIP ───── -->
 <div class="proof-strip rv">
   <div class="proof-label">Trusted by Web3 & Tech Brands</div>
@@ -167,6 +185,15 @@
   <p class="s-intro rv">Real quotes from real projects. We don't fake testimonials — every word below comes from a paying client we'd happily put you in touch with.</p>
 
 
+  <div style="margin-bottom:32px">
+    <a href="https://www.google.com/search?q=RYMPE+Studio+reviews" target="_blank" rel="noopener"
+       style="display:inline-flex;align-items:center;gap:10px;padding:10px 22px;border:1px solid rgba(29,127,255,.22);color:#2e3254;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-decoration:none;transition:border-color .2s,color .2s,background .2s"
+       onmouseover="this.style.borderColor='rgba(29,127,255,.6)';this.style.color='#1d7fff';this.style.background='rgba(29,127,255,.04)'"
+       onmouseout="this.style.borderColor='rgba(29,127,255,.22)';this.style.color='#2e3254';this.style.background='transparent'">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      See our reviews on Google ↗
+    </a>
+  </div>
   <div class="tst-grid rv">
     <div class="tst">
       <div class="tst-result">+340% Engagement</div>
@@ -231,6 +258,9 @@
     </div>
   </div>
 </section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path class="w-a" d="M0,40 C360,8 720,56 1080,40 C1260,32 1380,44 1440,40 L1440,64 L0,64 Z"/><path class="w-b" d="M0,24 C240,56 480,4 720,28 C960,52 1200,8 1440,28 L1440,64 L0,64 Z"/><path class="w-c" d="M0,48 C200,20 400,60 600,44 C800,28 1000,60 1200,46 C1360,34 1420,52 1440,48 L1440,64 L0,64 Z"/></svg></div>
 
 <!-- ───── WORK ───── -->
 <section id="work" class="s">
@@ -306,6 +336,9 @@
     </div>
   </div>
 </section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path class="w-a" d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,64 L0,64 Z"/><path class="w-b" d="M0,48 C300,24 600,56 900,44 C1100,36 1300,52 1440,48 L1440,64 L0,64 Z"/><path class="w-c" d="M0,14 C160,44 320,4 480,32 C640,60 800,8 960,36 C1120,64 1300,16 1440,32 L1440,64 L0,64 Z"/></svg></div>
 
 <!-- ───── PRICING ───── -->
 <section id="pricing" class="s" style="background:var(--s1);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
@@ -548,7 +581,7 @@
 
       <div class="ref-cta">
         <button class="td-cta-p" onclick="openM()">Apply to Become a Partner</button>
-        <button class="td-cta-g" onclick="copyMail()">Or email referrals@rympe.com</button>
+        <button class="td-cta-g" onclick="copyMail()" style="text-transform:none;letter-spacing:0">Or email retre.6jecson@gmail.com</button>
       </div>
     </div>
 
@@ -564,7 +597,7 @@
 
         <div class="ref-calc-lbl">Commission tier</div>
         <div class="ref-input-wrap" style="padding:0">
-          <select id="refTier" style="background:transparent;border:none;width:100%;color:#fff;font-family:'Bebas Neue';font-size:1.4rem;padding:14px 16px;letter-spacing:.02em">
+          <select id="refTier" style="background:transparent;border:none;width:100%;color:var(--tBright);font-family:'Bebas Neue';font-size:1.4rem;padding:14px 16px;letter-spacing:.02em">
             <option value="15">First project — 15%</option>
             <option value="10">Repeat project — 10%</option>
             <option value="8">Retainer monthly — 8%</option>
@@ -626,6 +659,9 @@
     <div class="faq-item"><button class="faq-q">Who owns the final files?<span class="plus"></span></button><div class="faq-a"><div class="faq-a-inner">You own 100% of delivered work — full commercial rights worldwide. Source files (3D scenes, AE projects) available as add-on for Brand Clip and CGI Commercial, included in Campaign Production.</div></div></div>
   </div>
 </section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-div" aria-hidden="true"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path class="w-a" d="M0,36 C180,64 360,8 540,36 C720,64 900,12 1080,40 C1260,68 1380,28 1440,36 L1440,64 L0,64 Z"/><path class="w-b" d="M0,20 C300,52 600,4 900,28 C1100,44 1300,16 1440,24 L1440,64 L0,64 Z"/><path class="w-c" d="M0,52 C240,20 480,56 720,44 C960,32 1200,56 1440,44 L1440,64 L0,64 Z"/></svg></div>
 
 <!-- ───── REVIEW WIDGETS ───── -->
 <div class="review-strip rv">
@@ -770,8 +806,8 @@
 
       <div class="lm-success" id="lmSuccess">
         <div class="lm-success-ico">✦</div>
-        <div class="lm-success-t">Check Your Email</div>
-        <div class="lm-success-d">The PDF guide is on its way.<br>Should arrive in your inbox within 2 minutes.</div>
+        <div class="lm-success-t">Your PDF is Downloading</div>
+        <div class="lm-success-d">CGI Production Cost Guide 2026 started downloading.<br>Check your Downloads folder.</div>
       </div>
     </div>
   </div>
@@ -786,7 +822,7 @@
   </div>
   <div class="ctar rv d2">
     <button class="btn-p" onclick="openCalc()"><span data-i18n="cta_b1">Send a Brief</span> →</button>
-    <button class="btn-g" onclick="copyMail()" data-i18n="cta_b2">Copy hi@rympe.com</button>
+    <button class="btn-g" onclick="copyMail()" data-i18n="cta_b2" style="text-transform:none;letter-spacing:0">Copy retre.6jecson@gmail.com</button>
   </div>
 </div>
 
@@ -828,6 +864,23 @@
     <li><a data-scroll="how">Process</a></li>
     <li><a data-scroll="faq">FAQ</a></li>
   </ul>
+  <div class="fsocial">
+    <a href="https://instagram.com/rympe.studio" target="_blank" rel="noopener" aria-label="Instagram" class="fsoc-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://x.com/rympe_studio" target="_blank" rel="noopener" aria-label="X / Twitter" class="fsoc-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.behance.net/rympe" target="_blank" rel="noopener" aria-label="Behance" class="fsoc-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 11.25c.69 0 1.25-.56 1.25-1.25S8.19 8.75 7.5 8.75H5.25v2.5zm.25 3.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5H5.25v3zm0 2.25H3V6.5h4.75c1.8 0 3.25 1.35 3.25 3 0 .9-.38 1.71-1 2.27.96.5 1.6 1.5 1.6 2.73 0 1.93-1.57 3.5-3.85 3.5zM15.5 10c-1.1 0-2.02.7-2.32 1.67h4.64C17.52 10.7 16.6 10 15.5 10zm3.5 3.5h-5.82c.1 1.1 1 1.92 2.17 1.92.74 0 1.4-.34 1.8-.86l1.6.93A4.01 4.01 0 0115.5 17c-2.21 0-4-1.79-4-4s1.79-4 4-4 3.87 1.67 3.87 3.87c0 .22-.02.43-.05.63H19zM13.5 6.5h4v1H13.5z"/></svg>
+    </a>
+    <a href="https://linkedin.com/company/rympe" target="_blank" rel="noopener" aria-label="LinkedIn" class="fsoc-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://t.me/rympe_studio_bot" target="_blank" rel="noopener" aria-label="Telegram" class="fsoc-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.5 4.253 12.6c-.637-.196-.65-.637.136-.944l11.24-4.334c.527-.196.989.12.817.944l-.552-.045z"/></svg>
+    </a>
+  </div>
   <div class="fcopy">© 2026 Rympe Studio · Ukraine · Remote Worldwide</div>
 </footer>
 
@@ -835,7 +888,7 @@
 
 <!-- MODAL -->
 <div class="mo" id="mo" onclick="coO(event)">
-  <div class="mc">
+  <div class="mc dark-panel">
     <button class="mx" onclick="clM()">ESC ✕</button>
     <div class="mt">Start a Project</div>
     <div class="ms">Fill in the brief — we respond within 48 hours.</div>
@@ -866,7 +919,7 @@
 
 <!-- ═══════ CALENDLY BOOKING MODAL ═══════ -->
 <div class="cal-bg" id="calBg" onclick="calOvr(event)">
-  <div class="cal-shell">
+  <div class="cal-shell dark-panel">
     <button class="cal-x" onclick="closeCal()">ESC ✕</button>
     <div class="cal-head">
       <div class="cal-eye">Discovery Call · Free · 30 min</div>
@@ -874,11 +927,9 @@
       <div class="cal-sub">No commitment. We'll review your project and recommend the best tier.</div>
     </div>
     <div class="cal-iframe-wrap" id="calFrame">
-      <div class="cal-placeholder">
-        <div class="cal-ph-ico">◷</div>
-        <div class="cal-ph-title">CALENDLY SETUP REQUIRED</div>
-        <div class="cal-ph-text">Replace the placeholder below with your real Calendly embed link.<br>Get one free at <strong>calendly.com</strong> — takes 2 minutes.</div>
-        <div class="cal-ph-code">In source code: CALENDLY_URL = 'https://calendly.com/your-link'</div>
+      <div class="cal-placeholder" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:60px 20px;color:#8892b0;font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.08em">
+        <div style="width:32px;height:32px;border:2px solid #1d7fff;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+        <div>Loading calendar...</div>
       </div>
     </div>
   </div>
@@ -886,7 +937,7 @@
 
 <!-- ═══════ CASE STUDY MODAL ═══════ -->
 <div class="cs-bg" id="csBg" onclick="csOvr(event)">
-  <div class="cs-shell">
+  <div class="cs-shell dark-panel">
     <button class="cs-x" onclick="closeCase()">ESC ✕</button>
     <div id="csContent"></div>
   </div>
@@ -940,7 +991,7 @@
 
 <!-- ═══════ PROJECT CALCULATOR ═══════ -->
 <div class="calc-bg" id="calcBg" onclick="calcOvr(event)">
-  <div class="calc-shell">
+  <div class="calc-shell dark-panel">
     <button class="calc-x" onclick="closeCalc()">ESC ✕</button>
 
     <!-- LEFT: pickers -->
@@ -1045,18 +1096,20 @@
 <!-- ═══════ FLOATING CHAT TRIGGER ═══════ -->
 <div class="float-chat">
   <div class="fc-options" id="fcOpts">
-    <a class="fc-opt" href="https://t.me/rympestudio" target="_blank" rel="noopener">
+    <a class="fc-opt" href="https://wa.me/380000000000" target="_blank" rel="noopener">
+      <div class="fc-opt-ico wa">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+      </div>
+      <div>
+        <div class="fc-opt-name">WhatsApp</div>
+        <div class="fc-opt-sub">Fast reply · Business hours</div>
+      </div>
+    </a>
+    <a class="fc-opt" href="https://t.me/rympe_studio_bot" target="_blank" rel="noopener">
       <div class="fc-opt-ico tg">✈</div>
       <div>
         <div class="fc-opt-name">Telegram</div>
-        <div class="fc-opt-sub">@rympestudio · 1-min reply</div>
-      </div>
-    </a>
-    <a class="fc-opt" href="https://wa.me/00000000000" target="_blank" rel="noopener">
-      <div class="fc-opt-ico wa">●</div>
-      <div>
-        <div class="fc-opt-name">WhatsApp</div>
-        <div class="fc-opt-sub">Direct chat</div>
+        <div class="fc-opt-sub">@rympe_studio_bot · 1-min reply</div>
       </div>
     </a>
     <a class="fc-opt" href="javascript:void(0)" onclick="closeFc();openCal()">
@@ -1070,7 +1123,7 @@
       <div class="fc-opt-ico em">✉</div>
       <div>
         <div class="fc-opt-name">Email Brief</div>
-        <div class="fc-opt-sub">hi@rympe.com</div>
+        <div class="fc-opt-sub">retre.6jecson@gmail.com</div>
       </div>
     </a>
   </div>
@@ -1116,9 +1169,10 @@ async function sendLeadMagnet(){
     source:'rympe.com'
   };
 
-  // Show success
+  // Show success + trigger PDF download
   document.getElementById('lmForm').style.display='none';
   document.getElementById('lmSuccess').classList.add('on');
+  const a=document.createElement('a');a.href='/guide.pdf';a.download='RYMPE_CGI_Cost_Guide_2026.pdf';document.body.appendChild(a);a.click();document.body.removeChild(a);
 
   // Send to Formspree
   if(typeof FORMSPREE_URL!=='undefined' && FORMSPREE_URL && !FORMSPREE_URL.includes('YOUR_FORM_ID')){
@@ -1145,15 +1199,9 @@ function updateRefCalc(){
   const pct=parseFloat(document.getElementById('refTier').value)||0;
   const single=Math.round(amt*pct/100);
   const yearly=single*5;
-  document.getElementById('refSingle').textContent='
-</html>
-+single.toLocaleString();
-  document.getElementById('refYear').textContent='
-</html>
-+yearly.toLocaleString();
-  document.getElementById('refBig').textContent='
-</html>
-+yearly.toLocaleString();
+  document.getElementById('refSingle').textContent='$'+single.toLocaleString();
+  document.getElementById('refYear').textContent='$'+yearly.toLocaleString();
+  document.getElementById('refBig').textContent='$'+yearly.toLocaleString();
 }
 const refA=document.getElementById('refAmount');
 const refT=document.getElementById('refTier');
@@ -1261,8 +1309,8 @@ const I18N = {
       sec_03:'03 / Enterprise & Partnerships',corp_h1:'FOR',corp_h2:'CORPORATIONS.',corp_intro:'Long-term partnerships with brands, agencies, and tech companies that need predictable CGI capacity.',
       sec_04:'04 / Production Pipeline',proc_h1:'FIVE PHASES.',proc_h2:'ZERO SURPRISES.',proc_intro:'Every project follows the same proven pipeline. You see deliverables at each phase before we move forward.',
       sec_05:'05 / Common Questions',faq_h1:'QUICK',faq_h2:'ANSWERS.',faq_intro:'Real answers to questions we hear on every discovery call.',
-      sec_06:'06 / Get Started',cta_h1:'READY TO BUILD',cta_h2:'SOMETHING',cta_h3:'REMARKABLE?',cta_p:'Send your brief — even a rough one. We\'ll respond within 48 hours with a production plan, recommended tier, and clear quote.',cta_b1:'Send a Brief',cta_b2:'Copy hi@rympe.com'},
-  ru:{brand:'RYMPE.',nav_work:'Работы',nav_pricing:'Цены',nav_corporate:'Корпоративно',nav_process:'Процесс',nav_faq:'FAQ',nav_start:'Начать проект',
+      sec_06:'06 / Get Started',cta_h1:'READY TO BUILD',cta_h2:'SOMETHING',cta_h3:'REMARKABLE?',cta_p:'Send your brief — even a rough one. We\'ll respond within 48 hours with a production plan, recommended tier, and clear quote.',cta_b1:'Send a Brief',cta_b2:'Copy retre.6jecson@gmail.com'},
+  ru:{brand:'RYMPE.',nav_work:'Работы',nav_pricing:'Цены',nav_corporate:'Корпоративно',nav_process:'Процесс',nav_faq:'FAQ',nav_start:'Начать проект',sec_ref:'04 / Партнёрская программа',
       hero_badge:'CGI · 3D · Web3 · Motion',hero_1:'МЫ ЗАСТАВЛЯЕМ',hero_2:'БРЕНДЫ',hero_3:'ДВИГАТЬСЯ.',
       hero_sub:'Кинематографичное 3D-производство для Web3, NFT, DeFi и технологичных брендов, которые требуют большего.',
       hero_cta1:'Получить расчёт',hero_cta2:'Смотреть работы',
@@ -1272,8 +1320,8 @@ const I18N = {
       sec_03:'03 / Корпоративное партнёрство',corp_h1:'ДЛЯ',corp_h2:'КОРПОРАЦИЙ.',corp_intro:'Долгосрочное сотрудничество с брендами, агентствами и tech-компаниями, нуждающимися в стабильной CGI-мощности.',
       sec_04:'04 / Производственный пайплайн',proc_h1:'ПЯТЬ ФАЗ.',proc_h2:'НОЛЬ СЮРПРИЗОВ.',proc_intro:'Каждый проект проходит по проверенному пайплайну. Вы видите результаты на каждой фазе до перехода к следующей.',
       sec_05:'05 / Частые вопросы',faq_h1:'БЫСТРЫЕ',faq_h2:'ОТВЕТЫ.',faq_intro:'Реальные ответы на вопросы, которые мы слышим на каждом первом созвоне.',
-      sec_06:'06 / Начать',cta_h1:'ГОТОВЫ СДЕЛАТЬ',cta_h2:'ЧТО-ТО',cta_h3:'ВЫДАЮЩЕЕСЯ?',cta_p:'Пришлите бриф — даже черновик. Мы ответим в течение 48 часов с планом и расчётом.',cta_b1:'Отправить бриф',cta_b2:'Скопировать hi@rympe.com'},
-  uk:{brand:'RYMPE.',nav_work:'Роботи',nav_pricing:'Ціни',nav_corporate:'Корпоративно',nav_process:'Процес',nav_faq:'FAQ',nav_start:'Розпочати проєкт',
+      sec_06:'06 / Начать',cta_h1:'ГОТОВЫ СДЕЛАТЬ',cta_h2:'ЧТО-ТО',cta_h3:'ВЫДАЮЩЕЕСЯ?',cta_p:'Пришлите бриф — даже черновик. Мы ответим в течение 48 часов с планом и расчётом.',cta_b1:'Отправить бриф',cta_b2:'Скопировать retre.6jecson@gmail.com'},
+  uk:{brand:'RYMPE.',nav_work:'Роботи',nav_pricing:'Ціни',nav_corporate:'Корпоративно',nav_process:'Процес',nav_faq:'FAQ',nav_start:'Розпочати проєкт',sec_ref:'04 / Партнерська програма',
       hero_badge:'CGI · 3D · Web3 · Motion',hero_1:'МИ ЗМУШУЄМО',hero_2:'БРЕНДИ',hero_3:'РУХАТИСЯ.',
       hero_sub:'Кінематографічне 3D-виробництво для Web3, NFT, DeFi та технологічних брендів, що прагнуть більшого.',
       hero_cta1:'Отримати розрахунок',hero_cta2:'Дивитись роботи',
@@ -1283,8 +1331,8 @@ const I18N = {
       sec_03:'03 / Корпоративне партнерство',corp_h1:'ДЛЯ',corp_h2:'КОРПОРАЦІЙ.',corp_intro:'Довгострокова співпраця з брендами та агенціями, що потребують стабільної CGI-потужності.',
       sec_04:'04 / Виробничий пайплайн',proc_h1:'П\'ЯТЬ ФАЗ.',proc_h2:'НУЛЬ СЮРПРИЗІВ.',proc_intro:'Кожен проєкт проходить перевіреним пайплайном.',
       sec_05:'05 / Часті питання',faq_h1:'ШВИДКІ',faq_h2:'ВІДПОВІДІ.',faq_intro:'Реальні відповіді на запитання з кожного першого дзвінка.',
-      sec_06:'06 / Розпочати',cta_h1:'ГОТОВІ СТВОРИТИ',cta_h2:'ЩОСЬ',cta_h3:'ВИДАТНЕ?',cta_p:'Надішліть бриф — навіть чорновий. Відповімо протягом 48 годин.',cta_b1:'Надіслати бриф',cta_b2:'Скопіювати hi@rympe.com'},
-  es:{brand:'RYMPE.',nav_work:'Trabajo',nav_pricing:'Precios',nav_corporate:'Corporativo',nav_process:'Proceso',nav_faq:'FAQ',nav_start:'Iniciar Proyecto',
+      sec_06:'06 / Розпочати',cta_h1:'ГОТОВІ СТВОРИТИ',cta_h2:'ЩОСЬ',cta_h3:'ВИДАТНЕ?',cta_p:'Надішліть бриф — навіть чорновий. Відповімо протягом 48 годин.',cta_b1:'Надіслати бриф',cta_b2:'Скопіювати retre.6jecson@gmail.com'},
+  es:{brand:'RYMPE.',nav_work:'Trabajo',nav_pricing:'Precios',nav_corporate:'Corporativo',nav_process:'Proceso',nav_faq:'FAQ',nav_start:'Iniciar Proyecto',sec_ref:'04 / Programa de Referidos',
       hero_badge:'CGI · 3D · Web3 · Motion',hero_1:'HACEMOS QUE',hero_2:'LAS MARCAS',hero_3:'SE MUEVAN.',
       hero_sub:'Producción 3D cinematográfica para Web3, NFT, DeFi y marcas tecnológicas que exigen lo extraordinario.',
       hero_cta1:'Solicitar Presupuesto',hero_cta2:'Ver Trabajos',
@@ -1294,8 +1342,8 @@ const I18N = {
       sec_03:'03 / Alianzas Corporativas',corp_h1:'PARA',corp_h2:'CORPORACIONES.',corp_intro:'Alianzas a largo plazo con marcas, agencias y empresas tecnológicas.',
       sec_04:'04 / Pipeline de Producción',proc_h1:'CINCO FASES.',proc_h2:'CERO SORPRESAS.',proc_intro:'Cada proyecto sigue el mismo pipeline probado.',
       sec_05:'05 / Preguntas Frecuentes',faq_h1:'RESPUESTAS',faq_h2:'RÁPIDAS.',faq_intro:'Respuestas reales a las preguntas de cada llamada.',
-      sec_06:'06 / Empezar',cta_h1:'¿LISTO PARA CREAR',cta_h2:'ALGO',cta_h3:'EXTRAORDINARIO?',cta_p:'Envía tu brief. Responderemos en 48 horas.',cta_b1:'Enviar Brief',cta_b2:'Copiar hi@rympe.com'},
-  de:{brand:'RYMPE.',nav_work:'Arbeiten',nav_pricing:'Preise',nav_corporate:'Unternehmen',nav_process:'Prozess',nav_faq:'FAQ',nav_start:'Projekt Starten',
+      sec_06:'06 / Empezar',cta_h1:'¿LISTO PARA CREAR',cta_h2:'ALGO',cta_h3:'EXTRAORDINARIO?',cta_p:'Envía tu brief. Responderemos en 48 horas.',cta_b1:'Enviar Brief',cta_b2:'Copiar retre.6jecson@gmail.com'},
+  de:{brand:'RYMPE.',nav_work:'Arbeiten',nav_pricing:'Preise',nav_corporate:'Unternehmen',nav_process:'Prozess',nav_faq:'FAQ',nav_start:'Projekt Starten',sec_ref:'04 / Empfehlungsprogramm',
       hero_badge:'CGI · 3D · Web3 · Motion',hero_1:'WIR BRINGEN',hero_2:'MARKEN',hero_3:'IN BEWEGUNG.',
       hero_sub:'Kinematografische 3D-Produktion für Web3, NFT, DeFi und Tech-Marken, die mehr als das Übliche fordern.',
       hero_cta1:'Angebot Anfordern',hero_cta2:'Arbeiten Ansehen',
@@ -1305,8 +1353,8 @@ const I18N = {
       sec_03:'03 / Unternehmenspartnerschaften',corp_h1:'FÜR',corp_h2:'UNTERNEHMEN.',corp_intro:'Langfristige Partnerschaften mit Marken, Agenturen und Tech-Unternehmen.',
       sec_04:'04 / Produktions-Pipeline',proc_h1:'FÜNF PHASEN.',proc_h2:'KEINE ÜBERRASCHUNGEN.',proc_intro:'Jedes Projekt folgt derselben bewährten Pipeline.',
       sec_05:'05 / Häufige Fragen',faq_h1:'SCHNELLE',faq_h2:'ANTWORTEN.',faq_intro:'Echte Antworten auf häufige Fragen.',
-      sec_06:'06 / Loslegen',cta_h1:'BEREIT FÜR',cta_h2:'ETWAS',cta_h3:'BEMERKENSWERTES?',cta_p:'Senden Sie Ihren Brief. Wir antworten innerhalb von 48 Stunden.',cta_b1:'Brief Senden',cta_b2:'hi@rympe.com kopieren'},
-  fr:{brand:'RYMPE.',nav_work:'Travaux',nav_pricing:'Tarifs',nav_corporate:'Entreprise',nav_process:'Processus',nav_faq:'FAQ',nav_start:'Démarrer un Projet',
+      sec_06:'06 / Loslegen',cta_h1:'BEREIT FÜR',cta_h2:'ETWAS',cta_h3:'BEMERKENSWERTES?',cta_p:'Senden Sie Ihren Brief. Wir antworten innerhalb von 48 Stunden.',cta_b1:'Brief Senden',cta_b2:'retre.6jecson@gmail.com kopieren'},
+  fr:{brand:'RYMPE.',nav_work:'Travaux',nav_pricing:'Tarifs',nav_corporate:'Entreprise',nav_process:'Processus',nav_faq:'FAQ',nav_start:'Démarrer un Projet',sec_ref:'04 / Programme de Parrainage',
       hero_badge:'CGI · 3D · Web3 · Motion',hero_1:'NOUS FAISONS',hero_2:'BOUGER',hero_3:'LES MARQUES.',
       hero_sub:'Production 3D cinématographique pour Web3, NFT, DeFi et marques tech qui exigent l\'extraordinaire.',
       hero_cta1:'Obtenir un Devis',hero_cta2:'Voir les Travaux',
@@ -1316,8 +1364,8 @@ const I18N = {
       sec_03:'03 / Partenariats Entreprises',corp_h1:'POUR LES',corp_h2:'ENTREPRISES.',corp_intro:'Partenariats à long terme avec marques, agences et entreprises tech.',
       sec_04:'04 / Pipeline de Production',proc_h1:'CINQ PHASES.',proc_h2:'ZÉRO SURPRISE.',proc_intro:'Chaque projet suit le même pipeline éprouvé.',
       sec_05:'05 / Questions Fréquentes',faq_h1:'RÉPONSES',faq_h2:'RAPIDES.',faq_intro:'Vraies réponses aux questions de chaque appel.',
-      sec_06:'06 / Commencer',cta_h1:'PRÊT À CRÉER',cta_h2:'QUELQUE CHOSE',cta_h3:'D\'EXCEPTIONNEL?',cta_p:'Envoyez votre brief. Réponse sous 48 heures.',cta_b1:'Envoyer le Brief',cta_b2:'Copier hi@rympe.com'},
-  zh:{brand:'RYMPE.',nav_work:'作品',nav_pricing:'价格',nav_corporate:'企业合作',nav_process:'流程',nav_faq:'常见问题',nav_start:'开始项目',
+      sec_06:'06 / Commencer',cta_h1:'PRÊT À CRÉER',cta_h2:'QUELQUE CHOSE',cta_h3:'D\'EXCEPTIONNEL?',cta_p:'Envoyez votre brief. Réponse sous 48 heures.',cta_b1:'Envoyer le Brief',cta_b2:'Copier retre.6jecson@gmail.com'},
+  zh:{brand:'RYMPE.',nav_work:'作品',nav_pricing:'价格',nav_corporate:'企业合作',nav_process:'流程',nav_faq:'常见问题',nav_start:'开始项目',sec_ref:'04 / 推荐计划',
       hero_badge:'CGI · 3D · Web3 · 动态',hero_1:'我们让',hero_2:'品牌',hero_3:'动起来。',
       hero_sub:'为Web3、NFT、DeFi及科技品牌提供电影级3D制作。',
       hero_cta1:'获取报价',hero_cta2:'查看作品',
@@ -1327,7 +1375,7 @@ const I18N = {
       sec_03:'03 / 企业合作',corp_h1:'面向',corp_h2:'企业。',corp_intro:'与品牌、代理机构和科技公司建立长期合作。',
       sec_04:'04 / 制作流程',proc_h1:'五个阶段。',proc_h2:'零意外。',proc_intro:'每个项目都遵循同一经过验证的流程。',
       sec_05:'05 / 常见问题',faq_h1:'快速',faq_h2:'答案。',faq_intro:'每次咨询都会被问到的真实问题。',
-      sec_06:'06 / 立即开始',cta_h1:'准备好打造',cta_h2:'非凡',cta_h3:'作品了吗？',cta_p:'发送您的简报——即使是粗略的。48小时内回复。',cta_b1:'发送简报',cta_b2:'复制 hi@rympe.com'}
+      sec_06:'06 / 立即开始',cta_h1:'准备好打造',cta_h2:'非凡',cta_h3:'作品了吗？',cta_p:'发送您的简报——即使是粗略的。48小时内回复。',cta_b1:'发送简报',cta_b2:'复制 retre.6jecson@gmail.com'}
 };
 
 let currentLang='en';
@@ -1370,8 +1418,7 @@ const TIERS=[
   {tag:'Core Tier · Cinematic',name:'CGI Commercial',
    desc:'Full cinematic production for product launches, brand films, NFT drops, and DeFi platform reveals.',
    example:'<strong>Example use:</strong> A DeFi protocol launches their main platform. We build a 60-second cinematic film showing their isometric "vault city" — used as homepage hero, conference reveal, and ad campaign. Result: <strong>raised $4M in week-1 deposits</strong> with the video as primary marketing asset.',
-   price:'
-</body>5,000',priceUnit:'starting',
+   price:'$15,000',priceUnit:'starting',
    meta:[{lbl:'Duration',val:'30–90 sec'},{lbl:'Timeline',val:'4–6 weeks'},{lbl:'Revisions',val:'3 rounds'}],
    deliverables:[
      {n:'01',name:'Full Creative Direction',sub:'Strategy, storyboard, style frames',val:'Phase 1'},
@@ -1396,8 +1443,7 @@ const TIERS=[
    ]},
   {tag:'Retainer · Ongoing Capacity',name:'Monthly Retainer',
    desc:'Dedicated production capacity for brands with ongoing motion needs.',
-   example:'<strong>Example use:</strong> An NFT marketplace runs a weekly drop schedule. Instead of hiring an in-house motion team (
-</body>5K/month for one mid-level hire), they retain us at $8K/month — getting <strong>4 short clips, 1 mid-length promo, and unlimited motion graphics support</strong>. Faster output, no HR overhead.',
+   example:'<strong>Example use:</strong> An NFT marketplace runs a weekly drop schedule. Instead of hiring an in-house motion team ($15K/month for one mid-level hire), they retain us at $8K/month — getting <strong>4 short clips, 1 mid-length promo, and unlimited motion graphics support</strong>. Faster output, no HR overhead.',
    price:'$8,000',priceUnit:'per month',
    meta:[{lbl:'Capacity',val:'40 hours/mo'},{lbl:'Commit',val:'3-month min.'},{lbl:'Discount',val:'–20%'}],
    deliverables:[
@@ -1465,26 +1511,26 @@ let W,H,P=[];
 const rsz=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};
 const ip=()=>{
   P=[];
-  for(let i=0;i<120;i++){
-    const big=Math.random()<.12;
-    P.push({x:Math.random()*W,y:Math.random()*H,r:big?(1.2+Math.random()*1.6):(.3+Math.random()*.8),
-      vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,
-      a:big?(.6+Math.random()*.35):(.15+Math.random()*.3),
-      tw:Math.random()*Math.PI*2,twSpd:.02+Math.random()*.035,big});
+  for(let i=0;i<60;i++){
+    const big=Math.random()<.14;
+    P.push({x:Math.random()*W,y:Math.random()*H,r:big?(1.4+Math.random()*1.8):(.4+Math.random()*.9),
+      vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,
+      a:big?(.5+Math.random()*.3):(.18+Math.random()*.28),
+      tw:Math.random()*Math.PI*2,twSpd:.015+Math.random()*.03,big});
   }
 };
 const df=()=>{
   cx.clearRect(0,0,W,H);
   P.forEach(p=>{
     p.tw+=p.twSpd;
-    const aa=p.a*(.7+Math.sin(p.tw)*.3);
+    const aa=p.a*(.6+Math.sin(p.tw)*.4);
     cx.beginPath();cx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    cx.fillStyle=`rgba(140,190,255,${aa})`;cx.fill();
+    cx.fillStyle=`rgba(29,100,220,${aa*.7})`;cx.fill();
     if(p.big){
-      cx.beginPath();cx.arc(p.x,p.y,p.r*3,0,Math.PI*2);
-      const grad=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3);
-      grad.addColorStop(0,`rgba(120,180,255,${aa*.35})`);
-      grad.addColorStop(1,'rgba(120,180,255,0)');
+      cx.beginPath();cx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
+      const grad=cx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+      grad.addColorStop(0,`rgba(29,127,255,${aa*.25})`);
+      grad.addColorStop(1,'rgba(29,127,255,0)');
       cx.fillStyle=grad;cx.fill();
     }
     p.x+=p.vx;p.y+=p.vy;
@@ -1492,12 +1538,70 @@ const df=()=>{
   });
   for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){
     const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);
-    if(d<130){cx.beginPath();cx.strokeStyle=`rgba(29,127,255,${.06*(1-d/130)})`;cx.lineWidth=.4;cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke()}
+    if(d<120){cx.beginPath();cx.strokeStyle=`rgba(29,100,220,${.055*(1-d/120)})`;cx.lineWidth=.5;cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);cx.stroke()}
   }
   requestAnimationFrame(df);
 };
 rsz();ip();df();
 addEventListener('resize',()=>{rsz();ip()});
+
+/* SCROLL PROGRESS */
+const prog=document.getElementById('scrollProg');
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  prog.style.width=Math.min(pct,100)+'%';
+  backTop.classList.toggle('show',h.scrollTop>500);
+},{ passive:true });
+
+/* COUNTER ANIMATION for stats */
+const statsObs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  statsObs.unobserve(e.target);
+  e.target.querySelectorAll('.stn').forEach(stn=>{
+    const em=stn.querySelector('em');
+    const emHTML=em?`<em>${em.textContent}</em>`:'';
+    const tn=Array.from(stn.childNodes).find(n=>n.nodeType===3);
+    if(!tn)return;
+    const raw=tn.textContent;
+    const num=parseFloat(raw.replace(/[^0-9.]/g,''));
+    if(!num||num<2)return;
+    const pre=raw.replace(/[0-9].*$/,'');
+    const post=raw.replace(/^[^0-9]*[0-9.]+/,'');
+    const start=performance.now();
+    const run=t=>{
+      const p=Math.min((t-start)/1200,1);
+      const ease=1-Math.pow(1-p,3);
+      stn.innerHTML=pre+Math.round(ease*num)+post+emHTML;
+      if(p<1)requestAnimationFrame(run);
+    };
+    requestAnimationFrame(run);
+  });
+}),{threshold:.5});
+const sb=document.querySelector('.statbar');
+if(sb)statsObs.observe(sb);
+
+/* SCRAMBLE TEXT on h1 */
+const CHARS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+function scramble(el,orig,dur){
+  let frame=0;const total=Math.round(dur/28);
+  const tick=()=>{
+    el.textContent=orig.split('').map((c,i)=>{
+      if(c===' ')return ' ';
+      return frame/total>(i/orig.length)?c:CHARS[Math.floor(Math.random()*CHARS.length)];
+    }).join('');
+    frame++;
+    if(frame<=total)requestAnimationFrame(tick);else el.textContent=orig;
+  };
+  tick();
+}
+setTimeout(()=>{
+  document.querySelectorAll('h1 span').forEach(s=>{
+    const orig=s.textContent.trim();
+    if(orig.length>1)scramble(s,orig,900);
+  });
+},1600);
 
 /* REVEAL */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.06});
@@ -1560,7 +1664,17 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')clM()});
 
   If both blank — form still works as fake demo (no real send).
 */
-const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';   // <-- paste here
+/*
+  SECURITY NOTE: TG_TOKEN is visible in browser source.
+  Risk is low for a notification-only bot, but to harden:
+  - Create a dedicated bot used ONLY for these alerts (already done)
+  - In @BotFather set the bot to Group Privacy mode OFF, but do NOT add to any public group
+  - If compromised: revoke via @BotFather → /revoke and paste new token below
+  For full security: move sends to a Cloudflare Worker / serverless proxy.
+
+  Formspree: sign up at formspree.io, create a form, replace YOUR_FORM_ID below.
+*/
+const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
 const TG_TOKEN      = '8998099774:AAGsCves_9BYmzlbosrgStbPcfTv9cGhbNY';
 const TG_CHAT_ID    = '1143912165';
 
@@ -1658,6 +1772,7 @@ function calOvr(e){if(e.target.id==='calBg')closeCal()}
 const CASES=[
   {
     visual:'vis-dex',
+    visual3d:'<div class="dex-blk h1"></div><div class="dex-blk h2"></div><div class="dex-blk h3"></div>',
     tag:'01 · DeFi Platform · 2023',
     title:'DEXVAULT — CGI BRAND FILM',
     sub:'A full cinematic 3D commercial for a decentralized finance investment platform — built to drive deposits and conviction.',
@@ -1678,6 +1793,7 @@ const CASES=[
   },
   {
     visual:'vis-dape',
+    visual3d:'<div class="dape-c c1"></div><div class="dape-c c2"></div><div class="dape-c c3"></div>',
     tag:'02 · NFT Project · 2023',
     title:'DAPE NFT PROMO',
     sub:'Character-driven 3D commercial for a browser extension app built for NFT holders.',
@@ -1698,6 +1814,7 @@ const CASES=[
   },
   {
     visual:'vis-prod',
+    visual3d:'<div class="prod-sph"></div>',
     tag:'03 · Product Animation Service',
     title:'PRODUCT ANIMATION REELS',
     sub:'Ongoing service line — photorealistic CGI for physical and digital products starting at $999 per asset.',
@@ -1718,6 +1835,7 @@ const CASES=[
   },
   {
     visual:'vis-ites',
+    visual3d:'<div class="ites-bld"></div>',
     tag:'04 · Retail / Commercial · 2022',
     title:'ITES STORE COMMERCIAL',
     sub:'A fully CGI branded retail environment used for in-store advertising and brand reveal.',
@@ -1738,6 +1856,7 @@ const CASES=[
   },
   {
     visual:'vis-pencil',
+    visual3d:'<div class="pen-grp"><div class="pen p3"></div><div class="pen p1"></div><div class="pen p2"></div><div class="pen p4"></div><div class="pen p1"></div></div>',
     tag:'05 · Creative / Product · 2022',
     title:'PRISMA PENCIL SERIES',
     sub:'Vivid product visualization for a creative stationery line — reimagining everyday objects as art pieces.',
@@ -1763,7 +1882,7 @@ function openCase(idx){
   const html=`
     <div class="cs-hero wcard-visual ${c.visual}">
       <div class="wcard-3d" style="opacity:.4">
-        <div class="dex-blk h2"></div>
+        ${c.visual3d}
       </div>
       <div class="cs-hero-content">
         <div class="cs-hero-tag">${c.tag}</div>
@@ -1884,7 +2003,7 @@ function closeReel(){
 function srOvr(e){if(e.target.id==='srOverlay')closeReel()}
 
 function copyMail(){
-  navigator.clipboard.writeText('hi@rympe.com').then(()=>{
+  navigator.clipboard.writeText('retre.6jecson@gmail.com').then(()=>{
     const btn=event.target.closest('button');
     if(!btn)return;
     const old=btn.textContent;
@@ -1912,9 +2031,7 @@ const calcState={tier:null, addons:{}, rush:false};
 
 /* CURRENCY */
 const CURR={
-  USD:{sym:'
-</html>
-,rate:1,after:false},
+  USD:{sym:'$',rate:1,after:false},
   EUR:{sym:'€',rate:0.93,after:false},
   UAH:{sym:'₴',rate:42,after:true},
   GBP:{sym:'£',rate:0.79,after:false}
@@ -2147,12 +2264,12 @@ function sendCalc(){
   let summary='';
   if(calcState.tier){
     const t=CALC_TIERS.find(x=>x.id===calcState.tier);
-    summary+=`Tier: ${t.name} (${t.price.toLocaleString()})\n`;
+    summary+=`Tier: ${t.name} ($${t.price.toLocaleString()})\n`;
   }
   for(const aid in calcState.addons){
     const a=CALC_ADDONS.find(x=>x.id===aid);
     const q=calcState.addons[aid].qty;
-    summary+=`+ ${a.name}${a.qty?' ×'+q:''} (${(a.price*q).toLocaleString()})\n`;
+    summary+=`+ ${a.name}${a.qty?' ×'+q:''} ($${(a.price*q).toLocaleString()})\n`;
   }
   if(calcState.rush)summary+='+ Rush Delivery (+30%)\n';
 
@@ -2166,8 +2283,7 @@ function sendCalc(){
     if(mb)mb.value=`Project quote from calculator:\n\n${summary}\n\n--- Additional details ---\n`;
     const mtype=document.getElementById('mtype');
     if(mtype && calcState.tier){
-      const map={clip:'Brand Clip ($5K+)',comm:'CGI Commercial (
-</body>5K+)',campaign:'Campaign Production ($35K+)',retainer:'Monthly Retainer ($8K/mo)'};
+      const map={clip:'Brand Clip ($5K+)',comm:'CGI Commercial ($15K+)',campaign:'Campaign Production ($35K+)',retainer:'Monthly Retainer ($8K/mo)'};
       const target=map[calcState.tier];
       for(let i=0;i<mtype.options.length;i++){
         if(mtype.options[i].text===target){mtype.selectedIndex=i;break}

@@ -4,5 +4,11 @@
   "scripts": {
     "dev": "npx serve . -p 3000",
     "open": "npx serve . -p 3000 --open"
+  },
+  "dependencies": {
+    "pdfkit": "^0.18.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }
