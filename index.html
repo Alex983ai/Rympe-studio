@@ -1314,6 +1314,7 @@ const I18N = {
       sec_03:'03 / Enterprise & Partnerships',corp_h1:'FOR',corp_h2:'CORPORATIONS.',corp_intro:'Long-term partnerships with brands, agencies, and tech companies that need predictable CGI capacity.',
       sec_04:'04 / Production Pipeline',proc_h1:'FIVE PHASES.',proc_h2:'ZERO SURPRISES.',proc_intro:'Every project follows the same proven pipeline. You see deliverables at each phase before we move forward.',
       sec_05:'05 / Common Questions',faq_h1:'QUICK',faq_h2:'ANSWERS.',faq_intro:'Real answers to questions we hear on every discovery call.',
+      sec_ref:'04 / Referral Program',
       sec_06:'06 / Get Started',cta_h1:'READY TO BUILD',cta_h2:'SOMETHING',cta_h3:'REMARKABLE?',cta_p:'Send your brief — even a rough one. We\'ll respond within 48 hours with a production plan, recommended tier, and clear quote.',cta_b1:'Send a Brief',cta_b2:'Copy retre.6jecson@gmail.com'},
   ru:{brand:'RYMPE.',nav_work:'Работы',nav_pricing:'Цены',nav_corporate:'Корпоративно',nav_process:'Процесс',nav_faq:'FAQ',nav_start:'Начать проект',sec_ref:'04 / Партнёрская программа',
       hero_badge:'CGI · 3D · Web3 · Motion',hero_1:'МЫ ЗАСТАВЛЯЕМ',hero_2:'БРЕНДЫ',hero_3:'ДВИГАТЬСЯ.',
@@ -1387,10 +1388,12 @@ let currentLang='en';
 function applyLang(lang){
   currentLang=lang;
   document.documentElement.lang=lang;
-  const dict=I18N[lang];
+  const dict=I18N[lang]||{};
+  const fallback=I18N.en;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.getAttribute('data-i18n');
-    if(dict[key])el.textContent=dict[key];
+    const val=dict[key]||fallback[key];
+    if(val)el.textContent=val;
   });
   document.getElementById('langCur').textContent=lang.toUpperCase();
   document.querySelectorAll('.lang-opt').forEach(o=>{
