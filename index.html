@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="has-promo">
+<canvas id="warpCanvas" class="warp-canvas" aria-hidden="true"></canvas>
 
 <!-- SCROLL PROGRESS -->
 <div class="scroll-prog" id="scrollProg"></div>
@@ -127,6 +128,17 @@
   </div>
 
 </section>
+
+<!-- ═══════ VOID — dark desert ═══════ -->
+<div class="void-land" id="voidLand" aria-hidden="true">
+  <div class="void-stars"></div>
+  <div class="void-horizon"></div>
+  <div class="void-glyph">RYMPE</div>
+</div>
+
+<!-- ═══════ SOUL RISE — site floats up ═══════ -->
+<div class="soul-rise" id="soulRise">
+<div class="soul-glass" id="soulGlass"></div>
 
 <!-- HERO (rich content — visible on scroll) -->
 <section class="hero hero-sub" id="hero-sub">
@@ -931,6 +943,7 @@
   <button class="pay-invoice-btn" onclick="openPay()">🔒 Pay Invoice</button>
 </footer>
 
+</div><!-- /soul-rise -->
 </div><!--/page-->
 
 <!-- MODAL -->
@@ -1711,6 +1724,115 @@ setTimeout(()=>{
 /* REVEAL */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.06});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ═══════════════════════════════════════════
+   WARP + VOID + SOUL RISE
+   ═══════════════════════════════════════════ */
+(function(){
+  const vhero   = document.querySelector('.vhero');
+  const voidEl  = document.getElementById('voidLand');
+  const soulEl  = document.getElementById('soulRise');
+  const glassEl = document.getElementById('soulGlass');
+  const canvas  = document.getElementById('warpCanvas');
+  if(!vhero||!voidEl||!soulEl||!canvas)return;
+
+  /* — WARP CANVAS — */
+  let warpDone=false;
+  function runWarp(){
+    if(warpDone)return; warpDone=true;
+    const ctx=canvas.getContext('2d');
+    canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+    canvas.style.opacity='1';
+    const W=canvas.width,H=canvas.height,CX=W/2,CY=H/2;
+    /* build 90 streaks radiating outward from centre */
+    const streaks=Array.from({length:90},()=>({
+      a:Math.random()*Math.PI*2,
+      r:0.15+Math.random()*0.55,
+      w:0.4+Math.random()*1.4,
+      o:0.4+Math.random()*0.6
+    }));
+    let t=0;
+    function frame(){
+      t+=0.045;
+      ctx.clearRect(0,0,W,H);
+      /* white flash phase */
+      if(t<0.25){
+        ctx.fillStyle=`rgba(255,255,255,${t*3.5})`;
+        ctx.fillRect(0,0,W,H);
+      }
+      /* dark tunnel */
+      if(t>0.15){
+        const dp=Math.min(1,(t-0.15)/0.35);
+        ctx.fillStyle=`rgba(4,4,10,${dp*0.96})`;
+        ctx.fillRect(0,0,W,H);
+      }
+      /* streaks */
+      if(t>0.2&&t<1.4){
+        const sp=Math.min(1,(t-0.2)/0.9);
+        const maxR=Math.hypot(W,H)*0.55;
+        streaks.forEach(s=>{
+          const r0=sp*s.r*maxR;
+          const r1=r0+maxR*0.09;
+          const alpha=s.o*(1-sp)*1.8;
+          if(alpha<0.01)return;
+          const grd=ctx.createLinearGradient(
+            CX+Math.cos(s.a)*r0,CY+Math.sin(s.a)*r0,
+            CX+Math.cos(s.a)*r1,CY+Math.sin(s.a)*r1
+          );
+          grd.addColorStop(0,'rgba(160,200,255,0)');
+          grd.addColorStop(0.4,`rgba(200,225,255,${alpha})`);
+          grd.addColorStop(1,'rgba(160,200,255,0)');
+          ctx.strokeStyle=grd;
+          ctx.lineWidth=s.w;
+          ctx.beginPath();
+          ctx.moveTo(CX+Math.cos(s.a)*r0,CY+Math.sin(s.a)*r0);
+          ctx.lineTo(CX+Math.cos(s.a)*r1,CY+Math.sin(s.a)*r1);
+          ctx.stroke();
+        });
+      }
+      if(t<1.6) requestAnimationFrame(frame);
+      else{ canvas.style.transition='opacity .4s'; canvas.style.opacity='0'; }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* trigger warp once hero is 45% gone */
+  let warpPrimed=false;
+  function checkWarp(){
+    if(warpDone)return;
+    const r=vhero.getBoundingClientRect();
+    const gone=1-(r.bottom/window.innerHeight);
+    if(gone>0.45){ runWarp(); }
+    if(gone<0.1){ warpDone=false; /* reset on scroll up */ }
+  }
+
+  /* — SOUL RISE — scroll-driven approach — */
+  function updateSoul(){
+    const vr=voidEl.getBoundingClientRect();
+    /* progress: 0 = void top hits screen bottom, 1 = void fully past */
+    const raw=(window.innerHeight-vr.top)/(window.innerHeight+vr.height);
+    const p=Math.max(0,Math.min(1,raw));
+
+    /* scale: 0.88 → 1 */
+    const scale=0.88+p*0.12;
+    /* translateY: 60px → 0 */
+    const ty=(1-p)*60;
+    /* opacity: 0 → 1 */
+    const op=p;
+    /* blur: 3px → 0 */
+    const bl=(1-p)*3;
+    /* glass overlay opacity: 0.65 → 0 (fades out as soul solidifies) */
+    const gl=Math.max(0,(1-p*1.6)*0.65);
+
+    soulEl.style.opacity=op;
+    soulEl.style.transform=`perspective(1400px) scale(${scale}) translateY(${ty}px)`;
+    soulEl.style.filter=bl>0.05?`blur(${bl.toFixed(2)}px)`:'';
+    glassEl.style.opacity=gl;
+  }
+
+  window.addEventListener('scroll',()=>{ checkWarp(); updateSoul(); },{passive:true});
+  updateSoul(); /* init */
+})();
 
 /* ───── QUANTUM SCROLL ───── */
 const qContent=document.getElementById('qContent');
