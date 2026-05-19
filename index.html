@@ -111,6 +111,9 @@
   <!-- Three.js particles overlay -->
   <canvas id="heroParticles" class="hero-ptcl" aria-hidden="true"></canvas>
 
+  <!-- Three.js 3D object (mouse-reactive) -->
+  <canvas id="hero3d" class="hero-3d" aria-hidden="true"></canvas>
+
   <!-- centred content — logo + tagline + one CTA -->
   <div class="vhero-content">
     <div class="vhero-logo">RYMPE<span>.</span></div>
@@ -2199,7 +2202,7 @@ function initThreeParticles(){
     renderer.setClearColor(0x000000,0);
 
     const scene=new THREE.Scene();
-    const camera=new THREE.PerspectiveCamera(65,W()/H(),.1,300);
+    const camera=new THREE.PerspectiveCamera(72,W()/H(),.1,300);
     camera.position.z=60;
 
     function makeField(count,spread,size,opacity,col){
@@ -2247,7 +2250,13 @@ function initThreeParticles(){
       const voidH=voidEl.offsetHeight;
       const prog=Math.max(0,Math.min(1,-voidTop/voidH));
 
-      camera.position.y=-prog*14;
+      /* Z-fly: camera dives from z=60 forward to z=8 as you scroll through void */
+      camera.position.z=60-prog*52;
+      /* slight Y drift — descend into the field */
+      camera.position.y=-prog*10;
+      /* widen FOV slightly mid-flight for speed sensation */
+      camera.fov=72+prog*(1-prog)*18;
+      camera.updateProjectionMatrix();
 
       if(warpMode){
         layers.forEach((l,i)=>{
@@ -2271,10 +2280,131 @@ function initThreeParticles(){
   })();
 }
 
+/* ── HERO 3D OBJECT (mouse-reactive crystal) ── */
+function initHero3D(){
+  const canvas=document.getElementById('hero3d');
+  if(!canvas||typeof THREE==='undefined')return;
+  const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduced)return;
+
+  const W=()=>canvas.offsetWidth, H=()=>canvas.offsetHeight;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(W(),H());
+  renderer.setClearColor(0x000000,0);
+  renderer.shadowMap.enabled=false;
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(42,W()/H(),.1,100);
+  camera.position.set(0,0,9);
+
+  /* — main crystal: icosahedron detail-1 — */
+  const geo=new THREE.IcosahedronGeometry(2.6,1);
+
+  /* solid dark-glass shell */
+  const matSolid=new THREE.MeshPhongMaterial({
+    color:0x040d1e,emissive:0x061228,
+    specular:0x3a90ff,shininess:120,
+    transparent:true,opacity:.72,
+    side:THREE.FrontSide,
+  });
+  const crystal=new THREE.Mesh(geo,matSolid);
+  scene.add(crystal);
+
+  /* inner glow layer — slightly larger, additive */
+  const matGlow=new THREE.MeshBasicMaterial({
+    color:0x1d5fff,transparent:true,opacity:.06,
+    side:THREE.BackSide,
+  });
+  const glow=new THREE.Mesh(new THREE.IcosahedronGeometry(2.85,1),matGlow);
+  scene.add(glow);
+
+  /* wireframe edges */
+  const edges=new THREE.EdgesGeometry(geo);
+  const matWire=new THREE.LineBasicMaterial({
+    color:0x2a8fff,transparent:true,opacity:.55,
+  });
+  const wireframe=new THREE.LineSegments(edges,matWire);
+  wireframe.scale.setScalar(1.003);
+  scene.add(wireframe);
+
+  /* outer halo */
+  const halo=new THREE.Mesh(
+    new THREE.IcosahedronGeometry(3.1,1),
+    new THREE.MeshBasicMaterial({color:0x1d7fff,transparent:true,opacity:.03,wireframe:true})
+  );
+  scene.add(halo);
+
+  /* lights */
+  scene.add(new THREE.AmbientLight(0x0a1f60,.8));
+  const keyLight=new THREE.PointLight(0x5aaeff,5,20);
+  keyLight.position.set(4,3,5);
+  scene.add(keyLight);
+  const rimLight=new THREE.PointLight(0x1d7fff,3,14);
+  rimLight.position.set(-4,-2,2);
+  scene.add(rimLight);
+  const fillLight=new THREE.PointLight(0xffffff,1.2,12);
+  fillLight.position.set(0,5,3);
+  scene.add(fillLight);
+
+  /* mouse tracking */
+  let mx=0,my=0,tx=0,ty=0;
+  window.addEventListener('mousemove',e=>{
+    mx=(e.clientX/window.innerWidth-.5)*2;
+    my=-(e.clientY/window.innerHeight-.5)*2;
+  },{passive:true});
+
+  let t=0,alive=true;
+  const obs=new IntersectionObserver(([e])=>{alive=e.isIntersecting},{threshold:0});
+  obs.observe(canvas.closest('.vhero')||canvas);
+
+  function tick(){
+    requestAnimationFrame(tick);
+    if(!alive)return;
+    t+=.008;
+
+    /* smooth mouse follow */
+    tx+=(mx-tx)*.04;
+    ty+=(my-ty)*.04;
+
+    /* rotation: auto + mouse influence */
+    crystal.rotation.x=ty*.5+Math.sin(t*.4)*.08;
+    crystal.rotation.y=tx*.7+t*.18;
+    wireframe.rotation.copy(crystal.rotation);
+    halo.rotation.y=-t*.09;
+    halo.rotation.x=Math.sin(t*.25)*.06;
+    glow.rotation.copy(crystal.rotation);
+
+    /* float */
+    const floatY=Math.sin(t*.55)*.18;
+    crystal.position.y=floatY;
+    wireframe.position.y=floatY;
+    glow.position.y=floatY;
+
+    /* orbit key light */
+    keyLight.position.x=Math.sin(t*.6)*5;
+    keyLight.position.z=Math.cos(t*.6)*5;
+
+    /* pulse glow opacity */
+    matGlow.opacity=.04+Math.sin(t*.9)*.025;
+
+    renderer.render(scene,camera);
+  }
+  tick();
+
+  window.addEventListener('resize',()=>{
+    renderer.setSize(W(),H());
+    camera.aspect=W()/H();
+    camera.updateProjectionMatrix();
+  },{passive:true});
+}
+
 /* init after THREE loads */
 (function waitForThree(){
-  if(typeof THREE!=='undefined') initThreeParticles();
-  else setTimeout(waitForThree,80);
+  if(typeof THREE!=='undefined'){
+    initThreeParticles();
+    initHero3D();
+  } else setTimeout(waitForThree,80);
 })();
 
 /* ═══════ CASE STUDIES ═══════ */
