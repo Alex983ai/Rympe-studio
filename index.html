@@ -19,6 +19,7 @@
 <title>RYMPE — CGI Production Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer></script>
+<script src="https://js.stripe.com/v3/" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="has-promo">
@@ -882,6 +883,7 @@
     </a>
   </div>
   <div class="fcopy">© 2026 Rympe Studio · Ukraine · Remote Worldwide</div>
+  <button class="pay-invoice-btn" onclick="openPay()">🔒 Pay Invoice</button>
 </footer>
 
 </div><!--/page-->
@@ -940,6 +942,46 @@
   <div class="cs-shell dark-panel">
     <button class="cs-x" onclick="closeCase()">ESC ✕</button>
     <div id="csContent"></div>
+  </div>
+</div>
+
+<!-- ═══════ STRIPE PAYMENT MODAL ═══════ -->
+<div class="pay-bg" id="payBg" onclick="payOvr(event)">
+  <div class="pay-shell dark-panel">
+    <button class="pay-x" onclick="closePay()">ESC ✕</button>
+    <div class="pay-head">
+      <div class="pay-logo">RYMPE<span>.</span></div>
+      <div class="pay-title">Project Payment</div>
+      <div class="pay-sub">Enter the agreed amount to proceed with payment.</div>
+    </div>
+    <form id="payForm">
+      <div class="pay-row">
+        <label class="pay-label">Amount (USD)</label>
+        <div class="pay-amount-wrap">
+          <span class="pay-sym">$</span>
+          <input class="pay-input" id="payAmount" type="number" min="100" step="0.01" placeholder="5000" required>
+        </div>
+      </div>
+      <div class="pay-row">
+        <label class="pay-label">Project description</label>
+        <input class="pay-input" id="payDesc" type="text" placeholder="e.g. Brand Clip — 50% deposit" maxlength="120">
+      </div>
+      <div class="pay-row">
+        <label class="pay-label">Card details</label>
+        <div id="payElement" class="pay-element-wrap"></div>
+        <div id="payError" class="pay-err"></div>
+      </div>
+      <button class="pay-btn" id="payBtn" type="submit">
+        <span id="payBtnText">Pay Now</span>
+        <span id="payBtnSpin" style="display:none" class="pay-spin"></span>
+      </button>
+    </form>
+    <div id="paySuccess" class="pay-success" style="display:none">
+      <div class="pay-check">✓</div>
+      <div class="pay-ok-title">Payment received</div>
+      <div class="pay-ok-sub">We'll be in touch within 24 hours to kick off the project.</div>
+    </div>
+    <div class="pay-secure"><span>🔒</span> Secured by Stripe · PCI DSS compliant</div>
   </div>
 </div>
 
@@ -1777,6 +1819,96 @@ function closeCal(){
   document.body.style.overflow='';
 }
 function calOvr(e){if(e.target.id==='calBg')closeCal()}
+
+/* ═══════ STRIPE PAYMENT ═══════ */
+let STRIPE_PK='';
+fetch('/api/config').then(r=>r.json()).then(d=>{STRIPE_PK=d.stripePk||''}).catch(()=>{});
+let stripeInstance=null, stripeElements=null, stripePaymentEl=null;
+
+function openPay(prefillAmount){
+  document.getElementById('payBg').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('payForm').style.display='';
+  document.getElementById('paySuccess').style.display='none';
+  document.getElementById('payError').textContent='';
+  if(prefillAmount)document.getElementById('payAmount').value=prefillAmount;
+
+  if(!stripeInstance){
+    if(!STRIPE_PK){
+      document.getElementById('payError').textContent='Payment not configured. Contact us directly.';
+      return;
+    }
+    stripeInstance=Stripe(STRIPE_PK);
+    stripeElements=stripeInstance.elements({
+      appearance:{
+        theme:'night',
+        variables:{colorPrimary:'#1d7fff',colorBackground:'#0c0c14',colorText:'#cdd0e8',
+                   colorDanger:'#ff4d6d',fontFamily:'Manrope,sans-serif',borderRadius:'2px'}
+      }
+    });
+    stripePaymentEl=stripeElements.create('payment',{layout:'tabs'});
+    stripePaymentEl.mount('#payElement');
+  }
+}
+
+function closePay(){
+  document.getElementById('payBg').classList.remove('open');
+  document.body.style.overflow='';
+}
+function payOvr(e){if(e.target.id==='payBg')closePay()}
+
+document.getElementById('payForm').addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  if(!stripeInstance)return;
+
+  const amount=parseFloat(document.getElementById('payAmount').value);
+  const desc=document.getElementById('payDesc').value||'RYMPE Studio — Project Payment';
+  const btn=document.getElementById('payBtn');
+  const btnText=document.getElementById('payBtnText');
+  const btnSpin=document.getElementById('payBtnSpin');
+  const errEl=document.getElementById('payError');
+
+  errEl.textContent='';
+  btn.disabled=true;
+  btnText.style.display='none';
+  btnSpin.style.display='inline-block';
+
+  try{
+    const r=await fetch('/api/create-payment-intent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({amount,currency:'usd',description:desc})
+    });
+    const data=await r.json();
+    if(!r.ok)throw new Error(data.error||'Server error');
+
+    const {error}=await stripeInstance.confirmPayment({
+      elements:stripeElements,
+      clientSecret:data.clientSecret,
+      confirmParams:{return_url:window.location.href+'?payment=success'}
+    });
+
+    if(error){
+      errEl.textContent=error.message;
+    } else {
+      document.getElementById('payForm').style.display='none';
+      document.getElementById('paySuccess').style.display='flex';
+    }
+  }catch(err){
+    errEl.textContent=err.message;
+  }finally{
+    btn.disabled=false;
+    btnText.style.display='';
+    btnSpin.style.display='none';
+  }
+});
+
+/* check return_url after 3DS redirect */
+if(new URLSearchParams(location.search).get('payment')==='success'){
+  setTimeout(()=>openPay(),300);
+  document.getElementById('payForm').style.display='none';
+  setTimeout(()=>{document.getElementById('paySuccess').style.display='flex'},400);
+}
 
 /* ═══════ CASE STUDIES ═══════ */
 const CASES=[

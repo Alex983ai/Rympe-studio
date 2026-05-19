@@ -6,7 +6,8 @@
     "open": "npx serve . -p 3000 --open"
   },
   "dependencies": {
-    "pdfkit": "^0.18.0"
+    "pdfkit": "^0.18.0",
+    "stripe": "^22.1.1"
   },
   "devDependencies": {
     "sharp": "^0.34.5"
