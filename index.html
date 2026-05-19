@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer></script>
 <script src="https://js.stripe.com/v3/" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.min.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="has-promo">
@@ -107,6 +108,9 @@
   <!-- dark overlay gradient -->
   <div class="vhero-overlay" aria-hidden="true"></div>
 
+  <!-- Three.js particles overlay -->
+  <canvas id="heroParticles" class="hero-ptcl" aria-hidden="true"></canvas>
+
   <!-- centred content — logo + tagline + one CTA -->
   <div class="vhero-content">
     <div class="vhero-logo">RYMPE<span>.</span></div>
@@ -131,7 +135,7 @@
 
 <!-- ═══════ VOID — dark desert ═══════ -->
 <div class="void-land" id="voidLand" aria-hidden="true">
-  <div class="void-stars"></div>
+  <canvas id="voidParticles" class="void-ptcl"></canvas>
   <div class="void-horizon"></div>
   <div class="void-glyph">RYMPE</div>
 </div>
@@ -1740,6 +1744,7 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
   let warpDone=false;
   function runWarp(){
     if(warpDone)return; warpDone=true;
+    window.dispatchEvent(new Event('warpfire'));
     const ctx=canvas.getContext('2d');
     canvas.width=window.innerWidth; canvas.height=window.innerHeight;
     canvas.style.opacity='1';
@@ -2084,6 +2089,193 @@ if(new URLSearchParams(location.search).get('payment')==='success'){
   document.getElementById('payForm').style.display='none';
   setTimeout(()=>{document.getElementById('paySuccess').style.display='flex'},400);
 }
+
+/* ═══════════════════════════════════════════
+   THREE.JS PARTICLES
+   ═══════════════════════════════════════════ */
+function initThreeParticles(){
+  if(typeof THREE==='undefined')return;
+  const reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduced)return;
+
+  /* ── HERO PARTICLES ── */
+  (function(){
+    const canvas=document.getElementById('heroParticles');
+    if(!canvas)return;
+    const W=()=>window.innerWidth, H=()=>window.innerHeight;
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:false});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.setSize(W(),H());
+    renderer.setClearColor(0x000000,0);
+
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(70,W()/H(),0.1,120);
+    camera.position.z=35;
+
+    /* build one particle cloud */
+    const N=260;
+    const pos=new Float32Array(N*3);
+    const vel=new Float32Array(N*3);
+    for(let i=0;i<N;i++){
+      pos[i*3  ]=(Math.random()-.5)*90;
+      pos[i*3+1]=(Math.random()-.5)*60;
+      pos[i*3+2]=(Math.random()-.5)*50;
+      vel[i*3  ]=(Math.random()-.5)*.008;
+      vel[i*3+1]=(Math.random()-.5)*.005;
+      vel[i*3+2]=0;
+    }
+    const geo=new THREE.BufferGeometry();
+    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+
+    /* simple circle texture */
+    const sz=64;
+    const offscreen=document.createElement('canvas');
+    offscreen.width=offscreen.height=sz;
+    const octx=offscreen.getContext('2d');
+    const grd=octx.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz/2);
+    grd.addColorStop(0,'rgba(180,215,255,1)');
+    grd.addColorStop(.4,'rgba(100,170,255,.6)');
+    grd.addColorStop(1,'rgba(29,127,255,0)');
+    octx.fillStyle=grd;
+    octx.fillRect(0,0,sz,sz);
+    const tex=new THREE.CanvasTexture(offscreen);
+
+    const mat=new THREE.PointsMaterial({
+      size:.55,map:tex,transparent:true,opacity:.55,
+      depthWrite:false,blending:THREE.AdditiveBlending,sizeAttenuation:true
+    });
+    const pts=new THREE.Points(geo,mat);
+    scene.add(pts);
+
+    let mx=0,my=0;
+    window.addEventListener('mousemove',e=>{
+      mx=(e.clientX/window.innerWidth-.5)*2;
+      my=-(e.clientY/window.innerHeight-.5)*2;
+    },{passive:true});
+
+    let alive=true;
+    const hObs=new IntersectionObserver(([e])=>{alive=e.isIntersecting},{threshold:0});
+    hObs.observe(canvas.closest('.vhero')||canvas);
+
+    function tick(){
+      requestAnimationFrame(tick);
+      if(!alive)return;
+      /* drift */
+      const pa=geo.attributes.position.array;
+      for(let i=0;i<N;i++){
+        pa[i*3  ]+=vel[i*3];
+        pa[i*3+1]+=vel[i*3+1];
+        /* wrap */
+        if(pa[i*3  ]>45)pa[i*3  ]=-45;
+        if(pa[i*3  ]<-45)pa[i*3  ]=45;
+        if(pa[i*3+1]>30)pa[i*3+1]=-30;
+        if(pa[i*3+1]<-30)pa[i*3+1]=30;
+      }
+      geo.attributes.position.needsUpdate=true;
+      /* subtle mouse parallax */
+      camera.position.x+=(mx*4-camera.position.x)*.025;
+      camera.position.y+=(my*3-camera.position.y)*.025;
+      pts.rotation.y+=.00015;
+      renderer.render(scene,camera);
+    }
+    tick();
+
+    window.addEventListener('resize',()=>{
+      renderer.setSize(W(),H());
+      camera.aspect=W()/H();
+      camera.updateProjectionMatrix();
+    },{passive:true});
+  })();
+
+  /* ── VOID PARTICLES ── */
+  (function(){
+    const canvas=document.getElementById('voidParticles');
+    if(!canvas)return;
+    const voidEl=document.getElementById('voidLand');
+    const W=()=>voidEl.offsetWidth, H=()=>voidEl.offsetHeight;
+    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:false});
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+    renderer.setSize(W(),H());
+    renderer.setClearColor(0x000000,0);
+
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(65,W()/H(),.1,300);
+    camera.position.z=60;
+
+    function makeField(count,spread,size,opacity,col){
+      const p=new Float32Array(count*3);
+      for(let i=0;i<count;i++){
+        p[i*3  ]=(Math.random()-.5)*spread;
+        p[i*3+1]=(Math.random()-.5)*spread*.55;
+        p[i*3+2]=(Math.random()-.5)*spread*.8;
+      }
+      const g=new THREE.BufferGeometry();
+      g.setAttribute('position',new THREE.BufferAttribute(p,3));
+      const m=new THREE.PointsMaterial({
+        size,color:col,transparent:true,opacity,
+        depthWrite:false,blending:THREE.AdditiveBlending,sizeAttenuation:true
+      });
+      return new THREE.Points(g,m);
+    }
+
+    const layers=[
+      makeField(1400,220,.18,.55,0xadd4ff), /* far blue */
+      makeField(600, 160,.32,.70,0xffffff), /* mid white */
+      makeField(200, 100,.55,.90,0xffffff), /* near bright */
+      makeField(80,   80,.9,1.0,0x5aaeff)  /* close glow */
+    ];
+    layers.forEach(l=>scene.add(l));
+
+    let scrollY=0;
+    window.addEventListener('scroll',()=>{scrollY=window.scrollY;},{passive:true});
+
+    /* warp mode: speed particles outward when warp fires */
+    let warpMode=0;
+    window.addEventListener('warpfire',()=>{
+      warpMode=1;
+      setTimeout(()=>{warpMode=0;},900);
+    });
+
+    let alive=true;
+    const vObs=new IntersectionObserver(([e])=>{alive=e.isIntersecting},{threshold:0});
+    vObs.observe(voidEl);
+
+    function tick(){
+      requestAnimationFrame(tick);
+      if(!alive)return;
+      const voidTop=voidEl.getBoundingClientRect().top;
+      const voidH=voidEl.offsetHeight;
+      const prog=Math.max(0,Math.min(1,-voidTop/voidH));
+
+      camera.position.y=-prog*14;
+
+      if(warpMode){
+        layers.forEach((l,i)=>{
+          l.rotation.z+=[.003,.005,.007,.009][i];
+        });
+      } else {
+        layers.forEach((l,i)=>{
+          l.rotation.y+=[.00012,.00008,.00016,.0002][i];
+          l.rotation.x+=[.00005,.00003,.00007,.0001][i];
+        });
+      }
+      renderer.render(scene,camera);
+    }
+    tick();
+
+    window.addEventListener('resize',()=>{
+      renderer.setSize(W(),H());
+      camera.aspect=W()/H();
+      camera.updateProjectionMatrix();
+    },{passive:true});
+  })();
+}
+
+/* init after THREE loads */
+(function waitForThree(){
+  if(typeof THREE!=='undefined') initThreeParticles();
+  else setTimeout(waitForThree,80);
+})();
 
 /* ═══════ CASE STUDIES ═══════ */
 const CASES=[
