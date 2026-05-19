@@ -92,8 +92,44 @@
   <a data-scroll="faq" data-i18n="nav_faq">FAQ</a>
   <button class="btn-p" style="margin-top:20px;width:100%;justify-content:center" onclick="closeMobNav();openCalc()" data-i18n="nav_start">Start a Project</button>
 </div>
-<!-- HERO -->
-<section class="hero" id="top">
+<!-- ═══════ VIDEO PREMIERE HERO ═══════ -->
+<section class="vhero" id="top">
+
+  <!-- YouTube iframe background (desktop) -->
+  <div class="vhero-bg" aria-hidden="true">
+    <iframe class="vhero-iframe"
+      src="https://www.youtube.com/embed/XBan0-wF9GM?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&playlist=XBan0-wF9GM"
+      frameborder="0" allow="autoplay; encrypted-media" allowfullscreen
+      title="RYMPE — NICE Web3 Film"></iframe>
+  </div>
+
+  <!-- dark overlay gradient -->
+  <div class="vhero-overlay" aria-hidden="true"></div>
+
+  <!-- centred content — logo + tagline + one CTA -->
+  <div class="vhero-content">
+    <div class="vhero-logo">RYMPE<span>.</span></div>
+    <div class="vhero-tagline">
+      <span data-i18n="hero_1">WE MAKE</span>
+      <span data-i18n="hero_2"> BRANDS </span>
+      <span data-i18n="hero_3">MOVE.</span>
+    </div>
+    <button class="vhero-cta" onclick="quantumScroll('work')">
+      <span data-i18n="hero_cta2">View Work</span>
+      <span class="vhero-arrow">↓</span>
+    </button>
+  </div>
+
+  <!-- scroll hint -->
+  <div class="vhero-scroll" aria-hidden="true">
+    <span>scroll</span>
+    <div class="vhero-line"></div>
+  </div>
+
+</section>
+
+<!-- HERO (rich content — visible on scroll) -->
+<section class="hero hero-sub" id="hero-sub">
   <!-- LIVE PROJECT COUNTER -->
   <div class="live-counter">
     <span class="lc-dot"></span>
@@ -102,31 +138,6 @@
     <span class="lc-warn"><strong>2</strong> slots remaining this month</span>
   </div>
 
-  <!-- animated blue wave blobs -->
-  <div class="hero-wave" aria-hidden="true">
-    <div class="hw-blob b1"></div>
-    <div class="hw-blob b2"></div>
-    <div class="hw-blob b3"></div>
-    <div class="hw-blob b4"></div>
-  </div>
-
-  <!-- rotating showreel background -->
-  <div class="showreel-bg">
-    <div class="sr-frame sr-1 active"></div>
-    <div class="sr-frame sr-2"></div>
-    <div class="sr-frame sr-3"></div>
-    <div class="sr-frame sr-4"></div>
-  </div>
-  <div class="bgw"><div class="bgw-text">MOTION</div></div>
-
-  <!-- play button bottom-right -->
-  <button class="sr-play" onclick="openReel()">
-    <div class="sr-play-icon">▶</div>
-    <div>
-      <div>Watch Showreel</div>
-      <div class="sr-play-time">0:60 · 5 projects</div>
-    </div>
-  </button>
   <div class="hero-inner">
     <div class="badge"><span class="bdot"></span><span data-i18n="hero_badge">CGI · 3D · Web3 · Motion</span></div>
     <h1>
@@ -141,6 +152,26 @@
       <button class="btn-g" onclick="quantumScroll('work')"><span data-i18n="hero_cta2">View Work</span> <span style="font-size:1rem">↓</span></button>
     </div>
   </div>
+
+  <!-- showreel bg for hero-sub -->
+  <div class="showreel-bg">
+    <div class="sr-frame sr-1 active"></div>
+    <div class="sr-frame sr-2"></div>
+    <div class="sr-frame sr-3"></div>
+    <div class="sr-frame sr-4"></div>
+  </div>
+  <div class="hero-wave" aria-hidden="true">
+    <div class="hw-blob b1"></div><div class="hw-blob b2"></div>
+    <div class="hw-blob b3"></div><div class="hw-blob b4"></div>
+  </div>
+  <div class="bgw"><div class="bgw-text">MOTION</div></div>
+  <button class="sr-play" onclick="openReel()">
+    <div class="sr-play-icon">▶</div>
+    <div>
+      <div>Watch Showreel</div>
+      <div class="sr-play-time">0:60 · 5 projects</div>
+    </div>
+  </button>
 </section>
 
 <!-- Content wrapper for quantum transition -->
