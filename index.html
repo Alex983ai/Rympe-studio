@@ -335,6 +335,20 @@
         <div class="wcard-view">View Case</div>
       </div>
     </div>
+
+    <div class="wcard feat" onclick="openYT('XBan0-wF9GM')">
+      <div class="wcard-visual vis-yt" style="background-image:url('https://img.youtube.com/vi/XBan0-wF9GM/maxresdefault.jpg')">
+        <div class="yt-play-btn" aria-hidden="true">▶</div>
+        <span class="wcard-tag">Web3 · CGI</span><span class="wcard-num">06</span>
+      </div>
+      <div class="wcard-body">
+        <div class="wcard-client">RYMPE Studio</div>
+        <div class="wcard-title">NICE — WEB3 FILM</div>
+        <div class="wcard-desc">A cinematic CGI film produced in-house by RYMPE Studio. Full 3D production for the Web3 space — concept, animation, render, and post.</div>
+        <div class="wcard-meta"><span class="wcard-chip">Web3</span><span class="wcard-chip">CGI</span><span class="wcard-chip">In-house</span></div>
+        <div class="wcard-view">▶ Watch Film</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -942,6 +956,14 @@
   <div class="cs-shell dark-panel">
     <button class="cs-x" onclick="closeCase()">ESC ✕</button>
     <div id="csContent"></div>
+  </div>
+</div>
+
+<!-- ═══════ YOUTUBE VIDEO OVERLAY ═══════ -->
+<div class="yt-overlay" id="ytOverlay" onclick="closeYT(event)">
+  <button class="yt-x" onclick="closeYT()">ESC ✕</button>
+  <div class="yt-wrap">
+    <iframe id="ytFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -2143,6 +2165,23 @@ function closeReel(){
   clearInterval(srProgressInterval);
 }
 function srOvr(e){if(e.target.id==='srOverlay')closeReel()}
+
+/* ═══════ YOUTUBE PLAYER ═══════ */
+function openYT(videoId){
+  const overlay=document.getElementById('ytOverlay');
+  const frame=document.getElementById('ytFrame');
+  frame.src=`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  overlay.classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeYT(e){
+  if(e && e.target && e.target.id!=='ytOverlay' && !e.target.classList.contains('yt-x'))return;
+  const overlay=document.getElementById('ytOverlay');
+  document.getElementById('ytFrame').src='';
+  overlay.classList.remove('on');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeYT({target:{id:'ytOverlay'}})});
 
 function copyMail(){
   navigator.clipboard.writeText('retre.6jecson@gmail.com').then(()=>{
