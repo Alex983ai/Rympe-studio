@@ -420,26 +420,6 @@ body::after {
   color: rgba(237,237,237,0.18);
 }
 
-/* ─── Video modal ─────────────────────────────── */
-#modal {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(8,8,8,0.96);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.4s ease;
-}
-#modal.on { opacity: 1; pointer-events: all; }
-.modal-x {
-  position: absolute; top: 2rem; right: 2.5rem;
-  background: none; border: none; cursor: none;
-  color: rgba(255,255,255,0.5); font-size: 1.5rem;
-  transition: color 0.2s, transform 0.2s;
-}
-.modal-x:hover { color: white; transform: scale(1.1); }
-.modal-wrap {
-  width: 90vw; max-width: 1260px; aspect-ratio: 16 / 9;
-}
-.modal-wrap iframe { width: 100%; height: 100%; }
 
 /* ─── Responsive ──────────────────────────────── */
 @media (max-width: 960px) {
