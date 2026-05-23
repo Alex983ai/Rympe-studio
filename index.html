@@ -80,55 +80,55 @@
 
     <div class="w-grid">
 
-      <div class="wc r" onclick="openVid('1187992341')">
+      <div class="wc r" onclick="openCase('beoble')">
         <div class="wc-img" data-v="1187992341"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Beoble 2.0</strong><span>Brand · 3D</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1123546540')">
+      <div class="wc r" onclick="openCase('oko')">
         <div class="wc-img" data-v="1123546540"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>OKO</strong><span>CGI · Motion</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1107392535')">
+      <div class="wc r" onclick="openCase('thoughtful')">
         <div class="wc-img" data-v="1107392535"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Thoughtful</strong><span>Brand · 3D</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1114665600')">
+      <div class="wc r" onclick="openCase('tabbycard')">
         <div class="wc-img" data-v="1114665600"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Tabby Card</strong><span>Product · CGI</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1114664869')">
+      <div class="wc r" onclick="openCase('klasha')">
         <div class="wc-img" data-v="1114664869"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Klasha</strong><span>Brand · Motion</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1115899250')">
+      <div class="wc r" onclick="openCase('dynaboard')">
         <div class="wc-img" data-v="1115899250"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Dynaboard</strong><span>Tech · Motion</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1115903599')">
+      <div class="wc r" onclick="openCase('tabbyshop')">
         <div class="wc-img" data-v="1115903599"></div>
         <div class="wc-over"><span>▶</span></div>
-        <div class="wc-foot"><strong>Tabby Shop</strong><span>E-comm · CGI</span></div>
+        <div class="wc-foot"><strong>Tabby Shop</strong><span>E-Comm · CGI</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1115895255')">
+      <div class="wc r" onclick="openCase('pattern')">
         <div class="wc-img" data-v="1115895255"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Pattern</strong><span>Art Direction · Motion</span></div>
       </div>
 
-      <div class="wc r" onclick="openVid('1116585739')">
+      <div class="wc r" onclick="openCase('aria')">
         <div class="wc-img" data-v="1116585739"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Thoughtful ARIA</strong><span>AI · 3D</span></div>
@@ -221,12 +221,19 @@
     </div>
   </section>
 
-  <!-- ─── VIDEO MODAL ───────────────────────────────────── -->
-  <div id="modal" onclick="if(event.target===this)closeVid()">
-    <button class="modal-x" onclick="closeVid()">✕</button>
+  <!-- ─── CASE MODAL ──────────────────────────────────────── -->
+  <div id="modal">
+    <button class="modal-x" onclick="closeCase()">✕</button>
     <div class="modal-wrap">
-      <iframe id="mframe" frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      <div class="case-hero-block">
+        <p class="case-tag" id="caseTag"></p>
+        <h1 class="case-title" id="caseTitle"></h1>
+        <p class="case-intro" id="caseIntro"></p>
+      </div>
+      <div class="case-video-block">
+        <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="case-blocks" id="caseBlocks"></div>
     </div>
   </div>
 
@@ -292,19 +299,134 @@
       .catch(() => {});
   });
 
-  // ── Video modal ───────────────────────────────
-  function openVid(id) {
-    document.getElementById('mframe').src =
-      `https://player.vimeo.com/video/${id}?autoplay=1&color=ffffff&title=0&byline=0&portrait=0`;
-    document.getElementById('modal').classList.add('on');
+  // ── Case modal ────────────────────────────────
+  const CASES = {
+    beoble: {
+      title: 'Beoble 2.0',
+      tag: 'Brand · 3D',
+      intro: 'A full 3D brand identity for Beoble — the Web3 social layer. From moodboard to final render, we built a visual world that lives between crypto culture and cinematic motion.',
+      vimeo: '1187992341',
+      blocks: [
+        { heading: 'Brief & Concept', text: 'The client came with a clear direction: Web3, dark, premium. We built a moodboard around liquid metals, deep space aesthetics, and layered UI motion. Every frame needed to feel like the future.' },
+        { heading: 'Art Direction', text: 'Color palette — near-black with electric blue and gold accents. Typography — sharp and geometric. We defined the visual language before touching Cinema 4D.' },
+        { heading: '3D Production', text: 'All scenes built in Cinema 4D with Redshift rendering. 14 unique shots, 3 rounds of iteration. Post-production in After Effects with custom motion blur and color grading in DaVinci Resolve.' },
+        { heading: 'Result', text: 'Delivered a full brand motion kit: hero reel, 6 social cuts, looping backgrounds for web. The client used it across their product launch campaign.' }
+      ]
+    },
+    oko: {
+      title: 'OKO',
+      tag: 'CGI · Motion',
+      intro: 'A cinematic CGI spot for OKO — a data platform built for enterprise teams. We translated complex tech into clean, confident visuals.',
+      vimeo: '1123546540',
+      blocks: [
+        { heading: 'Brief & Concept', text: 'OKO needed to communicate precision and reliability. We pitched a concept around geometric forms, controlled camera motion, and a muted but powerful color palette.' },
+        { heading: '3D Production', text: 'Built in Cinema 4D. Key focus — lighting that feels editorial, not corporate. Every scene was lit individually for maximum control over mood.' },
+        { heading: 'Result', text: 'A 60-second brand film used on the product landing page and investor deck.' }
+      ]
+    },
+    thoughtful: {
+      title: 'Thoughtful',
+      tag: 'Brand · 3D',
+      intro: 'A captivating explainer for Thoughtful — a healthcare administration AI. The artwork combines elements of technology and the human touch, symbolising deep integration of AI into healthcare systems.',
+      vimeo: '1107392535',
+      blocks: [
+        { heading: 'Brief & Concept', text: 'Introducing Thoughtful.ai — an AI platform for healthcare administration. The challenge: make complex automation feel warm and human. We surfed references, approved placement and combined them to define the visual style.' },
+        { heading: 'Visual Build', text: 'After receiving the brief, we started designing the scenes. Storyboards, color palette, typography, pacing — all defined before a single render was made.' },
+        { heading: 'Process', text: 'Creating scenes took a large portion of the project\'s time. We used Mograph to create animations and Redshift for rendering in Cinema 4D. Post-production, color correction, and sound design were done in After Effects and DaVinci Resolve.' },
+        { heading: 'Result', text: 'A full explainer video delivered for Thoughtful\'s product launch — used on their homepage, paid ads, and demo presentations.' }
+      ]
+    },
+    tabbycard: {
+      title: 'Tabby Card',
+      tag: 'Product · CGI',
+      intro: 'Product CGI for Tabby Card — the BNPL card for the Middle East. Clean, confident, premium.',
+      vimeo: '1114665600',
+      blocks: [
+        { heading: 'Brief & Concept', text: 'Tabby needed product renders that looked better than photography. We proposed CGI so we could control every reflection, every highlight, every angle.' },
+        { heading: '3D Production', text: 'Card modelled to exact spec, rendered with Redshift. 8 final hero shots + animated loop for digital use.' },
+        { heading: 'Result', text: 'Assets deployed across app store listings, paid social, and OOH campaigns in UAE and KSA.' }
+      ]
+    },
+    klasha: {
+      title: 'Klasha',
+      tag: 'Brand · Motion',
+      intro: 'Brand motion for Klasha — a fintech platform enabling cross-border payments across Africa.',
+      vimeo: '1114664869',
+      blocks: [
+        { heading: 'Brief & Concept', text: 'Klasha wanted energy, movement, and cultural relevance. We built a motion system rooted in bold color, kinetic typography, and layered animation.' },
+        { heading: 'Production', text: 'Motion design in After Effects, 3D elements in Cinema 4D. Delivered a full social motion kit — 12 formats across platforms.' },
+        { heading: 'Result', text: 'Used across Klasha\'s Series A announcement, social channels, and investor materials.' }
+      ]
+    },
+    dynaboard: {
+      title: 'Dynaboard',
+      tag: 'Tech · Motion',
+      intro: 'A product explainer for Dynaboard — a collaborative UI builder for engineering teams.',
+      vimeo: '1115899250',
+      blocks: [
+        { heading: 'Brief & Concept', text: 'Complex product, simple story. We broke the product into 4 core use cases and built a visual narrative around each one.' },
+        { heading: 'Production', text: 'Screen recordings combined with 3D transitions and motion graphics. The challenge was keeping it technical enough for developers while remaining visually engaging.' },
+        { heading: 'Result', text: 'Primary explainer used on the Dynaboard homepage and YC pitch materials.' }
+      ]
+    },
+    tabbyshop: {
+      title: 'Tabby Shop',
+      tag: 'E-Comm · CGI',
+      intro: 'CGI campaign for Tabby Shop — the e-commerce arm of the Tabby ecosystem.',
+      vimeo: '1115903599',
+      blocks: [
+        { heading: 'Concept', text: 'Shopping made cinematic. We built 3D product scenes that elevated everyday items into desirable objects — the visual language of luxury applied to everyday commerce.' },
+        { heading: 'Production', text: 'Full CGI product shots, animated loops, and seasonal campaign assets. Delivered in 15 formats for digital and OOH.' }
+      ]
+    },
+    pattern: {
+      title: 'Pattern',
+      tag: 'Art Direction · Motion',
+      intro: 'Art direction and motion for Pattern — a data intelligence platform for e-commerce brands.',
+      vimeo: '1115895255',
+      blocks: [
+        { heading: 'Art Direction', text: 'Data doesn\'t have to be boring. We built a visual system using abstract data forms, flowing lines, and a restrained palette of navy, white, and gold.' },
+        { heading: 'Motion', text: 'Animated data visualisations, kinetic typography, and 3D structural forms. Delivered as a full brand motion system.' }
+      ]
+    },
+    aria: {
+      title: 'Thoughtful ARIA',
+      tag: 'AI · 3D',
+      intro: 'A visual identity and motion system for ARIA — the AI assistant built into the Thoughtful platform.',
+      vimeo: '1116585739',
+      blocks: [
+        { heading: 'Concept', text: 'ARIA needed a visual form — something that felt intelligent, calm, and trustworthy. We designed an abstract 3D entity that morphs and responds like a living intelligence.' },
+        { heading: '3D Production', text: 'Built in Cinema 4D using dynamic simulations. Every state of ARIA — listening, thinking, responding — has a distinct visual expression.' },
+        { heading: 'Result', text: 'Used as the central visual element in the Thoughtful product UI, onboarding flow, and brand films.' }
+      ]
+    }
+  };
+
+  function openCase(id) {
+    const c = CASES[id];
+    if (!c) return;
+    document.getElementById('caseTag').textContent   = c.tag;
+    document.getElementById('caseTitle').textContent = c.title;
+    document.getElementById('caseIntro').textContent = c.intro;
+    document.getElementById('caseVideo').src =
+      `https://player.vimeo.com/video/${c.vimeo}?autoplay=1&loop=1&color=ffffff&title=0&byline=0&portrait=0`;
+    document.getElementById('caseBlocks').innerHTML = c.blocks.map(b =>
+      `<div class="case-block"><h3>${b.heading}</h3><p>${b.text}</p></div>`
+    ).join('');
+    document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-  function closeVid() {
-    document.getElementById('mframe').src = '';
-    document.getElementById('modal').classList.remove('on');
+
+  function closeCase() {
+    document.getElementById('modal').classList.remove('open');
     document.body.style.overflow = '';
+    document.getElementById('caseVideo').src = '';
   }
-  document.addEventListener('keydown', e => e.key === 'Escape' && closeVid());
+
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal')) closeCase();
+  });
+  document.addEventListener('keydown', e => e.key === 'Escape' && closeCase());
 
   // ── Mobile menu ───────────────────────────────
   document.getElementById('burger').addEventListener('click', function() {

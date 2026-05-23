@@ -475,3 +475,105 @@ body::after {
   .c-title { font-size: clamp(2.6rem, 13vw, 4.5rem); }
   .process-grid { grid-template-columns: 1fr; }
 }
+
+/* ─── CASE MODAL ──────────────────────────────── */
+#modal {
+  position: fixed; inset: 0;
+  background: #080808;
+  z-index: 1000;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+#modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal-x {
+  position: fixed;
+  top: 24px; right: 24px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #fff;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: none;
+  z-index: 1010;
+  transition: background .2s;
+}
+.modal-x:hover { background: #2a2a2a; }
+
+.modal-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 40px 120px;
+}
+
+.case-hero-block {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #1f1f1f;
+  margin-bottom: 60px;
+}
+.case-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.case-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 10vw, 120px);
+  line-height: .95;
+  color: #fff;
+  margin-bottom: 32px;
+}
+.case-intro {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #aaa;
+  max-width: 640px;
+}
+
+.case-video-block {
+  position: relative;
+  padding-bottom: 56.25%;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 80px;
+}
+.case-video-block iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+}
+
+.case-blocks { display: grid; gap: 48px; }
+.case-block {
+  padding-bottom: 48px;
+  border-bottom: 1px solid #1a1a1a;
+}
+.case-block:last-child { border-bottom: none; }
+.case-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: .04em;
+}
+.case-block p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #888;
+  max-width: 620px;
+}
+
+@media (max-width: 600px) {
+  .modal-wrap { padding: 60px 20px 80px; }
+  .case-title { font-size: 56px; }
+  .modal-x { top: 16px; right: 16px; }
+}
