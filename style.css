@@ -475,19 +475,21 @@ body::after {
 }
 
 /* ─── CASE MODAL ──────────────────────────────── */
+body.modal-open { overflow: hidden; }
+
 #modal {
   position: fixed; inset: 0;
   background: #080808;
   z-index: 1000;
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   opacity: 0;
   pointer-events: none;
   transition: opacity .4s ease;
 }
-#modal.open {
-  opacity: 1;
-  pointer-events: all;
-}
+#modal.open { opacity: 1; pointer-events: all; }
+
 .modal-x {
   position: fixed;
   top: 24px; right: 24px;
@@ -503,75 +505,111 @@ body::after {
 }
 .modal-x:hover { background: #2a2a2a; }
 
-.modal-wrap {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 80px 40px 120px;
-}
+.modal-wrap { max-width: 1100px; margin: 0 auto; }
 
-.case-hero-block {
-  padding-bottom: 60px;
-  border-bottom: 1px solid #1f1f1f;
-  margin-bottom: 60px;
+/* Header */
+.modal-header {
+  padding: 80px 60px 48px;
 }
-.case-tag {
+.modal-meta {
   font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  letter-spacing: .12em;
-  color: #666;
+  font-size: 11px;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  color: #666;
+  margin-bottom: 16px;
 }
-.case-title {
+.modal-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px, 10vw, 120px);
-  line-height: .95;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.9;
   color: #fff;
   margin-bottom: 32px;
+  letter-spacing: -0.02em;
 }
-.case-intro {
+.modal-lead {
   font-size: 18px;
-  line-height: 1.7;
+  line-height: 1.6;
   color: #aaa;
-  max-width: 640px;
+  max-width: 600px;
 }
 
-.case-video-block {
-  position: relative;
-  padding-bottom: 56.25%;
+/* Hero video — full width */
+.modal-hero-media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
   background: #111;
-  border-radius: 8px;
-  overflow: hidden;
   margin-bottom: 80px;
 }
-.case-video-block iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-}
+.modal-hero-media iframe { width: 100%; height: 100%; border: none; }
 
-.case-blocks { display: grid; gap: 48px; }
-.case-block {
-  padding-bottom: 48px;
-  border-bottom: 1px solid #1a1a1a;
+/* Two-column grid */
+.modal-body-grid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0 80px;
+  padding: 0 60px;
+  margin-bottom: 80px;
 }
-.case-block:last-child { border-bottom: none; }
-.case-block h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  color: #fff;
-  margin-bottom: 16px;
-  letter-spacing: .04em;
+.modal-sidebar-item { margin-bottom: 24px; }
+.modal-sidebar-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 4px;
 }
-.case-block p {
-  font-size: 16px;
-  line-height: 1.8;
+.modal-sidebar-value { font-size: 14px; color: #ccc; }
+.modal-sidebar-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
   color: #888;
-  max-width: 620px;
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
 }
+.modal-sidebar-link:hover { color: #fff; border-color: #fff; }
 
-@media (max-width: 600px) {
-  .modal-wrap { padding: 60px 20px 80px; }
-  .case-title { font-size: 56px; }
+/* Content sections */
+.modal-divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 0 28px; }
+.modal-section { margin-bottom: 48px; }
+.modal-section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: .02em;
+}
+.modal-section-body { font-size: 16px; line-height: 1.75; color: #888; max-width: 580px; }
+
+/* CTA */
+.modal-cta {
+  text-align: center;
+  padding: 80px 60px 120px;
+  border-top: 1px solid #1e1e1e;
+}
+.modal-cta p { color: #555; font-size: 14px; margin-bottom: 20px; }
+.modal-cta-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 100px;
+  letter-spacing: 0.02em;
+  transition: opacity .2s;
+}
+.modal-cta-btn:hover { opacity: 0.85; }
+
+@media (max-width: 768px) {
+  .modal-header { padding: 60px 24px 32px; }
+  .modal-body-grid { grid-template-columns: 1fr; padding: 0 24px; gap: 32px 0; }
+  .modal-cta { padding: 60px 24px 80px; }
   .modal-x { top: 16px; right: 16px; }
 }
