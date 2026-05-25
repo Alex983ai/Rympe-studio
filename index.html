@@ -140,20 +140,19 @@
   <!-- ─── CLIENTS ───────────────────────────────────────── -->
   <section class="s-clients">
     <div class="marquee-wrap">
-      <div class="marquee-track">
-        <a href="https://www.thoughtful.ai"  target="_blank" rel="noopener">Thoughtful</a><i>·</i>
-        <a href="https://tabby.ai"           target="_blank" rel="noopener">Tabby</a><i>·</i>
-        <a href="https://klasha.com"         target="_blank" rel="noopener">Klasha</a><i>·</i>
-        <a href="https://dynaboard.com"      target="_blank" rel="noopener">Dynaboard</a><i>·</i>
-        <a href="https://vkusvill.ru"        target="_blank" rel="noopener">VKUSVILL</a><i>·</i>
-        <a href="https://beoble.io"          target="_blank" rel="noopener">Beoble</a><i>·</i>
-        <!-- duplicate for seamless loop -->
-        <a href="https://www.thoughtful.ai"  target="_blank" rel="noopener">Thoughtful</a><i>·</i>
-        <a href="https://tabby.ai"           target="_blank" rel="noopener">Tabby</a><i>·</i>
-        <a href="https://klasha.com"         target="_blank" rel="noopener">Klasha</a><i>·</i>
-        <a href="https://dynaboard.com"      target="_blank" rel="noopener">Dynaboard</a><i>·</i>
-        <a href="https://vkusvill.ru"        target="_blank" rel="noopener">VKUSVILL</a><i>·</i>
-        <a href="https://beoble.io"          target="_blank" rel="noopener">Beoble</a><i>·</i>
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="mq-item"><a href="https://www.thoughtful.ai" target="_blank" rel="noopener">Thoughtful</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://tabby.ai" target="_blank" rel="noopener">Tabby</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://klasha.com" target="_blank" rel="noopener">Klasha</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://dynaboard.com" target="_blank" rel="noopener">Dynaboard</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://vkusvill.ru" target="_blank" rel="noopener">VKUSVILL</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://beoble.io" target="_blank" rel="noopener">Beoble</a></span>
+        <span class="mq-sep">·</span>
       </div>
     </div>
   </section>
@@ -233,6 +232,7 @@
       <div class="modal-hero-media">
         <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
         <div class="modal-hero-media-overlay" onclick="this.style.display='none';document.getElementById('caseVideo').style.pointerEvents='all'"></div>
+        <button class="video-fs-btn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
       </div>
       <div class="modal-body-grid">
         <aside class="modal-sidebar" id="caseSidebar"></aside>
@@ -440,6 +440,7 @@
     document.body.classList.remove('modal-open');
     document.getElementById('caseVideo').src = '';
     if (lenis) lenis.start();
+    resetVideoOverlay && resetVideoOverlay();
   }
 
   document.getElementById('modal').addEventListener('click', e => {
@@ -470,13 +471,56 @@
     if (mob && mob.classList.contains('on')) closeMob();
   });
 
-    // Patch #5 — Modal wheel scroll (bypass Lenis)
-    document.getElementById('modal').addEventListener('wheel', function(e) {
-        if (!this.classList.contains('open')) return;
-        e.stopPropagation();
-        e.preventDefault();
-        this.scrollTop += e.deltaY;
-    }, { passive: false });
+  // Patch #5 — Modal wheel scroll (bypass Lenis)
+  document.getElementById('modal').addEventListener('wheel', function(e) {
+    if (!this.classList.contains('open')) return;
+    e.stopPropagation();
+    e.preventDefault();
+    this.scrollTop += e.deltaY;
+  }, { passive: false });
+
+  // ── Marquee — JS rAF (pixel-perfect, no CSS restart flash) ──
+  (function() {
+    const track = document.getElementById('marqueeTrack');
+    if (!track) return;
+    // Clone content for seamless loop
+    const clone = track.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.setAttribute('aria-hidden', 'true');
+    track.parentNode.appendChild(clone);
+    // Wrap both in a runner
+    const wrap = track.parentNode;
+    const runner = document.createElement('div');
+    runner.className = 'mq-runner';
+    wrap.appendChild(runner);
+    runner.appendChild(track);
+    runner.appendChild(clone);
+
+    let x = 0;
+    const speed = 0.6; // px/frame ≈ 36px/s at 60fps
+    let raf;
+    function tick() {
+      x -= speed;
+      const half = track.offsetWidth;
+      if (half > 0 && Math.abs(x) >= half) x += half;
+      runner.style.transform = 'translateX(' + x + 'px)';
+      raf = requestAnimationFrame(tick);
+    }
+    // Pause when tab hidden, resume when visible
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) { cancelAnimationFrame(raf); }
+      else { raf = requestAnimationFrame(tick); }
+    });
+    raf = requestAnimationFrame(tick);
+  })();
+
+  // Reset video overlay when modal closes
+  function resetVideoOverlay() {
+    var ov = document.querySelector('.modal-hero-media-overlay');
+    if (ov) { ov.style.display = ''; }
+    var vid = document.getElementById('caseVideo');
+    if (vid) vid.style.pointerEvents = '';
+  }
 </script>
 </body>
 </html>

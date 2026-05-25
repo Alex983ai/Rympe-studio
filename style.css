@@ -296,35 +296,33 @@ body::after {
   overflow: hidden;
 }
 .marquee-wrap { overflow: hidden; }
+/* JS rAF runner — no CSS animation (avoids restart flash) */
+.mq-runner {
+  display: flex;
+  align-items: center;
+  will-change: transform;
+}
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 0;
-  width: max-content;
-  will-change: transform;
-  animation: marquee 22s linear infinite;
+  flex-shrink: 0;
 }
-.marquee-track a {
+.mq-item a {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.6rem;
   letter-spacing: 0.12em;
   color: rgba(237,237,237,0.22);
   white-space: nowrap;
   text-decoration: none;
+  padding: 0 1.4rem;
   transition: color 0.3s;
-  padding: 0 1.25rem;
 }
-.marquee-track a:hover { color: rgba(237,237,237,0.8); }
-.marquee-track i {
+.mq-item a:hover { color: rgba(237,237,237,0.8); }
+.mq-sep {
   font-style: normal;
   color: rgba(237,237,237,0.1);
   font-size: 0.6rem;
   flex-shrink: 0;
-  padding: 0 0.4rem;
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 
 /* ─── Process ─────────────────────────────────── */
@@ -616,3 +614,27 @@ body.modal-open { overflow: hidden; }
   .modal-cta { padding: 60px 24px 80px; }
   .modal-x { top: 16px; right: 16px; }
 }
+
+/* ─── Video fullscreen button ─────────────────── */
+.video-fs-btn {
+  position: absolute;
+  bottom: 12px; right: 12px;
+  z-index: 3;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+  width: 36px; height: 36px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: none;
+  backdrop-filter: blur(6px);
+  transition: background .2s;
+}
+.video-fs-btn:hover { background: rgba(0,0,0,0.8); }
+
+/* ─── Hide Vercel toolbar/badge ───────────────── */
+#__vercel_toolbar,
+#vercel-live-feedback,
+.vercel-live-feedback,
+[data-vercel-toolbar],
+vercel-live-feedback { display: none !important; }
