@@ -16,6 +16,11 @@
 #modal .modal-x {
     cursor: pointer !important;
 }
+/* Enable interaction with video/iframe inside modal */
+#modal .modal-hero-media iframe,
+#modal .modal-hero-media video {
+    pointer-events: auto !important;
+}
 html { font-size: 16px; }
 body {
   background: #080808;
