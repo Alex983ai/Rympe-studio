@@ -308,11 +308,11 @@ body::after {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.6rem;
   letter-spacing: 0.12em;
-  padding: 0 1.25rem;
   color: rgba(237,237,237,0.22);
   white-space: nowrap;
   text-decoration: none;
   transition: color 0.3s;
+  padding: 0 1.25rem;
 }
 .marquee-track a:hover { color: rgba(237,237,237,0.8); }
 .marquee-track i {
@@ -539,17 +539,12 @@ body.modal-open { overflow: hidden; }
 
 /* Hero video — full width */
 .modal-hero-media {
-  position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #111;
   margin-bottom: 80px;
 }
 .modal-hero-media iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
-.modal-hero-media-overlay {
-  position: absolute; inset: 0; z-index: 2;
-  cursor: pointer;
-}
 
 /* Two-column grid */
 .modal-body-grid {
