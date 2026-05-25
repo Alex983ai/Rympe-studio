@@ -232,6 +232,7 @@
       </div>
       <div class="modal-hero-media">
         <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <div class="modal-hero-media-overlay" onclick="document.getElementById('caseVideo').style.pointerEvents='all'"></div>
       </div>
       <div class="modal-body-grid">
         <aside class="modal-sidebar" id="caseSidebar"></aside>
@@ -444,7 +445,12 @@
   document.getElementById('modal').addEventListener('click', e => {
     if (e.target === document.getElementById('modal')) closeCase();
   });
-  document.addEventListener('keydown', e => e.key === 'Escape' && closeCase());
+  // Escape closes modal OR mobile menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('modal').classList.contains('open')) closeCase();
+    else if (document.getElementById('mobMenu').classList.contains('on')) closeMob();
+  });
 
   // ── Mobile menu ───────────────────────────────
   document.getElementById('burger').addEventListener('click', function() {
@@ -455,6 +461,10 @@
     document.getElementById('burger').classList.remove('x');
     document.getElementById('mobMenu').classList.remove('on');
   }
+  // Patch #3: close mobile menu on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 960) closeMob();
+  });
   </script>
 </body>
 </html>
