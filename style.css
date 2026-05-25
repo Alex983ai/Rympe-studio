@@ -16,11 +16,7 @@
 #modal .modal-x {
     cursor: pointer !important;
 }
-/* Enable interaction with video/iframe inside modal */
-#modal .modal-hero-media iframe,
-#modal .modal-hero-media video {
-    pointer-events: auto !important;
-}
+/* pointer-events on modal iframe managed via JS overlay (none by default, auto when overlay clicked) */
 html { font-size: 16px; }
 body {
   background: #080808;
