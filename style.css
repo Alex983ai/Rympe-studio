@@ -3,6 +3,19 @@
   box-sizing: border-box; margin: 0; padding: 0;
   cursor: none !important; /* hide I-beam on text; selection still works */
 }
+
+/* Restore default cursor inside modal so video/iframe controls work */
+#modal *,
+#modal *::before,
+#modal *::after {
+    cursor: auto !important;
+}
+#modal a,
+#modal button,
+#modal [role="button"],
+#modal .modal-x {
+    cursor: pointer !important;
+}
 html { font-size: 16px; }
 body {
   background: #080808;
