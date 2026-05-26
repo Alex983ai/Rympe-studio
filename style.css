@@ -634,3 +634,62 @@ body.modal-open { overflow: hidden; }
 .vercel-live-feedback,
 [data-vercel-toolbar],
 vercel-live-feedback { display: none !important; }
+
+/* ── Behind the Scenes ─────────────────────────── */
+.modal-bts {
+  padding: 60px 60px 0;
+  margin-bottom: 0;
+}
+.modal-bts-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 16px;
+}
+.modal-bts-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.modal-bts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.bts-item { display: flex; flex-direction: column; gap: 8px; }
+.bts-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+.bts-vimeo-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bts-vimeo-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.bts-caption {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #555;
+}
+@media (max-width: 600px) {
+  .modal-bts { padding: 40px 24px 0; }
+  .modal-bts-grid { grid-template-columns: 1fr; }
+}
