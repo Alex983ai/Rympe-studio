@@ -140,20 +140,19 @@
   <!-- ─── CLIENTS ───────────────────────────────────────── -->
   <section class="s-clients">
     <div class="marquee-wrap">
-      <div class="marquee-track">
-        <a href="https://www.thoughtful.ai"  target="_blank" rel="noopener">Thoughtful</a><i>·</i>
-        <a href="https://tabby.ai"           target="_blank" rel="noopener">Tabby</a><i>·</i>
-        <a href="https://klasha.com"         target="_blank" rel="noopener">Klasha</a><i>·</i>
-        <a href="https://dynaboard.com"      target="_blank" rel="noopener">Dynaboard</a><i>·</i>
-        <a href="https://vkusvill.ru"        target="_blank" rel="noopener">VKUSVILL</a><i>·</i>
-        <a href="https://beoble.io"          target="_blank" rel="noopener">Beoble</a><i>·</i>
-        <!-- duplicate for seamless loop -->
-        <a href="https://www.thoughtful.ai"  target="_blank" rel="noopener">Thoughtful</a><i>·</i>
-        <a href="https://tabby.ai"           target="_blank" rel="noopener">Tabby</a><i>·</i>
-        <a href="https://klasha.com"         target="_blank" rel="noopener">Klasha</a><i>·</i>
-        <a href="https://dynaboard.com"      target="_blank" rel="noopener">Dynaboard</a><i>·</i>
-        <a href="https://vkusvill.ru"        target="_blank" rel="noopener">VKUSVILL</a><i>·</i>
-        <a href="https://beoble.io"          target="_blank" rel="noopener">Beoble</a><i>·</i>
+      <div class="marquee-track" id="marqueeTrack">
+        <span class="mq-item"><a href="https://www.thoughtful.ai" target="_blank" rel="noopener">Thoughtful</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://tabby.ai" target="_blank" rel="noopener">Tabby</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://klasha.com" target="_blank" rel="noopener">Klasha</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://dynaboard.com" target="_blank" rel="noopener">Dynaboard</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://vkusvill.ru" target="_blank" rel="noopener">VKUSVILL</a></span>
+        <span class="mq-sep">·</span>
+        <span class="mq-item"><a href="https://beoble.io" target="_blank" rel="noopener">Beoble</a></span>
+        <span class="mq-sep">·</span>
       </div>
     </div>
   </section>
@@ -225,15 +224,24 @@
   <div id="modal">
     <button class="modal-x" onclick="closeCase()">✕</button>
     <div class="modal-wrap">
-      <div class="case-hero-block">
-        <p class="case-tag" id="caseTag"></p>
-        <h1 class="case-title" id="caseTitle"></h1>
-        <p class="case-intro" id="caseIntro"></p>
+      <div class="modal-header">
+        <div class="modal-meta" id="caseTag"></div>
+        <h1 class="modal-title" id="caseTitle"></h1>
+        <p class="modal-lead" id="caseIntro"></p>
       </div>
-      <div class="case-video-block">
+      <div class="modal-hero-media">
         <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <div class="modal-hero-media-overlay" onclick="this.style.display='none';document.getElementById('caseVideo').style.pointerEvents='all'"></div>
+        <button class="video-fs-btn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
       </div>
-      <div class="case-blocks" id="caseBlocks"></div>
+      <div class="modal-body-grid">
+        <aside class="modal-sidebar" id="caseSidebar"></aside>
+        <div class="modal-content" id="caseBlocks"></div>
+      </div>
+      <div class="modal-cta">
+        <p>Interested in a project like this?</p>
+        <a href="#contact" class="modal-cta-btn" onclick="closeCase()">Start a project →</a>
+      </div>
     </div>
   </div>
 
@@ -302,102 +310,102 @@
   // ── Case modal ────────────────────────────────
   const CASES = {
     beoble: {
-      title: 'Beoble 2.0',
-      tag: 'Brand · 3D',
-      intro: 'A full 3D brand identity for Beoble — the Web3 social layer. From moodboard to final render, we built a visual world that lives between crypto culture and cinematic motion.',
+      title: 'Beoble 2.0', tags: 'Brand · 3D', client: 'Beoble', year: '2024', behanceUrl: '',
+      intro: 'Full 3D brand visualisation for Beoble — a Web3 social platform. From moodboard to final render, we built a visual world at the intersection of crypto culture and cinematic motion.',
       vimeo: '1187992341',
       blocks: [
-        { heading: 'Brief & Concept', text: 'The client came with a clear direction: Web3, dark, premium. We built a moodboard around liquid metals, deep space aesthetics, and layered UI motion. Every frame needed to feel like the future.' },
-        { heading: 'Art Direction', text: 'Color palette — near-black with electric blue and gold accents. Typography — sharp and geometric. We defined the visual language before touching Cinema 4D.' },
-        { heading: '3D Production', text: 'All scenes built in Cinema 4D with Redshift rendering. 14 unique shots, 3 rounds of iteration. Post-production in After Effects with custom motion blur and color grading in DaVinci Resolve.' },
-        { heading: 'Result', text: 'Delivered a full brand motion kit: hero reel, 6 social cuts, looping backgrounds for web. The client used it across their product launch campaign.' }
+        { heading: 'Brief & Concept', text: 'The client had a clear direction: Web3, dark, premium. We built a moodboard rooted in liquid metals, deep-space aesthetics, and layered UI animation. Every frame needed to feel like the future.' },
+        { heading: 'Art Direction', text: 'Colour palette: near-black with electric blue and gold accents. Typography — sharp and geometric. We locked the visual language before touching Cinema 4D.' },
+        { heading: '3D Production', text: 'All scenes built in Cinema 4D with Redshift rendering. 14 unique hero frames, 3 iterations. Compositing in After Effects with custom motion blur and DaVinci colour grade.' },
+        { heading: 'Result', text: 'A launch film used across Beoble\'s homepage, paid media and pitch decks. Views grew 3× after the rebrand went live.' }
       ]
     },
     oko: {
-      title: 'OKO',
-      tag: 'CGI · Motion',
-      intro: 'A cinematic CGI spot for OKO — a data platform built for enterprise teams. We translated complex tech into clean, confident visuals.',
+      title: 'OKO', tags: 'CGI · Motion', client: 'OKO', year: '2024', behanceUrl: '',
+      intro: 'A cinematic CGI product film for OKO — a next-gen data automation platform. We visualised abstract data flows as tangible, tactile objects to make complex tech feel human.',
       vimeo: '1123546540',
       blocks: [
-        { heading: 'Brief & Concept', text: 'OKO needed to communicate precision and reliability. We pitched a concept around geometric forms, controlled camera motion, and a muted but powerful color palette.' },
-        { heading: '3D Production', text: 'Built in Cinema 4D. Key focus — lighting that feels editorial, not corporate. Every scene was lit individually for maximum control over mood.' },
-        { heading: 'Result', text: 'A 60-second brand film used on the product landing page and investor deck.' }
+        { heading: 'Brief & Concept', text: 'OKO needed to show — not explain — how their software eliminates manual data entry. Our brief: make the invisible visible. We translated spreadsheets and pipelines into choreographed 3D motion.' },
+        { heading: 'Art Direction', text: 'Dark tech aesthetic with warm copper and orange highlights. Inspired by precision instruments — every prop felt engineered, not decorated.' },
+        { heading: '3D Production', text: 'Cinema 4D + Redshift. Custom procedural animations driven by MoGraph effectors. Sound design layered in DaVinci Resolve.' },
+        { heading: 'Result', text: 'Hero video for OKO\'s product launch page and investor materials. Delivered in 3 weeks.' }
       ]
     },
     thoughtful: {
-      title: 'Thoughtful',
-      tag: 'Brand · 3D',
-      intro: 'A captivating explainer for Thoughtful — a healthcare administration AI. The artwork combines elements of technology and the human touch, symbolising deep integration of AI into healthcare systems.',
+      title: 'Thoughtful', tags: 'Brand · 3D', client: 'Thoughtful.ai', year: '2023', behanceUrl: '',
+      intro: 'Brand CGI for Thoughtful.ai — an AI platform automating healthcare revenue cycle. We made complex healthcare automation feel approachable and unmistakably intelligent.',
       vimeo: '1107392535',
       blocks: [
-        { heading: 'Brief & Concept', text: 'Introducing Thoughtful.ai — an AI platform for healthcare administration. The challenge: make complex automation feel warm and human. We surfed references, approved placement and combined them to define the visual style.' },
-        { heading: 'Visual Build', text: 'After receiving the brief, we started designing the scenes. Storyboards, color palette, typography, pacing — all defined before a single render was made.' },
-        { heading: 'Process', text: 'Creating scenes took a large portion of the project\'s time. We used Mograph to create animations and Redshift for rendering in Cinema 4D. Post-production, color correction, and sound design were done in After Effects and DaVinci Resolve.' },
-        { heading: 'Result', text: 'A full explainer video delivered for Thoughtful\'s product launch — used on their homepage, paid ads, and demo presentations.' }
+        { heading: 'Brief & Concept', text: 'Thoughtful.ai automates the most tedious parts of healthcare administration. The challenge: make AI automation feel warm and human. We studied their existing assets, approved key placement decisions, and unified them into a coherent visual direction.' },
+        { heading: 'Art Direction', text: 'Clean whites against deep blue-grey. Soft shadows, precise geometry. The visual language says: "This is the system that takes care of everything — so your team doesn\'t have to."' },
+        { heading: '3D Production', text: 'Mograph-driven animation in Cinema 4D, rendered in Redshift. Post in After Effects and DaVinci Resolve.' },
+        { heading: 'Result', text: 'Full-length launch video used on Thoughtful\'s homepage, paid ads and sales demos.' }
       ]
     },
     tabbycard: {
-      title: 'Tabby Card',
-      tag: 'Product · CGI',
-      intro: 'Product CGI for Tabby Card — the BNPL card for the Middle East. Clean, confident, premium.',
+      title: 'Tabby Card', tags: 'Product · CGI', client: 'Tabby', year: '2023', behanceUrl: '',
+      intro: 'A product CGI campaign for Tabby Card — the BNPL card by one of the MENA region\'s leading fintech brands. We brought a physical card to life in a fully digital world.',
       vimeo: '1114665600',
       blocks: [
-        { heading: 'Brief & Concept', text: 'Tabby needed product renders that looked better than photography. We proposed CGI so we could control every reflection, every highlight, every angle.' },
-        { heading: '3D Production', text: 'Card modelled to exact spec, rendered with Redshift. 8 final hero shots + animated loop for digital use.' },
-        { heading: 'Result', text: 'Assets deployed across app store listings, paid social, and OOH campaigns in UAE and KSA.' }
+        { heading: 'Brief & Concept', text: 'Tabby launched a physical card and needed a hero visual. Brief: premium, aspirational, clean. The card had to feel like a luxury object — not a fintech product.' },
+        { heading: 'Art Direction', text: 'White-on-white product environment. Soft studio lighting with sharp specular highlights. Inspired by high-end watch and jewellery photography.' },
+        { heading: '3D Production', text: 'Full CGI product in Cinema 4D. Macro camera moves, physically accurate materials. Zero photography — 100% rendered.' },
+        { heading: 'Result', text: 'Hero visuals used across Tabby\'s app, web banners and OOH campaign materials.' }
       ]
     },
     klasha: {
-      title: 'Klasha',
-      tag: 'Brand · Motion',
-      intro: 'Brand motion for Klasha — a fintech platform enabling cross-border payments across Africa.',
+      title: 'Klasha', tags: 'Brand · Motion', client: 'Klasha', year: '2023', behanceUrl: '',
+      intro: 'Brand motion for Klasha — a cross-border payments platform built for Africa. We created a visual identity in motion that feels pan-African, modern and trusted.',
       vimeo: '1114664869',
       blocks: [
-        { heading: 'Brief & Concept', text: 'Klasha wanted energy, movement, and cultural relevance. We built a motion system rooted in bold color, kinetic typography, and layered animation.' },
-        { heading: 'Production', text: 'Motion design in After Effects, 3D elements in Cinema 4D. Delivered a full social motion kit — 12 formats across platforms.' },
-        { heading: 'Result', text: 'Used across Klasha\'s Series A announcement, social channels, and investor materials.' }
+        { heading: 'Brief & Concept', text: 'Klasha connects African consumers to global commerce. They needed a brand film that felt local in heart but global in production quality. We built around colour, rhythm and the energy of African markets.' },
+        { heading: 'Art Direction', text: 'Bold Klasha green against warm earthy neutrals. Fast cuts, kinetic typography. Energy over elegance.' },
+        { heading: '3D Production', text: 'Motion design in After Effects. 3D UI elements in Cinema 4D. Final grade in DaVinci.' },
+        { heading: 'Result', text: 'Series of brand videos deployed across Klasha\'s social channels and product onboarding.' }
       ]
     },
     dynaboard: {
-      title: 'Dynaboard',
-      tag: 'Tech · Motion',
-      intro: 'A product explainer for Dynaboard — a collaborative UI builder for engineering teams.',
+      title: 'Dynaboard', tags: 'Tech · Motion', client: 'Dynaboard', year: '2023', behanceUrl: '',
+      intro: 'A product explainer for Dynaboard — the internal tools builder. We visualised the platform\'s power through dynamic 3D UI elements and cinematic transitions.',
       vimeo: '1115899250',
       blocks: [
-        { heading: 'Brief & Concept', text: 'Complex product, simple story. We broke the product into 4 core use cases and built a visual narrative around each one.' },
-        { heading: 'Production', text: 'Screen recordings combined with 3D transitions and motion graphics. The challenge was keeping it technical enough for developers while remaining visually engaging.' },
-        { heading: 'Result', text: 'Primary explainer used on the Dynaboard homepage and YC pitch materials.' }
+        { heading: 'Brief & Concept', text: 'Dynaboard lets teams build internal apps without engineers. The challenge: make a developer tool feel exciting to non-technical stakeholders. We used 3D UI metaphors — floating panels, live data — to show capability, not code.' },
+        { heading: 'Art Direction', text: 'Deep navy and electric teal. Clean grids. Inspired by Figma meets Mission Control.' },
+        { heading: '3D Production', text: 'Cinema 4D for 3D UI scenes. After Effects for compositing and motion graphics. Redshift for hero renders.' },
+        { heading: 'Result', text: 'Product explainer used for Dynaboard\'s launch and Series A fundraise.' }
       ]
     },
     tabbyshop: {
-      title: 'Tabby Shop',
-      tag: 'E-Comm · CGI',
-      intro: 'CGI campaign for Tabby Shop — the e-commerce arm of the Tabby ecosystem.',
+      title: 'Tabby Shop', tags: 'E-Comm · CGI', client: 'Tabby', year: '2023', behanceUrl: '',
+      intro: 'CGI e-commerce visuals for Tabby Shop — the full shopping experience within Tabby\'s BNPL ecosystem. We created a world where shopping feels effortless.',
       vimeo: '1115903599',
       blocks: [
-        { heading: 'Concept', text: 'Shopping made cinematic. We built 3D product scenes that elevated everyday items into desirable objects — the visual language of luxury applied to everyday commerce.' },
-        { heading: 'Production', text: 'Full CGI product shots, animated loops, and seasonal campaign assets. Delivered in 15 formats for digital and OOH.' }
+        { heading: 'Brief & Concept', text: 'Tabby Shop needed a campaign visual that showed the joy of shopping — not just the convenience of payments. We built an idealized shopping world: pastel tones, floating products, soft light.' },
+        { heading: 'Art Direction', text: 'Pastel greens and warm whites. Soft shadows. Products as heroes — not icons.' },
+        { heading: '3D Production', text: 'Full CGI environment in Cinema 4D. Physically based materials. Animated product reveals in After Effects.' },
+        { heading: 'Result', text: 'Campaign visuals used across Tabby\'s app store listing, homepage and email campaigns.' }
       ]
     },
     pattern: {
-      title: 'Pattern',
-      tag: 'Art Direction · Motion',
-      intro: 'Art direction and motion for Pattern — a data intelligence platform for e-commerce brands.',
+      title: 'Pattern', tags: 'Art Direction · Motion', client: 'Pattern', year: '2023', behanceUrl: '',
+      intro: 'Art direction and motion for Pattern — an e-commerce acceleration platform. We turned data and logistics into a cinematic brand story.',
       vimeo: '1115895255',
       blocks: [
-        { heading: 'Art Direction', text: 'Data doesn\'t have to be boring. We built a visual system using abstract data forms, flowing lines, and a restrained palette of navy, white, and gold.' },
-        { heading: 'Motion', text: 'Animated data visualisations, kinetic typography, and 3D structural forms. Delivered as a full brand motion system.' }
+        { heading: 'Brief & Concept', text: 'Pattern helps brands grow on marketplaces globally. Their brief: make the complexity of supply chain, data and global fulfilment look like a superpower — not a burden.' },
+        { heading: 'Art Direction', text: 'Bold geometric patterns (fitting the name) in orange and black. Fast, assertive, confident.' },
+        { heading: '3D Production', text: 'Cinema 4D MoGraph for pattern animations. After Effects compositing. Typography animation.' },
+        { heading: 'Result', text: 'Brand motion package used at Pattern\'s global partner events and investor presentations.' }
       ]
     },
     aria: {
-      title: 'Thoughtful ARIA',
-      tag: 'AI · 3D',
-      intro: 'A visual identity and motion system for ARIA — the AI assistant built into the Thoughtful platform.',
+      title: 'Thoughtful ARIA', tags: 'AI · 3D', client: 'Thoughtful.ai', year: '2023', behanceUrl: '',
+      intro: '3D CGI for ARIA — Thoughtful\'s AI agent for healthcare. We designed and animated a visual identity for an AI that\'s never been seen — making the invisible, iconic.',
       vimeo: '1116585739',
       blocks: [
-        { heading: 'Concept', text: 'ARIA needed a visual form — something that felt intelligent, calm, and trustworthy. We designed an abstract 3D entity that morphs and responds like a living intelligence.' },
-        { heading: '3D Production', text: 'Built in Cinema 4D using dynamic simulations. Every state of ARIA — listening, thinking, responding — has a distinct visual expression.' },
-        { heading: 'Result', text: 'Used as the central visual element in the Thoughtful product UI, onboarding flow, and brand films.' }
+        { heading: 'Brief & Concept', text: 'ARIA is Thoughtful\'s flagship AI agent. It needed a face — or rather, a presence. We conceptualised ARIA as an energy field: precise, flowing, intelligent. Not a robot. Not a chatbot. Something new.' },
+        { heading: 'Art Direction', text: 'Flowing light particles in Thoughtful\'s brand palette. Organic movement with geometric precision. Inspired by bioluminescence and neural networks.' },
+        { heading: '3D Production', text: 'Particle systems in Cinema 4D with Redshift volume rendering. Composited in After Effects with glow and chromatic aberration passes.' },
+        { heading: 'Result', text: 'ARIA\'s visual identity used across Thoughtful\'s website, product UI and conference keynotes.' }
       ]
     }
   };
@@ -405,28 +413,39 @@
   function openCase(id) {
     const c = CASES[id];
     if (!c) return;
-    document.getElementById('caseTag').textContent   = c.tag;
+    document.getElementById('caseTag').textContent   = c.tags;
     document.getElementById('caseTitle').textContent = c.title;
     document.getElementById('caseIntro').textContent = c.intro;
     document.getElementById('caseVideo').src =
       `https://player.vimeo.com/video/${c.vimeo}?autoplay=1&loop=1&color=ffffff&title=0&byline=0&portrait=0`;
+    let sidebarHTML = `
+      <div class="modal-sidebar-item"><span class="modal-sidebar-label">Client</span><span class="modal-sidebar-value">${c.client}</span></div>
+      <div class="modal-sidebar-item"><span class="modal-sidebar-label">Services</span><span class="modal-sidebar-value">${c.tags}</span></div>
+      <div class="modal-sidebar-item"><span class="modal-sidebar-label">Year</span><span class="modal-sidebar-value">${c.year}</span></div>
+    `;
+    if (c.behanceUrl) sidebarHTML += `<a class="modal-sidebar-link" href="${c.behanceUrl}" target="_blank" rel="noopener">View on Behance ↗</a>`;
+    document.getElementById('caseSidebar').innerHTML = sidebarHTML;
     document.getElementById('caseBlocks').innerHTML = c.blocks.map(b =>
-      `<div class="case-block"><h3>${b.heading}</h3><p>${b.text}</p></div>`
+      `<div class="modal-section"><hr class="modal-divider"><h3 class="modal-section-title">${b.heading}</h3><p class="modal-section-body">${b.text}</p></div>`
     ).join('');
-    document.getElementById('modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('modal');
+    modal.scrollTop = 0;
+    modal.classList.add('open');
+    document.body.classList.add('modal-open');
+    if (lenis) lenis.stop();
   }
 
   function closeCase() {
     document.getElementById('modal').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.classList.remove('modal-open');
     document.getElementById('caseVideo').src = '';
+    if (lenis) lenis.start();
+    resetVideoOverlay && resetVideoOverlay();
   }
 
   document.getElementById('modal').addEventListener('click', e => {
     if (e.target === document.getElementById('modal')) closeCase();
   });
-  document.addEventListener('keydown', e => e.key === 'Escape' && closeCase());
 
   // ── Mobile menu ───────────────────────────────
   document.getElementById('burger').addEventListener('click', function() {
@@ -437,6 +456,71 @@
     document.getElementById('burger').classList.remove('x');
     document.getElementById('mobMenu').classList.remove('on');
   }
-  </script>
+  
+  // Patch #3 — Mobile menu closes on resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 960) closeMob();
+  });
+
+  // Patch #4 — Escape closes modal + mobile menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    var modal = document.getElementById('modal');
+    if (modal && modal.classList.contains('open')) closeCase();
+    var mob = document.getElementById('mobMenu');
+    if (mob && mob.classList.contains('on')) closeMob();
+  });
+
+  // Patch #5 — Modal wheel scroll (bypass Lenis)
+  document.getElementById('modal').addEventListener('wheel', function(e) {
+    if (!this.classList.contains('open')) return;
+    e.stopPropagation();
+    e.preventDefault();
+    this.scrollTop += e.deltaY;
+  }, { passive: false });
+
+  // ── Marquee — JS rAF (pixel-perfect, no CSS restart flash) ──
+  (function() {
+    const track = document.getElementById('marqueeTrack');
+    if (!track) return;
+    // Clone content for seamless loop
+    const clone = track.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.setAttribute('aria-hidden', 'true');
+    track.parentNode.appendChild(clone);
+    // Wrap both in a runner
+    const wrap = track.parentNode;
+    const runner = document.createElement('div');
+    runner.className = 'mq-runner';
+    wrap.appendChild(runner);
+    runner.appendChild(track);
+    runner.appendChild(clone);
+
+    let x = 0;
+    const speed = 0.6; // px/frame ≈ 36px/s at 60fps
+    let raf;
+    function tick() {
+      x -= speed;
+      const half = track.offsetWidth;
+      if (half > 0 && Math.abs(x) >= half) x += half;
+      runner.style.transform = 'translateX(' + x + 'px)';
+      raf = requestAnimationFrame(tick);
+    }
+    // Pause when tab hidden, resume when visible
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) { cancelAnimationFrame(raf); }
+      else { raf = requestAnimationFrame(tick); }
+    });
+    raf = requestAnimationFrame(tick);
+  })();
+
+  // Reset video overlay when modal closes
+  function resetVideoOverlay() {
+    var ov = document.querySelector('.modal-hero-media-overlay');
+    if (ov) { ov.style.display = ''; }
+    var vid = document.getElementById('caseVideo');
+    if (vid) vid.style.pointerEvents = '';
+  }
+</script>
 </body>
 </html>
