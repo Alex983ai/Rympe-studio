@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#0d0d0d"/>
+  <!-- Grid lines -->
+  <g stroke="#1a1a2e" stroke-width="1" opacity="0.8">
+    <line x1="0" y1="180" x2="1280" y2="180"/>
+    <line x1="0" y1="360" x2="1280" y2="360"/>
+    <line x1="0" y1="540" x2="1280" y2="540"/>
+    <line x1="320" y1="0" x2="320" y2="720"/>
+    <line x1="640" y1="0" x2="640" y2="720"/>
+    <line x1="960" y1="0" x2="960" y2="720"/>
+  </g>
+  <!-- Wireframe sphere -->
+  <g fill="none" stroke="#3a7bd5" stroke-width="1.2" opacity="0.7">
+    <circle cx="640" cy="360" r="200"/>
+    <ellipse cx="640" cy="360" rx="200" ry="60"/>
+    <ellipse cx="640" cy="360" rx="200" ry="120"/>
+    <ellipse cx="640" cy="360" rx="60" ry="200"/>
+    <ellipse cx="640" cy="360" rx="120" ry="200"/>
+    <line x1="440" y1="360" x2="840" y2="360"/>
+    <line x1="640" y1="160" x2="640" y2="560"/>
+  </g>
+  <!-- Corner labels -->
+  <text x="24" y="40" fill="#3a7bd5" font-family="monospace" font-size="11" opacity="0.6">FRONT VIEW</text>
+  <text x="660" y="40" fill="#3a7bd5" font-family="monospace" font-size="11" opacity="0.6">TOP VIEW</text>
+  <text x="24" y="400" fill="#3a7bd5" font-family="monospace" font-size="11" opacity="0.6">SIDE VIEW</text>
+  <text x="660" y="400" fill="#3a7bd5" font-family="monospace" font-size="11" opacity="0.6">PERSPECTIVE</text>
+  <!-- Crosshair -->
+  <line x1="625" y1="355" x2="655" y2="355" stroke="#ff6b35" stroke-width="1.5" opacity="0.8"/>
+  <line x1="640" y1="340" x2="640" y2="370" stroke="#ff6b35" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="640" cy="360" r="4" fill="none" stroke="#ff6b35" stroke-width="1.5" opacity="0.8"/>
+  <!-- Label -->
+  <rect x="0" y="680" width="1280" height="40" fill="#080808" opacity="0.9"/>
+  <text x="24" y="704" fill="#555" font-family="monospace" font-size="11" letter-spacing="2">CINEMA 4D · CONCEPT SKETCHES · BEOBLE 2.0</text>
+</svg>
