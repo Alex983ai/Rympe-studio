@@ -48,7 +48,6 @@
   <!-- ─── HERO ─────────────────────────────────────────── -->
   <section class="hero">
     <div class="hero-bg">
-      <!-- Replace 1107392535 with your showreel ID when ready -->
       <iframe
         src="https://player.vimeo.com/video/1107392535?background=1&autoplay=1&loop=1&muted=1"
         frameborder="0" allow="autoplay; fullscreen"
@@ -132,29 +131,31 @@
         <div class="wc-img" data-v="1116585739"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Thoughtful ARIA</strong><span>AI · 3D</span></div>
+      </div>
+
+      <!-- ─── Behance projects ─────────────────────── -->
 
       <div class="wc r" onclick="openCase('dape')">
-        <div class="wc-img" data-v="739577157"></div>
-        <div class="wc-over"><span>▶</span></div>
-        <div class="wc-foot"><strong>DAPE NFT PROMO</strong><span>NFT · 3D</span></div>
+        <div class="wc-img" style="background-image:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/660d53153037155.63b3321849e0f.png')"></div>
+        <div class="wc-over"><span>↗</span></div>
+        <div class="wc-foot"><strong>DAPE NFT PROMO</strong><span>3D · NFT</span></div>
       </div>
 
       <div class="wc r" onclick="openCase('dexvault')">
-        <div class="wc-img" data-v="816820783"></div>
-        <div class="wc-over"><span>▶</span></div>
+        <div class="wc-img" style="background-image:url('https://mir-s3-cdn-cf.behance.net/project_modules/1400/e54cca167405315.64366a3079156.png')"></div>
+        <div class="wc-over"><span>↗</span></div>
         <div class="wc-foot"><strong>DexVault CG Promo</strong><span>CGI · Motion</span></div>
       </div>
 
       <div class="wc r" onclick="openCase('vkusvill')">
-        <div class="wc-img" data-v="1030151648"></div>
-        <div class="wc-over"><span>▶</span></div>
-        <div class="wc-foot"><strong>VKUSVILL + ITES</strong><span>Brand · CGI</span></div>
+        <div class="wc-img" style="background-image:url('https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/7f1f9c208498429.6739b2d207f07.png')"></div>
+        <div class="wc-over"><span>↗</span></div>        <div class="wc-foot"><strong>VKUSVILL + ITES</strong><span>Brand · CGI</span></div>
       </div>
 
       <div class="wc r" onclick="openCase('behancemotion')">
-        <div class="wc-img" data-v="573592087"></div>
-        <div class="wc-over"><span>▶</span></div>
-        <div class="wc-foot"><strong>Behance Motion</strong><span>Motion · 3D</span></div>
+        <div class="wc-img" style="background-image:url('https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/36231d123306907.60ec1eac0b964.png')"></div>
+        <div class="wc-over"><span>↗</span></div>
+        <div class="wc-foot"><strong>Behance Motion</strong><span>Motion · Design</span></div>
       </div>
 
     </div>
@@ -252,10 +253,15 @@
         <h1 class="modal-title" id="caseTitle"></h1>
         <p class="modal-lead" id="caseIntro"></p>
       </div>
-      <div class="modal-hero-media">
-        <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-        <div class="modal-hero-media-overlay" onclick="this.style.display='none';document.getElementById('caseVideo').style.pointerEvents='all'"></div>
-        <button class="video-fs-btn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
+      <div class="modal-hero-media" id="caseMediaWrap">
+        <!-- Video mode (Vimeo projects) -->
+        <div class="media-video-wrap" id="mediaVideoWrap">
+          <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          <div class="modal-hero-media-overlay" id="videoOverlay" onclick="this.style.display='none';document.getElementById('caseVideo').style.pointerEvents='all'"></div>
+          <button class="video-fs-btn" id="videoFsBtn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
+        </div>
+        <!-- Gallery mode (Behance projects) -->
+        <div class="behance-gallery" id="behanceGallery"></div>
       </div>
       <div class="modal-body-grid">
         <aside class="modal-sidebar" id="caseSidebar"></aside>
@@ -280,7 +286,6 @@
     lenis = new Lenis({ lerp: 0.075, smoothWheel: true });
     (function tick(t){ lenis.raf(t); requestAnimationFrame(tick); })(0);
   } else {
-    // Fallback: Lenis не загрузился — показываем всё сразу
     document.querySelectorAll('.r').forEach(el => el.classList.add('in'));
     lenis = { on: () => {}, raf: () => {} };
     window.addEventListener('scroll', () => {
@@ -445,52 +450,84 @@
         { heading: 'Result', text: 'ARIA\'s visual identity used across Thoughtful\'s website, product UI and conference keynotes.' }
       ]
     },
+
+    // ── Behance projects (image gallery) ─────────────────────
     dape: {
-      title: 'DAPE NFT PROMO', tags: 'NFT · 3D', client: 'DAPE', year: '2023', behanceUrl: 'https://www.behance.net/gallery/153037155/DAPE-NFT-PROMO',
-      intro: 'A cinematic 3D NFT promo for DAPE — a generative digital art project. We built a surreal visual world to launch the collection and drive community hype.',
-      vimeo: '739577157',
-      bts: { heading: 'Behind the Scenes', items: [] },
+      title: 'DAPE NFT PROMO', tags: '3D · NFT · Motion', client: 'DAPE', year: '2022',
+      behanceUrl: 'https://www.behance.net/gallery/153037155/DAPE-NFT-PROMO',
+      intro: 'A full CGI promo for the DAPE NFT collection — bold 3D characters, glitch motion and a dark futuristic aesthetic built for Web3.',
+      behanceImages: [
+        'https://mir-s3-cdn-cf.behance.net/project_modules/1400/660d53153037155.63b3321849e0f.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/fs/c52a80153037155.632f2b7ba5269.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/fs/06fe57153037155.632f2b7ba42a4.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/3a5209153037155.63b32a84efe09.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/df029d153037155.63b3321b45941.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/e1741e153037155.63b3321ce059d.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/12861c153037155.63b3321c7b276.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/e6b3f4153037155.63b32a857beb7.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/bdcc1d153037155.632f2b7ba4acc.gif',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/d7b52d153037155.63b3321ce1492.png'
+      ],
       blocks: [
-        { heading: 'Brief & Concept', text: 'DAPE needed a launch film that captured the energy of the NFT space — bold, surreal, collector-grade. We took inspiration from the collection\'s ape characters and translated them into a cinematic CGI environment.' },
-        { heading: 'Art Direction', text: 'Dark backgrounds with vivid neon accents. Cinematic camera moves around stylised 3D characters. Every frame designed to work as a still or in motion.' },
-        { heading: '3D Production', text: 'Characters and environments built in Cinema 4D with Redshift rendering. Motion design and compositing in After Effects.' },
-        { heading: 'Result', text: 'Launch promo used across DAPE\'s social channels, Discord and NFT marketplace listings.' }
+        { heading: 'Concept', text: 'Dark, bold, NFT-native. We built a visual world around DAPE\'s characters — glitchy motion, metallic surfaces, and cinematic depth that stands out in a saturated NFT market.' },
+        { heading: 'Production', text: 'Cinema 4D + Redshift for all 3D scenes. After Effects for glitch compositing and motion design. Full CGI — no photography.' },
+        { heading: 'Deliverables', text: 'Hero promotional visuals, animated loops, and social-format cuts for the DAPE NFT launch campaign.' }
       ]
     },
     dexvault: {
-      title: 'DexVault CG Promo', tags: 'CGI · Motion', client: 'DexVault', year: '2023', behanceUrl: 'https://www.behance.net/gallery/167405315/DexVault-CG-Promo',
-      intro: 'A high-end CGI promo for DexVault — a decentralised crypto vault platform. We visualised digital security and trustless finance through cinematic 3D.',
-      vimeo: '816820783',
-      bts: { heading: 'Behind the Scenes', items: [] },
+      title: 'DexVault CG Promo', tags: 'CGI · Motion · Web3', client: 'DexVault', year: '2023',
+      behanceUrl: 'https://www.behance.net/gallery/167405315/DexVault-CG-Promo',
+      intro: 'CGI promo for DexVault — a decentralised asset vault platform. Cinematic 3D environments, liquid metal materials and precision motion designed for Web3.',
+      behanceImages: [
+        'https://mir-s3-cdn-cf.behance.net/project_modules/1400/e54cca167405315.64366a3079156.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/8fbcdd167405315.6436885cdc2f3.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/214873167405315.642ae7d26bfb5.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/9d1ad7167405315.642ae7d26a2b0.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/55cc13167405315.642ae7d26afcc.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/f3c840167405315.642ae7d35ad04.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/142aa9167405315.642ae7d42dc7b.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/e3488c167405315.642ae7d42bfe2.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/1400/0a4294167405315.643681529422b.png'
+      ],
       blocks: [
-        { heading: 'Brief & Concept', text: 'DexVault needed to communicate security, decentralisation and premium-grade crypto infrastructure — without showing a single line of code. We translated the concept into a world of floating vaults, encrypted lattices and precision geometry.' },
-        { heading: 'Art Direction', text: 'Deep blacks, electric blues and metallic silvers. Architectural CGI forms. The visual language speaks trust without saying a word.' },
-        { heading: '3D Production', text: 'All scenes built in Cinema 4D with Redshift. Custom procedural shaders for the vault materials. Compositing in After Effects.' },
-        { heading: 'Result', text: 'Hero promo used across DexVault\'s website, Twitter and investor pitch materials.' }
+        { heading: 'Brief & Concept', text: 'DexVault needed visuals that communicated security, trust, and technical sophistication without feeling cold. We designed environments that felt like high-tech vaults — precision-engineered and impenetrable.' },
+        { heading: 'Art Direction', text: 'Deep blacks and electric blues. Liquid metal textures, volumetric light shafts. Every frame had to feel like a physical object worth protecting.' },
+        { heading: 'Production', text: 'Full 3D in Cinema 4D with Redshift. Custom shader development for all metallic surfaces. Motion design and compositing in After Effects.' }
       ]
     },
     vkusvill: {
-      title: 'VKUSVILL + ITES', tags: 'Brand · CGI', client: 'VKUSVILL / ITES', year: '2024', behanceUrl: 'https://www.behance.net/gallery/208498429/ecoexchanger-VKUSVILL-and-ITES-(brand-video)',
-      intro: 'A brand CGI video for VKUSVILL and ITES — celebrating their ecoexchanger partnership. We brought an environmental initiative to life through cinematic 3D storytelling.',
-      vimeo: '1030151648',
-      bts: { heading: 'Behind the Scenes', items: [] },
+      title: 'VKUSVILL + ITES', tags: 'Brand · CGI · Motion', client: 'VKUSVILL / ITES', year: '2024',
+      behanceUrl: 'https://www.behance.net/gallery/208498429/ecoexchanger-VKUSVILL-ITES',
+      intro: 'Brand video for the VKUSVILL & ITES ecoexchanger initiative — clean, organic CGI paired with kinetic motion design to communicate sustainability and innovation.',
+      behanceImages: [
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/32b282208498429.671bccfce73f9.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/e61d2e208498429.671bc7e2be9bf.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/354f2c208498429.671bc893293f4.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/ca11fd208498429.671fe1489f2f4.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/d72c73208498429.671bc7e373d3e.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/8defd5208498429.671bc7e4ea700.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/9438d1208498429.671bcabd40ec4.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/6236a5208498429.671bcabdf2e70.jpg',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_3840_webp/e9571c208498429.671bbe8cc417d.png'
+      ],
       blocks: [
-        { heading: 'Brief & Concept', text: 'VKUSVILL partnered with ITES to launch eco-exchange points across Russia. The brand film needed to convey sustainability, accessibility and community — all through a distinctly modern CGI lens.' },
-        { heading: 'Art Direction', text: 'VKUSVILL\'s signature greens and warm naturals. Clean product forms set against soft environmental backgrounds. Optimistic, approachable, authentic.' },
-        { heading: '3D Production', text: 'Cinema 4D with Redshift rendering. Product and environmental 3D scenes. Motion graphics and typography in After Effects.' },
-        { heading: 'Result', text: 'Brand video used across VKUSVILL\'s social channels and in-store display screens.' }
+        { heading: 'Brief & Concept', text: 'VKUSVILL partnered with ITES on an eco-exchange programme. The brief: make sustainability feel exciting and tangible — not corporate. We built a visual world of natural textures, organic forms and clean environmental motion.' },
+        { heading: 'Art Direction', text: 'Fresh greens, earthy neutrals, crisp whites. Soft environmental lighting, natural materials. The aesthetic bridges organic and modern without greenwashing.' },
+        { heading: 'Production', text: 'Cinema 4D with photorealistic Redshift rendering for all 3D scenes. Motion design in After Effects. Delivered as a brand video and series of still key visuals.' }
       ]
     },
     behancemotion: {
-      title: 'Behance Motion', tags: 'Motion · 3D', client: 'Behance', year: '2021', behanceUrl: 'https://www.behance.net/gallery/123306907/Behance-Motion',
-      intro: 'A 3D motion piece created for Behance — one of the world\'s leading platforms for creative portfolios. A self-initiated creative project celebrating the power of design in motion.',
-      vimeo: '573592087',
-      bts: { heading: 'Behind the Scenes', items: [] },
+      title: 'Behance Motion', tags: 'Motion · Design', client: 'Behance / Adobe', year: '2021',
+      behanceUrl: 'https://www.behance.net/gallery/123306907/Behance-Motion',
+      intro: 'A motion design concept created for Behance — exploring kinetic typography, abstract 3D forms and the visual language of creative platforms.',
+      behanceImages: [
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/36231d123306907.60ec1eac0b964.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/337c49123306907.60ec1eac0b22f.png',
+        'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200_webp/0850c4123306907.60ec1eac0aca9.png'
+      ],
       blocks: [
-        { heading: 'Brief & Concept', text: 'This was a passion project — a love letter to motion design and the Behance community. We set out to create something that would stop the scroll: a piece that felt both technically impressive and emotionally resonant.' },
-        { heading: 'Art Direction', text: 'Behance\'s iconic blue anchored the palette. Abstract 3D forms in constant motion, inspired by the fluid nature of creative thought and digital collaboration.' },
-        { heading: '3D Production', text: 'Cinema 4D for all 3D animation. Redshift for rendering. After Effects for final compositing and colour grading.' },
-        { heading: 'Result', text: 'Featured on Behance\'s curated galleries. Used as a studio showpiece to demonstrate RYMPE\'s creative range.' }
+        { heading: 'Concept', text: 'A personal motion design piece exploring Behance\'s visual identity. Kinetic type, abstract 3D geometry and fluid motion design — made to show what creative platform aesthetics could look like in motion.' },
+        { heading: 'Production', text: 'After Effects for all motion work. Cinema 4D for 3D elements. A fully personal project exploring the intersection of platform design and animation.' }
       ]
     }
   };
@@ -498,11 +535,41 @@
   function openCase(id) {
     const c = CASES[id];
     if (!c) return;
+
     document.getElementById('caseTag').textContent   = c.tags;
-    document.getElementById('caseTitle').textContent = c.title;
     document.getElementById('caseIntro').textContent = c.intro;
-    document.getElementById('caseVideo').src =
-      `https://player.vimeo.com/video/${c.vimeo}?autoplay=1&loop=1&color=ffffff&title=0&byline=0&portrait=0`;
+
+    // Title — clickable link for Behance projects
+    const titleEl = document.getElementById('caseTitle');
+    if (c.behanceUrl) {
+      titleEl.innerHTML = `<a href="${c.behanceUrl}" target="_blank" rel="noopener" class="modal-title-link">${c.title}</a>`;
+    } else {
+      titleEl.textContent = c.title;
+    }
+
+    const heroWrap   = document.getElementById('caseMediaWrap');
+    const videoWrap  = document.getElementById('mediaVideoWrap');
+    const gallery    = document.getElementById('behanceGallery');
+    const caseVideo  = document.getElementById('caseVideo');
+    const videoOverlay = document.getElementById('videoOverlay');
+
+    if (c.behanceImages) {
+      heroWrap.classList.add('gallery-mode');
+      videoWrap.style.display = 'none';
+      gallery.innerHTML = c.behanceImages.map(src =>
+        `<img src="${src}" alt="" loading="lazy">`
+      ).join('');
+      gallery.style.display = 'block';
+    } else {
+      heroWrap.classList.remove('gallery-mode');
+      videoWrap.style.display = '';
+      gallery.innerHTML = '';
+      gallery.style.display = 'none';
+      if (videoOverlay) videoOverlay.style.display = '';
+      caseVideo.style.pointerEvents = '';
+      caseVideo.src = `https://player.vimeo.com/video/${c.vimeo}?autoplay=1&loop=1&color=ffffff&title=0&byline=0&portrait=0`;
+    }
+
     let sidebarHTML = `
       <div class="modal-sidebar-item"><span class="modal-sidebar-label">Client</span><span class="modal-sidebar-value">${c.client}</span></div>
       <div class="modal-sidebar-item"><span class="modal-sidebar-label">Services</span><span class="modal-sidebar-value">${c.tags}</span></div>
@@ -527,10 +594,7 @@
           ${c.bts.items.map(item => `
             <div class="bts-item">
               ${item.type === 'vimeo'
-                ? `<div class="bts-vimeo-wrap">
-                     <iframe src="https://player.vimeo.com/video/${item.src}?background=1&muted=1"
-                       allowfullscreen></iframe>
-                   </div>`
+                ? `<div class="bts-vimeo-wrap"><iframe src="https://player.vimeo.com/video/${item.src}?background=1&muted=1" allowfullscreen></iframe></div>`
                 : `<img src="${item.src}" alt="${item.caption || ''}" loading="lazy">`
               }
               ${item.caption ? `<p class="bts-caption">${item.caption}</p>` : ''}
@@ -540,7 +604,6 @@
       `;
       document.querySelector('.modal-cta').before(btsEl);
     }
-    // ── /BTS ────────────────────────────────────────────
 
     const modal = document.getElementById('modal');
     modal.scrollTop = 0;
@@ -553,6 +616,10 @@
     document.getElementById('modal').classList.remove('open');
     document.body.classList.remove('modal-open');
     document.getElementById('caseVideo').src = '';
+    const gallery = document.getElementById('behanceGallery');
+    if (gallery) { gallery.innerHTML = ''; gallery.style.display = 'none'; }
+    const heroWrap = document.getElementById('caseMediaWrap');
+    if (heroWrap) heroWrap.classList.remove('gallery-mode');
     if (lenis) lenis.start();
     resetVideoOverlay && resetVideoOverlay();
   }
@@ -570,13 +637,9 @@
     document.getElementById('burger').classList.remove('x');
     document.getElementById('mobMenu').classList.remove('on');
   }
-  
-  // Patch #3 — Mobile menu closes on resize
   window.addEventListener('resize', function() {
     if (window.innerWidth > 960) closeMob();
   });
-
-  // Patch #4 — Escape closes modal + mobile menu
   document.addEventListener('keydown', function(e) {
     if (e.key !== 'Escape') return;
     var modal = document.getElementById('modal');
@@ -584,8 +647,6 @@
     var mob = document.getElementById('mobMenu');
     if (mob && mob.classList.contains('on')) closeMob();
   });
-
-  // Patch #5 — Modal wheel scroll (bypass Lenis)
   document.getElementById('modal').addEventListener('wheel', function(e) {
     if (!this.classList.contains('open')) return;
     e.stopPropagation();
@@ -593,25 +654,22 @@
     this.scrollTop += e.deltaY;
   }, { passive: false });
 
-  // ── Marquee — JS rAF (pixel-perfect, no CSS restart flash) ──
+  // ── Marquee ──
   (function() {
     const track = document.getElementById('marqueeTrack');
     if (!track) return;
-    // Clone content for seamless loop
     const clone = track.cloneNode(true);
     clone.removeAttribute('id');
     clone.setAttribute('aria-hidden', 'true');
     track.parentNode.appendChild(clone);
-    // Wrap both in a runner
     const wrap = track.parentNode;
     const runner = document.createElement('div');
     runner.className = 'mq-runner';
     wrap.appendChild(runner);
     runner.appendChild(track);
     runner.appendChild(clone);
-
     let x = 0;
-    const speed = 0.6; // px/frame ≈ 36px/s at 60fps
+    const speed = 0.6;
     let raf;
     function tick() {
       x -= speed;
@@ -620,7 +678,6 @@
       runner.style.transform = 'translateX(' + x + 'px)';
       raf = requestAnimationFrame(tick);
     }
-    // Pause when tab hidden, resume when visible
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) { cancelAnimationFrame(raf); }
       else { raf = requestAnimationFrame(tick); }
@@ -628,9 +685,8 @@
     raf = requestAnimationFrame(tick);
   })();
 
-  // Reset video overlay when modal closes
   function resetVideoOverlay() {
-    var ov = document.querySelector('.modal-hero-media-overlay');
+    var ov = document.getElementById('videoOverlay');
     if (ov) { ov.style.display = ''; }
     var vid = document.getElementById('caseVideo');
     if (vid) vid.style.pointerEvents = '';
