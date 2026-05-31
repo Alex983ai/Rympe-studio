@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <rect width="1280" height="720" fill="#131313"/>
+  <!-- Node graph background -->
+  <rect width="1280" height="720" fill="#161616"/>
+  <!-- Grid dots -->
+  <g fill="#222" opacity="0.8">
+    <rect x="0" y="0" width="1280" height="720" fill="none"/>
+  </g>
+  <!-- Dot grid pattern via rects -->
+  <g fill="#2a2a2a">
+    <rect x="40" y="40" width="2" height="2"/> <rect x="80" y="40" width="2" height="2"/> <rect x="120" y="40" width="2" height="2"/> <rect x="160" y="40" width="2" height="2"/> <rect x="200" y="40" width="2" height="2"/> <rect x="240" y="40" width="2" height="2"/> <rect x="280" y="40" width="2" height="2"/> <rect x="320" y="40" width="2" height="2"/> <rect x="360" y="40" width="2" height="2"/> <rect x="400" y="40" width="2" height="2"/>
+    <rect x="40" y="80" width="2" height="2"/> <rect x="80" y="80" width="2" height="2"/> <rect x="120" y="80" width="2" height="2"/> <rect x="160" y="80" width="2" height="2"/> <rect x="200" y="80" width="2" height="2"/> <rect x="240" y="80" width="2" height="2"/> <rect x="280" y="80" width="2" height="2"/> <rect x="320" y="80" width="2" height="2"/> <rect x="360" y="80" width="2" height="2"/> <rect x="400" y="80" width="2" height="2"/>
+  </g>
+
+  <!-- Shader nodes -->
+  <!-- Node: Texture Sample -->
+  <rect x="80" y="200" width="180" height="100" rx="6" fill="#1e1e2e" stroke="#3a3a5a" stroke-width="1.5"/>
+  <rect x="80" y="200" width="180" height="28" rx="6" fill="#2a2a4a"/>
+  <rect x="80" y="222" width="180" height="6" rx="0" fill="#2a2a4a"/>
+  <text x="95" y="219" fill="#8888cc" font-family="monospace" font-size="11" font-weight="bold">Texture Sample</text>
+  <circle cx="80" cy="252" r="5" fill="#4a9eff"/>
+  <circle cx="80" cy="272" r="5" fill="#4a9eff"/>
+  <circle cx="260" cy="252" r="5" fill="#ff9f4a"/>
+  <circle cx="260" cy="272" r="5" fill="#ff9f4a"/>
+  <text x="92" y="256" fill="#666" font-family="monospace" font-size="9">UV</text>
+  <text x="92" y="276" fill="#666" font-family="monospace" font-size="9">Sampler</text>
+  <text x="210" y="256" fill="#666" font-family="monospace" font-size="9">RGBA</text>
+  <text x="210" y="276" fill="#666" font-family="monospace" font-size="9">Alpha</text>
+
+  <!-- Node: Fresnel -->
+  <rect x="340" y="140" width="160" height="90" rx="6" fill="#1e2a1e" stroke="#3a5a3a" stroke-width="1.5"/>
+  <rect x="340" y="140" width="160" height="28" rx="6" fill="#2a4a2a"/>
+  <rect x="340" y="162" width="160" height="6" rx="0" fill="#2a4a2a"/>
+  <text x="355" y="159" fill="#88cc88" font-family="monospace" font-size="11" font-weight="bold">Fresnel</text>
+  <circle cx="340" cy="186" r="5" fill="#4a9eff"/>
+  <circle cx="500" cy="186" r="5" fill="#4aff9f"/>
+  <circle cx="500" cy="206" r="5" fill="#4aff9f"/>
+  <text x="352" y="190" fill="#666" font-family="monospace" font-size="9">IOR</text>
+  <text x="466" y="190" fill="#666" font-family="monospace" font-size="9">Out</text>
+  <text x="460" y="210" fill="#666" font-family="monospace" font-size="9">Mask</text>
+
+  <!-- Node: Multiply -->
+  <rect x="340" y="290" width="160" height="80" rx="6" fill="#2a1e1e" stroke="#5a3a3a" stroke-width="1.5"/>
+  <rect x="340" y="290" width="160" height="28" rx="6" fill="#4a2a2a"/>
+  <rect x="340" y="312" width="160" height="6" rx="0" fill="#4a2a2a"/>
+  <text x="355" y="309" fill="#cc8888" font-family="monospace" font-size="11" font-weight="bold">Multiply</text>
+  <circle cx="340" cy="334" r="5" fill="#4a9eff"/>
+  <circle cx="340" cy="352" r="5" fill="#4a9eff"/>
+  <circle cx="500" cy="343" r="5" fill="#ff4a4a"/>
+  <text x="352" y="338" fill="#666" font-family="monospace" font-size="9">A</text>
+  <text x="352" y="356" fill="#666" font-family="monospace" font-size="9">B</text>
+  <text x="466" y="348" fill="#666" font-family="monospace" font-size="9">Out</text>
+
+  <!-- Node: Standard Material -->
+  <rect x="580" y="200" width="200" height="160" rx="6" fill="#1e1e1e" stroke="#555" stroke-width="1.5"/>
+  <rect x="580" y="200" width="200" height="28" rx="6" fill="#2d2d2d"/>
+  <rect x="580" y="222" width="200" height="6" rx="0" fill="#2d2d2d"/>
+  <text x="595" y="219" fill="#cccccc" font-family="monospace" font-size="11" font-weight="bold">Standard Material</text>
+  <circle cx="580" cy="248" r="5" fill="#4a9eff"/>
+  <circle cx="580" cy="266" r="5" fill="#4a9eff"/>
+  <circle cx="580" cy="284" r="5" fill="#4a9eff"/>
+  <circle cx="580" cy="302" r="5" fill="#4a9eff"/>
+  <circle cx="580" cy="320" r="5" fill="#4a9eff"/>
+  <circle cx="780" cy="280" r="5" fill="#ffd700"/>
+  <text x="592" y="252" fill="#666" font-family="monospace" font-size="9">Base Color</text>
+  <text x="592" y="270" fill="#666" font-family="monospace" font-size="9">Roughness</text>
+  <text x="592" y="288" fill="#666" font-family="monospace" font-size="9">Metalness</text>
+  <text x="592" y="306" fill="#666" font-family="monospace" font-size="9">Normal</text>
+  <text x="592" y="324" fill="#666" font-family="monospace" font-size="9">Emission</text>
+  <text x="746" y="284" fill="#aa9900" font-family="monospace" font-size="9">Out</text>
+
+  <!-- Node: Output -->
+  <rect x="860" y="240" width="140" height="80" rx="6" fill="#1e1e0e" stroke="#5a5a1a" stroke-width="1.5"/>
+  <rect x="860" y="240" width="140" height="28" rx="6" fill="#3a3a0a"/>
+  <rect x="860" y="262" width="140" height="6" rx="0" fill="#3a3a0a"/>
+  <text x="875" y="259" fill="#cccc44" font-family="monospace" font-size="11" font-weight="bold">Output</text>
+  <circle cx="860" cy="286" r="5" fill="#ffd700"/>
+  <text x="872" y="290" fill="#666" font-family="monospace" font-size="9">Surface</text>
+
+  <!-- Connections -->
+  <path d="M 260 252 C 300 252 300 186 340 186" fill="none" stroke="#4aff9f" stroke-width="1.5" opacity="0.7"/>
+  <path d="M 260 272 C 310 272 310 334 340 334" fill="none" stroke="#4a9eff" stroke-width="1.5" opacity="0.7"/>
+  <path d="M 500 186 C 540 186 540 248 580 248" fill="none" stroke="#4aff9f" stroke-width="1.5" opacity="0.7"/>
+  <path d="M 500 343 C 540 343 540 284 580 284" fill="none" stroke="#ff4a4a" stroke-width="1.5" opacity="0.7"/>
+  <path d="M 780 280 C 820 280 820 280 860 280" fill="none" stroke="#ffd700" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Toolbar at top -->
+  <rect x="0" y="0" width="1280" height="30" fill="#0d0d0d"/>
+  <text x="12" y="20" fill="#888" font-family="monospace" font-size="10" letter-spacing="1">REDSHIFT · NODE EDITOR · SHADER GRAPH · BEOBLE 2.0</text>
+
+  <!-- Label -->
+  <rect x="0" y="688" width="1280" height="32" fill="#080808" opacity="0.9"/>
+  <text x="24" y="708" fill="#555" font-family="monospace" font-size="11" letter-spacing="2">REDSHIFT SHADER GRAPH · LOOK DEVELOPMENT</text>
+</svg>

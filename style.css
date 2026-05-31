@@ -254,25 +254,71 @@ body::after {
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
 }
-.wc { cursor: none; overflow: hidden; position: relative; }
+/* card counter */
+.work-grid { counter-reset: card-num; }
+
+.wc {
+  cursor: none; overflow: hidden; position: relative;
+  counter-increment: card-num;
+  border: 1px solid transparent;
+  transition: border-color 0.4s;
+}
+.wc:hover { border-color: rgba(255,255,255,0.07); }
+
+/* card number — appears top-left on hover */
+.wc::before {
+  content: counter(card-num, decimal-leading-zero);
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.55);
+  z-index: 3;
+  opacity: 0; transform: translateY(-4px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.wc:hover::before { opacity: 1; transform: translateY(0); }
 
 .wc-img {
   aspect-ratio: 16 / 9;
-  background: #0e0e0e center / cover no-repeat;
+  background: #111 center / cover no-repeat;
   transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.wc:hover .wc-img { transform: scale(1.05); }
+/* shimmer while loading */
+.wc-img:not([style*="url"]) {
+  background: linear-gradient(90deg, #111 25%, #1a1a1a 50%, #111 75%);
+  background-size: 400px 100%;
+  animation: wc-shimmer 1.6s infinite linear;
+}
+@keyframes wc-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.wc:hover .wc-img { transform: scale(1.04); }
 
 .wc-over {
   position: absolute;
-  top: 0; left: 0; right: 0;
-  bottom: 52px;
-  background: rgba(8,8,8,0.38);
+  top: 0; left: 0; right: 0; bottom: 52px;
+  background: linear-gradient(to top, rgba(8,8,8,0.6) 0%, rgba(8,8,8,0.12) 60%, transparent 100%);
   display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity 0.3s;
+  opacity: 0; transition: opacity 0.35s;
 }
 .wc:hover .wc-over { opacity: 1; }
 .wc-over span { font-size: 1.15rem; color: white; padding-left: 3px; }
+
+/* Behance badge — top-right pill on hover */
+.wc[data-type="behance"] .wc-over::after {
+  content: '↗ Behance';
+  position: absolute;
+  top: 10px; right: 10px;
+  font-family: 'DM Mono', monospace; font-size: 0.55rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(6px);
+  color: rgba(255,255,255,0.72);
+  padding: 0.28em 0.72em; border-radius: 2rem;
+  border: 1px solid rgba(255,255,255,0.18);
+}
 
 .wc-foot {
   padding: 0.9rem 0 1.2rem;
@@ -280,10 +326,12 @@ body::after {
 }
 .wc-foot strong { font-size: 0.95rem; font-weight: 500; }
 .wc-foot span {
-  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(237,237,237,0.28);
+  color: rgba(237,237,237,0.45);
+  transition: color 0.3s;
 }
+.wc:hover .wc-foot span { color: rgba(237,237,237,0.72); }
 
 /* ─── Clients marquee ─────────────────────────── */
 .s-clients {
@@ -414,6 +462,9 @@ body::after {
   transition: opacity 0.2s, transform 0.2s;
 }
 .c-btn:hover { opacity: 0.86; transform: scale(1.025); }
+.c-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+.c-btn--ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.35); }
+.c-btn--ghost:hover { border-color: rgba(255,255,255,0.7); opacity: 1; }
 .c-links {
   display: flex; gap: 2rem; margin-top: 2.5rem; flex-wrap: wrap;
 }
@@ -634,3 +685,116 @@ body.modal-open { overflow: hidden; }
 .vercel-live-feedback,
 [data-vercel-toolbar],
 vercel-live-feedback { display: none !important; }
+
+/* ── Behind the Scenes ─────────────────────────── */
+.modal-bts {
+  padding: 60px 60px 0;
+  margin-bottom: 0;
+}
+.modal-bts-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 16px;
+}
+.modal-bts-heading {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.modal-bts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.bts-item { display: flex; flex-direction: column; gap: 8px; }
+.bts-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+.bts-vimeo-wrap {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.bts-vimeo-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.bts-caption {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #555;
+}
+@media (max-width: 600px) {
+  .modal-bts { padding: 40px 24px 0; }
+  .modal-bts-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ─── Behance Gallery Mode ────────────────────── */
+.modal-hero-media {
+  position: relative;
+}
+
+/* Video wrapper fills the 16/9 media area */
+.media-video-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.media-video-wrap iframe {
+  width: 100%; height: 100%; border: none; pointer-events: none;
+}
+
+/* Gallery mode: remove fixed aspect-ratio, stack images */
+.modal-hero-media.gallery-mode {
+  aspect-ratio: unset;
+  background: none;
+  margin-bottom: 0;
+}
+
+.behance-gallery {
+  display: none;
+  width: 100%;
+}
+.behance-gallery img {
+  width: 100%;
+  display: block;
+  margin-bottom: 4px;
+  border: none;
+}
+.behance-gallery img:last-child {
+  margin-bottom: 0;
+}
+
+/* Clickable modal title link for Behance projects */
+.modal-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.modal-title-link:hover {
+  opacity: 0.65;
+}
+.modal-title-link::after {
+  content: ' ↗';
+  font-family: 'Inter', sans-serif;
+  font-size: 0.35em;
+  vertical-align: super;
+  opacity: 0.4;
+}
