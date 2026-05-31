@@ -241,7 +241,7 @@
       </div>
     </div>
     <div class="foot-bar">
-      <span>© 2025 RYMPE Studio</span>
+      <span>© <span id="footYear"></span> RYMPE Studio</span>
       <span>CGI Production Studio</span>
     </div>
   </section>
@@ -686,6 +686,9 @@
     });
     raf = requestAnimationFrame(tick);
   })();
+
+  // Dynamic footer year
+  document.getElementById('footYear').textContent = new Date().getFullYear();
 
   function resetVideoOverlay() {
     var ov = document.getElementById('videoOverlay');
