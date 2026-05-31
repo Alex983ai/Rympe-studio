@@ -798,3 +798,65 @@ vercel-live-feedback { display: none !important; }
   vertical-align: super;
   opacity: 0.4;
 }
+
+/* ── Brief form ───────────────────────────────────── */
+.brief-wrap { width: 100%; max-width: 560px; margin-top: 2.5rem; }
+
+.brief-toggle {
+  background: none; border: none; color: rgba(237,237,237,0.45);
+  font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; cursor: pointer;
+  padding: 0; transition: color 0.2s;
+}
+.brief-toggle:hover { color: rgba(237,237,237,0.85); }
+
+.brief-form {
+  display: grid; gap: 0.75rem;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s;
+  opacity: 0; margin-top: 0;
+}
+.brief-form.open {
+  max-height: 600px; opacity: 1; margin-top: 1.25rem;
+}
+
+.brief-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+.brief-form input,
+.brief-form select,
+.brief-form textarea {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0.5rem;
+  color: #ededed; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+  padding: 0.75rem 1rem; width: 100%;
+  transition: border-color 0.2s;
+  outline: none; resize: none;
+}
+.brief-form input::placeholder,
+.brief-form textarea::placeholder { color: rgba(237,237,237,0.3); }
+.brief-form input:focus,
+.brief-form select:focus,
+.brief-form textarea:focus { border-color: rgba(255,255,255,0.3); }
+.brief-form select option { background: #111; color: #ededed; }
+
+.brief-submit {
+  background: white; color: #080808;
+  font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em;
+  padding: 0.85rem 2rem; border-radius: 3rem; border: none;
+  cursor: pointer; transition: opacity 0.2s, transform 0.2s;
+  justify-self: start;
+}
+.brief-submit:hover { opacity: 0.85; transform: scale(1.02); }
+.brief-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.brief-thanks {
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  letter-spacing: 0.1em; color: rgba(237,237,237,0.6);
+  text-transform: uppercase; padding-top: 0.25rem;
+}
+
+@media (max-width: 600px) {
+  .brief-row { grid-template-columns: 1fr; }
+  .brief-wrap { max-width: 100%; }
+}
