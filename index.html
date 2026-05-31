@@ -235,6 +235,37 @@
         <a href="https://t.me/silent_north03" target="_blank" rel="noopener" class="c-btn">Write on Telegram</a>
         <a href="mailto:hello@rympe.studio" class="c-btn c-btn--ghost">hello@rympe.studio</a>
       </div>
+
+      <!-- BRIEF FORM -->
+      <div class="brief-wrap" id="briefWrap">
+        <button class="brief-toggle" id="briefToggle" onclick="toggleBrief()">Send a brief ↓</button>
+        <form class="brief-form" id="briefForm" onsubmit="submitBrief(event)">
+          <div class="brief-row">
+            <input type="text" name="name" placeholder="Your name" required>
+            <input type="email" name="email" placeholder="Your email" required>
+          </div>
+          <div class="brief-row">
+            <select name="type">
+              <option value="" disabled selected>Project type</option>
+              <option>CGI Product Promo</option>
+              <option>Brand Film</option>
+              <option>Motion Identity</option>
+              <option>NFT / Web3 Visual</option>
+              <option>Other</option>
+            </select>
+            <select name="budget">
+              <option value="" disabled selected>Budget</option>
+              <option>$500–1,500</option>
+              <option>$1,500–3,000</option>
+              <option>$3,000–7,000</option>
+              <option>$7,000+</option>
+            </select>
+          </div>
+          <textarea name="description" placeholder="Tell us about your project..." rows="4" required></textarea>
+          <button type="submit" class="brief-submit" id="briefSubmit">Send brief →</button>
+          <p class="brief-thanks" id="briefThanks" style="display:none">✓ Received! We'll get back to you within 24h.</p>
+        </form>
+      </div>
       <div class="c-links">
         <a href="https://vimeo.com/rympe" target="_blank" rel="noopener">Vimeo</a>
         <a href="https://www.behance.net/rympe" target="_blank" rel="noopener">Behance</a>
@@ -686,6 +717,44 @@
     });
     raf = requestAnimationFrame(tick);
   })();
+
+  // Brief form
+  function toggleBrief() {
+    const form = document.getElementById('briefForm');
+    const btn = document.getElementById('briefToggle');
+    const open = form.classList.toggle('open');
+    btn.textContent = open ? 'Send a brief ↑' : 'Send a brief ↓';
+  }
+
+  async function submitBrief(e) {
+    e.preventDefault();
+    const f = e.target;
+    const data = Object.fromEntries(new FormData(f));
+    const msg = `📬 New brief from RYMPE site
+
+👤 ${data.name}
+📧 ${data.email}
+🎬 ${data.type || '—'}
+💰 ${data.budget || '—'}
+
+📝 ${data.description}`;
+    const btn = document.getElementById('briefSubmit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      await fetch('https://api.telegram.org/bot8998099774:AAGsCves_9BYmzlbosrgStbPcfTv9cGhbNY/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: 1143912165, text: msg })
+      });
+      f.reset();
+      btn.style.display = 'none';
+      document.getElementById('briefThanks').style.display = 'block';
+    } catch(err) {
+      btn.textContent = 'Error. Try again →';
+      btn.disabled = false;
+    }
+  }
 
   // Dynamic footer year
   document.getElementById('footYear').textContent = new Date().getFullYear();
