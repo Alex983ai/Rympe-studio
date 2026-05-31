@@ -730,23 +730,16 @@
     e.preventDefault();
     const f = e.target;
     const data = Object.fromEntries(new FormData(f));
-    const msg = `📬 New brief from RYMPE site
-
-👤 ${data.name}
-📧 ${data.email}
-🎬 ${data.type || '—'}
-💰 ${data.budget || '—'}
-
-📝 ${data.description}`;
     const btn = document.getElementById('briefSubmit');
     btn.textContent = 'Sending...';
     btn.disabled = true;
     try {
-      await fetch('https://api.telegram.org/bot8998099774:AAGsCves_9BYmzlbosrgStbPcfTv9cGhbNY/sendMessage', {
+      const res = await fetch('/api/brief', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: 1143912165, text: msg })
+        body: JSON.stringify(data)
       });
+      if (!res.ok) throw new Error('Server error');
       f.reset();
       btn.style.display = 'none';
       document.getElementById('briefThanks').style.display = 'block';
