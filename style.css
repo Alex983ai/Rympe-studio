@@ -693,3 +693,57 @@ vercel-live-feedback { display: none !important; }
   .modal-bts { padding: 40px 24px 0; }
   .modal-bts-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ─── Behance Gallery Mode ────────────────────── */
+.modal-hero-media {
+  position: relative;
+}
+
+/* Video wrapper fills the 16/9 media area */
+.media-video-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.media-video-wrap iframe {
+  width: 100%; height: 100%; border: none; pointer-events: none;
+}
+
+/* Gallery mode: remove fixed aspect-ratio, stack images */
+.modal-hero-media.gallery-mode {
+  aspect-ratio: unset;
+  background: none;
+  margin-bottom: 0;
+}
+
+.behance-gallery {
+  display: none;
+  width: 100%;
+}
+.behance-gallery img {
+  width: 100%;
+  display: block;
+  margin-bottom: 4px;
+  border: none;
+}
+.behance-gallery img:last-child {
+  margin-bottom: 0;
+}
+
+/* Clickable modal title link for Behance projects */
+.modal-title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.modal-title-link:hover {
+  opacity: 0.65;
+}
+.modal-title-link::after {
+  content: ' ↗';
+  font-family: 'Inter', sans-serif;
+  font-size: 0.35em;
+  vertical-align: super;
+  opacity: 0.4;
+}
