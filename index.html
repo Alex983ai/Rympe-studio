@@ -92,7 +92,7 @@
       </div>
 
       <div class="wc r" onclick="openCase('oko')">
-        <div class="wc-img" data-v="1123546540"></div>
+        <div class="wc-img" data-v="1197161900"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>OKO</strong><span>CGI · Motion</span></div>
       </div>
@@ -128,7 +128,7 @@
       </div>
 
       <div class="wc r" onclick="openCase('pattern')">
-        <div class="wc-img" data-v="1115895255"></div>
+        <div class="wc-img" data-v="1197160862"></div>
         <div class="wc-over"><span>▶</span></div>
         <div class="wc-foot"><strong>Pattern</strong><span>Art Direction · Motion</span></div>
       </div>
@@ -238,8 +238,8 @@
 
       <!-- BRIEF FORM -->
       <div class="brief-wrap" id="briefWrap">
-        <button class="brief-toggle" id="briefToggle" onclick="toggleBrief()">Send a brief ↓</button>
-        <form class="brief-form" id="briefForm" onsubmit="submitBrief(event)">
+        <button type="button" class="brief-toggle" id="briefToggle" onclick="toggleBrief()">Send a brief ↓</button>
+        <form class="brief-form" id="briefForm" method="post" onsubmit="submitBrief(event)">
           <div class="brief-row">
             <input type="text" name="name" placeholder="Your name" required>
             <input type="email" name="email" placeholder="Your email" required>
@@ -279,7 +279,7 @@
 
   <!-- ─── CASE MODAL ──────────────────────────────────────── -->
   <div id="modal">
-    <button class="modal-x" onclick="closeCase()">✕</button>
+    <button type="button" class="modal-x" onclick="closeCase()">✕</button>
     <div class="modal-wrap">
       <div class="modal-header">
         <div class="modal-meta" id="caseTag"></div>
@@ -291,7 +291,7 @@
         <div class="media-video-wrap" id="mediaVideoWrap">
           <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
           <div class="modal-hero-media-overlay" id="videoOverlay" onclick="this.style.display='none';document.getElementById('caseVideo').style.pointerEvents='all'"></div>
-          <button class="video-fs-btn" id="videoFsBtn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
+          <button type="button" class="video-fs-btn" id="videoFsBtn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
         </div>
         <!-- Gallery mode (Behance projects) -->
         <div class="behance-gallery" id="behanceGallery"></div>
@@ -390,7 +390,7 @@
     oko: {
       title: 'OKO', tags: 'CGI · Motion', client: 'OKO', year: '2024', behanceUrl: '',
       intro: 'A cinematic CGI product film for OKO — a next-gen data automation platform. We visualised abstract data flows as tangible, tactile objects to make complex tech feel human.',
-      vimeo: '1123546540',
+      vimeo: '1197161900',
       bts: { heading: 'Behind the Scenes', items: [] },
       blocks: [
         { heading: 'Brief & Concept', text: 'OKO needed to show — not explain — how their software eliminates manual data entry. Our brief: make the invisible visible. We translated spreadsheets and pipelines into choreographed 3D motion.' },
@@ -462,7 +462,7 @@
     pattern: {
       title: 'Pattern', tags: 'Art Direction · Motion', client: 'Pattern', year: '2023', behanceUrl: '',
       intro: 'Art direction and motion for Pattern — an e-commerce acceleration platform. We turned data and logistics into a cinematic brand story.',
-      vimeo: '1115895255',
+      vimeo: '1197160862',
       bts: { heading: 'Behind the Scenes', items: [] },
       blocks: [
         { heading: 'Brief & Concept', text: 'Pattern helps brands grow on marketplaces globally. Their brief: make the complexity of supply chain, data and global fulfilment look like a superpower — not a burden.' },
