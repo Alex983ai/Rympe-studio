@@ -7,7 +7,11 @@
   <meta property="og:title" content="RYMPE — CGI Studio">
   <meta property="og:description" content="Cinematic 3D for brands that move culture.">
   <meta property="og:url" content="https://rympe-studio.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RYMPE Studio">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RYMPE — CGI Studio">
+  <meta name="twitter:description" content="Cinematic 3D for brands that move culture.">
   <meta property="og:image" content="https://rympe-studio.vercel.app/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -21,6 +25,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <link rel="stylesheet" href="style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "RYMPE",
+    "description": "CGI production studio crafting cinematic 3D for brands that move culture.",
+    "url": "https://rympe-studio.vercel.app/",
+    "logo": "https://rympe-studio.vercel.app/og.png",
+    "email": "rympestudio@gmail.com",
+    "sameAs": ["https://t.me/rympe_studio_bot"]
+  }
+  </script>
 </head>
 <body>
 
@@ -41,7 +57,7 @@
       <li><a href="#about">Studio</a></li>
       <li><a href="#contact" class="nav-pill">Start a project →</a></li>
     </ul>
-    <button id="burger" aria-label="Menu"><span></span><span></span></button>
+    <button type="button" id="burger" aria-label="Menu"><span></span><span></span></button>
   </nav>
 
   <!-- MOBILE MENU -->
@@ -745,9 +761,6 @@
 
   // Dynamic footer year
   document.getElementById('footYear').textContent = new Date().getFullYear();
-
-      var vid = document.getElementById('caseVideo');
-    if (vid) vid.style.pointerEvents = '';
 </script>
 </body>
 </html>
