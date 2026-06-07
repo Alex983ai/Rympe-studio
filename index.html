@@ -232,8 +232,8 @@
       <h2 class="c-title">Ready to make<br><i>something great?</i></h2>
       <p class="c-sub">We take on a limited number of projects each month.<br>Tell us about yours.</p>
       <div class="c-cta-group">
-        <a href="https://t.me/silent_north03" target="_blank" rel="noopener" class="c-btn">Write on Telegram</a>
-        <a href="mailto:hello@rympe.studio" class="c-btn c-btn--ghost">hello@rympe.studio</a>
+        <a href="https://t.me/rympe_studio_bot" target="_blank" rel="noopener" class="c-btn">Write on Telegram</a>
+        <a href="mailto:rympestudio@gmail.com" class="c-btn c-btn--ghost">rympestudio@gmail.com</a>
       </div>
 
       <!-- BRIEF FORM -->
@@ -289,9 +289,7 @@
       <div class="modal-hero-media" id="caseMediaWrap">
         <!-- Video mode (Vimeo projects) -->
         <div class="media-video-wrap" id="mediaVideoWrap">
-          <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-          <div class="modal-hero-media-overlay" id="videoOverlay" onclick="this.style.display='none';document.getElementById('caseVideo').style.pointerEvents='all'"></div>
-          <button type="button" class="video-fs-btn" id="videoFsBtn" onclick="(document.getElementById('caseVideo').requestFullscreen||document.getElementById('caseVideo').webkitRequestFullscreen).call(document.getElementById('caseVideo'))" title="Fullscreen">⛶</button>
+          <iframe id="caseVideo" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen webkitAllowFullScreen mozAllowFullScreen style="pointer-events:all"></iframe>
         </div>
         <!-- Gallery mode (Behance projects) -->
         <div class="behance-gallery" id="behanceGallery"></div>
@@ -584,7 +582,6 @@
     const videoWrap  = document.getElementById('mediaVideoWrap');
     const gallery    = document.getElementById('behanceGallery');
     const caseVideo  = document.getElementById('caseVideo');
-    const videoOverlay = document.getElementById('videoOverlay');
 
     if (c.behanceImages) {
       heroWrap.classList.add('gallery-mode');
@@ -598,9 +595,7 @@
       videoWrap.style.display = '';
       gallery.innerHTML = '';
       gallery.style.display = 'none';
-      if (videoOverlay) videoOverlay.style.display = '';
-      caseVideo.style.pointerEvents = '';
-      caseVideo.src = `https://player.vimeo.com/video/${c.vimeo}?autoplay=1&loop=1&color=ffffff&title=0&byline=0&portrait=0`;
+      caseVideo.src = `https://player.vimeo.com/video/${c.vimeo}?autoplay=1&loop=1&color=ffffff&title=0&byline=0&portrait=0&playsinline=1`;
     }
 
     let sidebarHTML = `
@@ -654,7 +649,6 @@
     const heroWrap = document.getElementById('caseMediaWrap');
     if (heroWrap) heroWrap.classList.remove('gallery-mode');
     if (lenis) lenis.start();
-    resetVideoOverlay && resetVideoOverlay();
   }
 
   document.getElementById('modal').addEventListener('click', e => {
@@ -752,10 +746,7 @@
   // Dynamic footer year
   document.getElementById('footYear').textContent = new Date().getFullYear();
 
-  function resetVideoOverlay() {
-    var ov = document.getElementById('videoOverlay');
-    if (ov) { ov.style.display = ''; }
-    var vid = document.getElementById('caseVideo');
+      var vid = document.getElementById('caseVideo');
     if (vid) vid.style.pointerEvents = '';
   }
 </script>
