@@ -68,7 +68,7 @@
   </div>
 
   <!-- ─── HERO ─────────────────────────────────────────── -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-bg">
       <iframe
         src="https://player.vimeo.com/video/1107392535?background=1&autoplay=1&loop=1&muted=1"
@@ -178,7 +178,7 @@
   </section>
 
   <!-- ─── CLIENTS ───────────────────────────────────────── -->
-  <section class="s-clients">
+  <section class="s-clients" id="clients">
     <div class="marquee-wrap">
       <div class="marquee-track" id="marqueeTrack">
         <span class="mq-item"><a href="https://www.thoughtful.ai" target="_blank" rel="noopener">Thoughtful</a></span>
@@ -198,7 +198,7 @@
   </section>
 
   <!-- ─── PROCESS ───────────────────────────────────────── -->
-  <section class="s-process">
+  <section class="s-process" id="process">
     <div class="s-head r">
       <em class="tag">How we work</em>
       <h2>From Brief<br>to Final Frame</h2>
@@ -257,11 +257,14 @@
         <button type="button" class="brief-toggle" id="briefToggle" onclick="toggleBrief()">Send a brief ↓</button>
         <form class="brief-form" id="briefForm" method="post" onsubmit="submitBrief(event)">
           <div class="brief-row">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
+            <label class="sr-only" for="brief-name">Your name</label>
+            <input type="text" id="brief-name" name="name" placeholder="Your name" required>
+            <label class="sr-only" for="brief-email">Your email</label>
+            <input type="email" id="brief-email" name="email" placeholder="Your email" required>
           </div>
           <div class="brief-row">
-            <select name="type">
+            <label class="sr-only" for="brief-type">Project type</label>
+            <select id="brief-type" name="type">
               <option value="" disabled selected>Project type</option>
               <option>CGI Product Promo</option>
               <option>Brand Film</option>
@@ -269,7 +272,8 @@
               <option>NFT / Web3 Visual</option>
               <option>Other</option>
             </select>
-            <select name="budget">
+            <label class="sr-only" for="brief-budget">Budget range</label>
+            <select id="brief-budget" name="budget">
               <option value="" disabled selected>Budget</option>
               <option>$500–1,500</option>
               <option>$1,500–3,000</option>
@@ -277,7 +281,8 @@
               <option>$7,000+</option>
             </select>
           </div>
-          <textarea name="description" placeholder="Tell us about your project..." rows="4" required></textarea>
+          <label class="sr-only" for="brief-description">Project description</label>
+          <textarea id="brief-description" name="description" placeholder="Tell us about your project..." rows="4" required></textarea>
           <button type="submit" class="brief-submit" id="briefSubmit">Send brief →</button>
           <p class="brief-thanks" id="briefThanks" style="display:none">✓ Received! We'll get back to you within 24h.</p>
         </form>
@@ -287,10 +292,10 @@
         <a href="https://www.behance.net/rympe" target="_blank" rel="noopener">Behance</a>
       </div>
     </div>
-    <div class="foot-bar">
+    <footer class="foot-bar">
       <span>© <span id="footYear"></span> RYMPE Studio</span>
       <span>CGI Production Studio</span>
-    </div>
+    </footer>
   </section>
 
   <!-- ─── CASE MODAL ──────────────────────────────────────── -->
@@ -299,7 +304,7 @@
     <div class="modal-wrap">
       <div class="modal-header">
         <div class="modal-meta" id="caseTag"></div>
-        <h1 class="modal-title" id="caseTitle"></h1>
+        <h2 class="modal-title" id="caseTitle"></h2>
         <p class="modal-lead" id="caseIntro"></p>
       </div>
       <div class="modal-hero-media" id="caseMediaWrap">
@@ -761,6 +766,20 @@
 
   // Dynamic footer year
   document.getElementById('footYear').textContent = new Date().getFullYear();
+
+  // ── Keyboard accessibility for portfolio cards ────────
+  document.querySelectorAll('.wc').forEach(card => {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    const title = card.querySelector('.wc-foot strong')?.textContent?.trim();
+    if (title) card.setAttribute('aria-label', 'Open ' + title + ' case study');
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
 </script>
 </body>
 </html>
